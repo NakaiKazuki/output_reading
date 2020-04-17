@@ -25,6 +25,7 @@ gem 'rails-i18n', '~> 5.1'
 group :development, :test do
   gem 'sqlite3' , '~> 1.4.2'
   gem 'byebug' , '~> 11.1.1' , platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -36,9 +37,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
-  gem 'rspec-rails'
+  gem 'webdrivers'
 end
 
 group :production do
