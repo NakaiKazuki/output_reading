@@ -12,15 +12,15 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n', '~> 5.1'
+gem 'jquery-rails'
+gem 'bootstrap', '~> 4.3.1'
 # gem 'bcrypt' , '~> 3.1.13'
 # gem 'faker' , '~> 2.11.0'
 # gem 'carrierwave' , '~> 2.1.0'
 # gem 'mini_magick' , '~> 4.10.1'
 # gem 'will_paginate' , '~> 3.3.0'
 # gem 'bootstrap-will_paginate' , '~> 1.0.0'
-# gem 'bootstrap-sass' , '~> 3.4.1'
 # gem 'sass-rails', '~> 5.0'
-# gem 'jquery-rails' , '~> 4.3.5'
 
 group :development, :test do
   gem 'sqlite3' , '~> 1.4.2'
