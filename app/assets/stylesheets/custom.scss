@@ -1,0 +1,44 @@
+@import "bootstrap";
+
+
+// universal
+
+body{
+ background-image: image-url("body_background.jpg");
+ padding-top:70px;
+}
+
+// header
+
+.navbar-brand{
+ font-size: 22px;
+ background-color:white;
+ padding: 4px 13px 6px 13px;
+ margin: 2px;
+ border-radius: 10px;
+ font-family:cursive,Century;
+}
+
+// jumbotron
+
+.jumbotron-extend {
+ margin-top:30px;
+ background-color:white;
+ border: 10px double darkorange;
+ border-radius: 70px;
+ .container{
+   text-align: center;
+   h1{
+     margin-bottom:40px;
+     font-family:cursive,Century;
+   }
+   p{
+     font-family:serif,Century;
+     font-size: 20px;
+     margin-bottom:24px;
+   }
+   p:last-of-type{
+     margin-bottom: 32px;
+   }
+ }
+}

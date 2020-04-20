@@ -13,18 +13,3 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap";
-
-body{
-  background-image: image-url("body_background.jpg");
-}
-// header
-.navbar-brand{
-  font-size: 22px;
-  background-color: #111111;
-  color:black;
-  padding: 4px 13px 6px 13px;
-  margin: 2px;
-  border: medium solid white;
-  border-radius: 10px;
-}

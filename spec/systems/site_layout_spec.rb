@@ -11,5 +11,10 @@ RSpec.describe "SiteLayouts", type: :system do
       visit root_path
       expect(page).to have_link "ログイン"#,href: login_path 未実装
     end
+
+    it "contains signup link" do
+      visit root_path
+      expect(page).to have_link "アカウントを作成する"#,href :signup_path 未実装
+    end
   end
 end
