@@ -3,59 +3,59 @@ ja:
   activerecord:
     errors:
       messages:
-        record_invalid: 'ƒoƒŠƒf[ƒVƒ‡ƒ“‚É¸”s‚µ‚Ü‚µ‚½: %{errors}'
+        record_invalid: 'ãƒãƒªãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ: %{errors}'
         restrict_dependent_destroy:
-          has_one: "%{record}‚ª‘¶İ‚µ‚Ä‚¢‚é‚Ì‚Åíœ‚Å‚«‚Ü‚¹‚ñ"
-          has_many: "%{record}‚ª‘¶İ‚µ‚Ä‚¢‚é‚Ì‚Åíœ‚Å‚«‚Ü‚¹‚ñ"
+          has_one: "%{record}ãŒå­˜åœ¨ã—ã¦ã„ã‚‹ã®ã§å‰Šé™¤ã§ãã¾ã›ã‚“"
+          has_many: "%{record}ãŒå­˜åœ¨ã—ã¦ã„ã‚‹ã®ã§å‰Šé™¤ã§ãã¾ã›ã‚“"
   date:
     abbr_day_names:
-    - “ú
-    - Œ
-    - ‰Î
-    - …
-    - –Ø
-    - ‹à
-    - “y
+    - æ—¥
+    - æœˆ
+    - ç«
+    - æ°´
+    - æœ¨
+    - é‡‘
+    - åœŸ
     abbr_month_names:
     -
-    - 1Œ
-    - 2Œ
-    - 3Œ
-    - 4Œ
-    - 5Œ
-    - 6Œ
-    - 7Œ
-    - 8Œ
-    - 9Œ
-    - 10Œ
-    - 11Œ
-    - 12Œ
+    - 1æœˆ
+    - 2æœˆ
+    - 3æœˆ
+    - 4æœˆ
+    - 5æœˆ
+    - 6æœˆ
+    - 7æœˆ
+    - 8æœˆ
+    - 9æœˆ
+    - 10æœˆ
+    - 11æœˆ
+    - 12æœˆ
     day_names:
-    - “ú—j“ú
-    - Œ—j“ú
-    - ‰Î—j“ú
-    - …—j“ú
-    - –Ø—j“ú
-    - ‹à—j“ú
-    - “y—j“ú
+    - æ—¥æ›œæ—¥
+    - æœˆæ›œæ—¥
+    - ç«æ›œæ—¥
+    - æ°´æ›œæ—¥
+    - æœ¨æ›œæ—¥
+    - é‡‘æ›œæ—¥
+    - åœŸæ›œæ—¥
     formats:
       default: "%Y/%m/%d"
-      long: "%Y”N%mŒ%d“ú(%a)"
+      long: "%Yå¹´%mæœˆ%dæ—¥(%a)"
       short: "%m/%d"
     month_names:
     -
-    - 1Œ
-    - 2Œ
-    - 3Œ
-    - 4Œ
-    - 5Œ
-    - 6Œ
-    - 7Œ
-    - 8Œ
-    - 9Œ
-    - 10Œ
-    - 11Œ
-    - 12Œ
+    - 1æœˆ
+    - 2æœˆ
+    - 3æœˆ
+    - 4æœˆ
+    - 5æœˆ
+    - 6æœˆ
+    - 7æœˆ
+    - 8æœˆ
+    - 9æœˆ
+    - 10æœˆ
+    - 11æœˆ
+    - 12æœˆ
     order:
     - :year
     - :month
@@ -63,88 +63,88 @@ ja:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: –ñ1ŠÔ
-        other: –ñ%{count}ŠÔ
+        one: ç´„1æ™‚é–“
+        other: ç´„%{count}æ™‚é–“
       about_x_months:
-        one: –ñ1ƒ–Œ
-        other: –ñ%{count}ƒ–Œ
+        one: ç´„1ãƒ¶æœˆ
+        other: ç´„%{count}ãƒ¶æœˆ
       about_x_years:
-        one: –ñ1”N
-        other: –ñ%{count}”N
+        one: ç´„1å¹´
+        other: ç´„%{count}å¹´
       almost_x_years:
-        one: 1”Nã
-        other: "%{count}”Nã"
-      half_a_minute: 30•b‘OŒã
+        one: 1å¹´å¼±
+        other: "%{count}å¹´å¼±"
+      half_a_minute: 30ç§’å‰å¾Œ
       less_than_x_seconds:
-        one: 1•bˆÈ“à
-        other: "%{count}•b–¢–"
+        one: 1ç§’ä»¥å†…
+        other: "%{count}ç§’æœªæº€"
       less_than_x_minutes:
-        one: 1•ªˆÈ“à
-        other: "%{count}•ª–¢–"
+        one: 1åˆ†ä»¥å†…
+        other: "%{count}åˆ†æœªæº€"
       over_x_years:
-        one: 1”NˆÈã
-        other: "%{count}”NˆÈã"
+        one: 1å¹´ä»¥ä¸Š
+        other: "%{count}å¹´ä»¥ä¸Š"
       x_seconds:
-        one: 1•b
-        other: "%{count}•b"
+        one: 1ç§’
+        other: "%{count}ç§’"
       x_minutes:
-        one: 1•ª
-        other: "%{count}•ª"
+        one: 1åˆ†
+        other: "%{count}åˆ†"
       x_days:
-        one: 1“ú
-        other: "%{count}“ú"
+        one: 1æ—¥
+        other: "%{count}æ—¥"
       x_months:
-        one: 1ƒ–Œ
-        other: "%{count}ƒ–Œ"
+        one: 1ãƒ¶æœˆ
+        other: "%{count}ãƒ¶æœˆ"
       x_years:
-        one: 1”N
-        other: "%{count}”N"
+        one: 1å¹´
+        other: "%{count}å¹´"
     prompts:
-      second: •b
-      minute: •ª
-      hour: 
-      day: “ú
-      month: Œ
-      year: ”N
+      second: ç§’
+      minute: åˆ†
+      hour: æ™‚
+      day: æ—¥
+      month: æœˆ
+      year: å¹´
   errors:
     format: "%{attribute}%{message}"
     messages:
-      accepted: ‚ğó‘ø‚µ‚Ä‚­‚¾‚³‚¢
-      blank: ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
-      confirmation: ‚Æ%{attribute}‚Ì“ü—Í‚ªˆê’v‚µ‚Ü‚¹‚ñ
-      empty: ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
-      equal_to: ‚Í%{count}‚É‚µ‚Ä‚­‚¾‚³‚¢
-      even: ‚Í‹ô”‚É‚µ‚Ä‚­‚¾‚³‚¢
-      exclusion: ‚Í—\–ñ‚³‚ê‚Ä‚¢‚Ü‚·
-      greater_than: ‚Í%{count}‚æ‚è‘å‚«‚¢’l‚É‚µ‚Ä‚­‚¾‚³‚¢
-      greater_than_or_equal_to: ‚Í%{count}ˆÈã‚Ì’l‚É‚µ‚Ä‚­‚¾‚³‚¢
-      inclusion: ‚Íˆê——‚É‚ ‚è‚Ü‚¹‚ñ
-      invalid: ‚Í•s³‚È’l‚Å‚·
-      less_than: ‚Í%{count}‚æ‚è¬‚³‚¢’l‚É‚µ‚Ä‚­‚¾‚³‚¢
-      less_than_or_equal_to: ‚Í%{count}ˆÈ‰º‚Ì’l‚É‚µ‚Ä‚­‚¾‚³‚¢
-      model_invalid: 'ƒoƒŠƒf[ƒVƒ‡ƒ“‚É¸”s‚µ‚Ü‚µ‚½: %{errors}'
-      not_a_number: ‚Í”’l‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
-      not_an_integer: ‚Í®”‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
-      odd: ‚ÍŠï”‚É‚µ‚Ä‚­‚¾‚³‚¢
-      other_than: ‚Í%{count}ˆÈŠO‚Ì’l‚É‚µ‚Ä‚­‚¾‚³‚¢
-      present: ‚Í“ü—Í‚µ‚È‚¢‚Å‚­‚¾‚³‚¢
-      required: ‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
-      taken: ‚Í‚·‚Å‚É‘¶İ‚µ‚Ü‚·
-      too_long: ‚Í%{count}•¶šˆÈ“à‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
-      too_short: ‚Í%{count}•¶šˆÈã‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
-      wrong_length: ‚Í%{count}•¶š‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢
+      accepted: ã‚’å—è«¾ã—ã¦ãã ã•ã„
+      blank: ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„
+      confirmation: ã¨%{attribute}ã®å…¥åŠ›ãŒä¸€è‡´ã—ã¾ã›ã‚“
+      empty: ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„
+      equal_to: ã¯%{count}ã«ã—ã¦ãã ã•ã„
+      even: ã¯å¶æ•°ã«ã—ã¦ãã ã•ã„
+      exclusion: ã¯äºˆç´„ã•ã‚Œã¦ã„ã¾ã™
+      greater_than: ã¯%{count}ã‚ˆã‚Šå¤§ãã„å€¤ã«ã—ã¦ãã ã•ã„
+      greater_than_or_equal_to: ã¯%{count}ä»¥ä¸Šã®å€¤ã«ã—ã¦ãã ã•ã„
+      inclusion: ã¯ä¸€è¦§ã«ã‚ã‚Šã¾ã›ã‚“
+      invalid: ã¯ä¸æ­£ãªå€¤ã§ã™
+      less_than: ã¯%{count}ã‚ˆã‚Šå°ã•ã„å€¤ã«ã—ã¦ãã ã•ã„
+      less_than_or_equal_to: ã¯%{count}ä»¥ä¸‹ã®å€¤ã«ã—ã¦ãã ã•ã„
+      model_invalid: 'ãƒãƒªãƒ‡ãƒ¼ã‚·ãƒ§ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸ: %{errors}'
+      not_a_number: ã¯æ•°å€¤ã§å…¥åŠ›ã—ã¦ãã ã•ã„
+      not_an_integer: ã¯æ•´æ•°ã§å…¥åŠ›ã—ã¦ãã ã•ã„
+      odd: ã¯å¥‡æ•°ã«ã—ã¦ãã ã•ã„
+      other_than: ã¯%{count}ä»¥å¤–ã®å€¤ã«ã—ã¦ãã ã•ã„
+      present: ã¯å…¥åŠ›ã—ãªã„ã§ãã ã•ã„
+      required: ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„
+      taken: ã¯ã™ã§ã«å­˜åœ¨ã—ã¾ã™
+      too_long: ã¯%{count}æ–‡å­—ä»¥å†…ã§å…¥åŠ›ã—ã¦ãã ã•ã„
+      too_short: ã¯%{count}æ–‡å­—ä»¥ä¸Šã§å…¥åŠ›ã—ã¦ãã ã•ã„
+      wrong_length: ã¯%{count}æ–‡å­—ã§å…¥åŠ›ã—ã¦ãã ã•ã„
     template:
-      body: Ÿ‚Ì€–Ú‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢
+      body: æ¬¡ã®é …ç›®ã‚’ç¢ºèªã—ã¦ãã ã•ã„
       header:
-        one: "%{model}‚ÉƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½"
-        other: "%{model}‚É%{count}ŒÂ‚ÌƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½"
+        one: "%{model}ã«ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ"
+        other: "%{model}ã«%{count}å€‹ã®ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸ"
   helpers:
     select:
-      prompt: ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢
+      prompt: é¸æŠã—ã¦ãã ã•ã„
     submit:
-      create: “o˜^‚·‚é
-      submit: •Û‘¶‚·‚é
-      update: XV‚·‚é
+      create: ç™»éŒ²ã™ã‚‹
+      submit: ä¿å­˜ã™ã‚‹
+      update: æ›´æ–°ã™ã‚‹
   number:
     currency:
       format:
@@ -154,7 +154,7 @@ ja:
         separator: "."
         significant: false
         strip_insignificant_zeros: false
-        unit: ‰~
+        unit: å††
     format:
       delimiter: ","
       precision: 3
@@ -165,11 +165,11 @@ ja:
       decimal_units:
         format: "%n %u"
         units:
-          billion: \‰­
-          million: •S–œ
-          quadrillion: ç’›
-          thousand: ç
-          trillion: ’›
+          billion: åå„„
+          million: ç™¾ä¸‡
+          quadrillion: åƒå…†
+          thousand: åƒ
+          trillion: å…†
           unit: ''
       format:
         delimiter: ''
@@ -179,7 +179,7 @@ ja:
       storage_units:
         format: "%n%u"
         units:
-          byte: ƒoƒCƒg
+          byte: ãƒã‚¤ãƒˆ
           eb: EB
           gb: GB
           kb: KB
@@ -195,13 +195,13 @@ ja:
         delimiter: ''
   support:
     array:
-      last_word_connector: "A"
-      two_words_connector: "A"
-      words_connector: "A"
+      last_word_connector: "ã€"
+      two_words_connector: "ã€"
+      words_connector: "ã€"
   time:
-    am: Œß‘O
+    am: åˆå‰
     formats:
-      default: "%Y”N%mŒ%d“ú(%a) %H%M•ª%S•b %z"
+      default: "%Yå¹´%mæœˆ%dæ—¥(%a) %Hæ™‚%Måˆ†%Sç§’ %z"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
-    pm: ŒßŒã
+    pm: åˆå¾Œ

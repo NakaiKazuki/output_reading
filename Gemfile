@@ -14,7 +14,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n', '~> 5.1'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
-# gem 'bcrypt' , '~> 3.1.13'
+gem 'bcrypt' , '~> 3.1.13'
 # gem 'faker' , '~> 2.11.0'
 # gem 'carrierwave' , '~> 2.1.0'
 # gem 'mini_magick' , '~> 4.10.1'
