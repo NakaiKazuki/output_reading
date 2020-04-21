@@ -1,0 +1,33 @@
+<% provide(:title, '新規ユーザ作成') %>
+<div class="container signup-container">
+  <div class="row">
+    <div class="col">
+      <h1 class="signup-title">新規ユーザ作成</h1>
+      <%= form_with(model: @user, url: users_path, local: true) do |form| %>
+        <%= render "shared/error_messages", object: form.object %>
+
+        <div class="form-group">
+          <%= form.text_field :name, class: 'form-control', placeholder: "名前" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.email_field :email, class: 'form-control', placeholder: "メールアドレス" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.password_field :password, class: 'form-control', placeholder: "パスワード" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.password_field :password_confirmation, class: 'form-control', placeholder: "パスワード（再入力）" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit "新規ユーザ作成", class: "btn btn-md btn-outline-success btn-lg form-submit" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- col-md-nは横幅を12分割したときの割合 n=3なら横幅の1/4になる。
+md sm などはブレイクポイントある程度画面が小さくなれば横幅の分割がなくなる。 -->

@@ -8,31 +8,30 @@ RSpec.describe User, type: :model do
     password: "foobar",
     password_confirmation: "foobar"
   ) }
-  subject{ user }
 
   describe "User" do
     it "should be valid" do
-      is_expected.to be_valid
+      expect(user).to be_valid
     end
   end
 
   describe "name" do
     it "gives presence" do
       user.name = "  "
-      is_expected.to be_invalid
+      expect(user).to be_invalid
     end
 
     context "50 characters" do
       it "is not too long" do
         user.name = "a" * 50
-        is_expected.to be_valid
+        expect(user).to be_valid
       end
     end
 
     context "51 characters" do
       it "is too long" do
         user.name = "a" * 51
-        is_expected.to be_invalid
+        expect(user).to be_invalid
       end
     end
   end
@@ -40,20 +39,20 @@ RSpec.describe User, type: :model do
   describe "email" do
     it "gives presence" do
       user.email = "  "
-      is_expected.to be_invalid
+      expect(user).to be_invalid
     end
 
     context "255 characters" do
       it "is not too long" do
         user.email = "a" * 243 + "@example.com"
-        is_expected.to be_valid
+        expect(user).to be_valid
       end
     end
 
     context "256 characters" do
       it "is too long" do
         user.email = "a" * 244 + "@example.com"
-        is_expected.to be_invalid
+        expect(user).to be_invalid
       end
     end
 
@@ -63,7 +62,7 @@ RSpec.describe User, type: :model do
       valid_addresses.each do |valid_address|
         it "should accept valid addresses" do
           user.email = valid_address
-          is_expected.to be_valid
+          expect(user).to be_valid
         end
       end
     end
@@ -74,7 +73,7 @@ RSpec.describe User, type: :model do
       invalid_addresses.each do |invalid_address|
         it "should reject invalid addresses" do
           user.email = invalid_address
-          is_expected.to be_invalid
+          expect(user).to be_invalid
         end
       end
     end
@@ -96,20 +95,20 @@ RSpec.describe User, type: :model do
   describe "password and password_confirmation" do
     it "should be present (nonblank)" do
       user.password = user.password_confirmation = " " * 6
-      is_expected.to be_invalid
+      expect(user).to be_invalid
     end
 
     context "5 characters" do
       it "is too short" do
         user.password = user.password_confirmation = "a" * 5
-        is_expected.to be_invalid
+        expect(user).to be_invalid
       end
     end
 
     context "6 characters" do
       it "is not too short" do
         user.password = user.password_confirmation = "a" * 6
-        is_expected.to be_valid
+        expect(user).to be_valid
       end
     end
   end
