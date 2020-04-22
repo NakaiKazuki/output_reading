@@ -6,7 +6,9 @@ body{
  background-image: image-url("body_background.jpg");
  padding-top:7rem;
 }
-
+.alert{
+  text-align: center;
+}
 // header
 
 .navbar-brand{
@@ -42,15 +44,48 @@ body{
  }
 }
 
-// users
+// signup
 .signup-container{
   margin-top:1.8rem;
-  padding:5rem 10rem;
-  text-align: center;
+  padding:3.5rem;
   background-color:white;
   border: 0.63rem double darkorange;
   border-radius: 4.4rem;
+  .signup-title{
+    text-align: center;
+    font-family:"ＭＳ 明朝";
+    padding-bottom: 2rem;
+  }
 }
+
+// form
+
+.form-group{
+  padding:0.5rem 0;
+}
+.form-submit{
+  margin-top: 1.6rem;
+  width:100%;
+}
+
+#error_explanation {
+  color: red;
+  text-align: center;
+  ul {
+    display: inline-block;
+    text-align: left;
+    color: red;
+    padding:1rem 0 ;
+  }
+}
+.field_with_errors .form-control {
+  border-color: red;
+}
+.alert-form-extend {
+  margin: 1.5rem 0 1rem;
+}
+
+// users/show
 
 .user-container{
   margin-top:1.8rem;
