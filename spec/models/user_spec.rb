@@ -17,9 +17,10 @@ RSpec.describe User, type: :model do
 
   describe "name" do
     it "gives presence" do
-      user.name = "  "
+      user.name = " "
       expect(user).to be_invalid
     end
+
 
     context "50 characters" do
       it "is not too long" do
@@ -35,7 +36,6 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
   describe "email" do
     it "gives presence" do
       user.email = "  "
@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
       valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                            first.last@foo.jp alice+bob@baz.cn]
       valid_addresses.each do |valid_address|
-        it "should accept valid addresses" do
+        it "expect accept valid addresses" do
           user.email = valid_address
           expect(user).to be_valid
         end

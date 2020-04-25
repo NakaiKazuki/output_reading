@@ -6,11 +6,27 @@ body{
  background-image: image-url("body_background.jpg");
  padding-top:7rem;
 }
-.alert{
-  text-align: center;
-}
-// header
 
+// max-width = 768px
+@media (max-width: 768px) {
+  .nav-item-extend {
+    margin-top: 0.6rem;
+  }
+}
+
+// button
+.btn-extend {
+  width: 8.5rem;
+}
+
+// header
+.navbar-extend {
+  margin-bottom: 0;
+  background-color: limegreen;
+  ul li a button {
+    padding: 0.375rem 1.5rem;
+  }
+}
 .navbar-brand{
  font-size: 1.43rem;
  background-color:white;
@@ -20,6 +36,10 @@ body{
  font-family:cursive,Century;
 }
 
+.nav-item-extend a{
+  margin-left: 1rem;
+  float: right;
+}
 // jumbotron
 
 .jumbotron-extend {
@@ -51,9 +71,8 @@ body{
   background-color:white;
   border: 0.63rem double darkorange;
   border-radius: 4.4rem;
+  text-align: center;
   .signup-title{
-    text-align: center;
-    font-family:"ＭＳ 明朝";
     padding-bottom: 2rem;
   }
 }
@@ -70,7 +89,6 @@ body{
 
 #error_explanation {
   color: red;
-  text-align: center;
   ul {
     display: inline-block;
     text-align: left;
@@ -81,21 +99,41 @@ body{
 .field_with_errors .form-control {
   border-color: red;
 }
+.alert{
+  text-align: center;
+}
 .alert-form-extend {
   margin: 1.5rem 0 1rem;
 }
 
-// users/show
+// users/show　未完成
 
-.user-container{
+.show-container{
   margin-top:1.8rem;
-  padding:3rem;
+  padding:3.5rem;
   background-color:white;
   border: 0.63rem double darkorange;
   border-radius: 4.4rem;
+  text-align: center;
   section{
     h1{
       font-size:2rem;
     }
+  }
+}
+
+// login
+.login-container{
+  margin-top:1.8rem;
+  padding:3.5rem;
+  background-color:white;
+  border: 0.63rem double darkorange;
+  border-radius: 4.4rem;
+  text-align: center;
+  .login-title{
+    padding-bottom: 2rem;
+  }
+  .form-go-to-signup-or-login{
+    margin-top:1.8rem;
   }
 }
