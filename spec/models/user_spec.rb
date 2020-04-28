@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:user) { User.new(
-    name: "Example User",
-    email: "user@example.com",
-    password: "foobar",
-    password_confirmation: "foobar"
-  ) }
+  let(:user) { create(:user)}
 
   describe "User" do
     it "should be valid" do
@@ -36,6 +31,7 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
   describe "email" do
     it "gives presence" do
       user.email = "  "
@@ -60,7 +56,7 @@ RSpec.describe User, type: :model do
       valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                            first.last@foo.jp alice+bob@baz.cn]
       valid_addresses.each do |valid_address|
-        it "expect accept valid addresses" do
+        it "should accept valid addresses" do
           user.email = valid_address
           expect(user).to be_valid
         end
@@ -109,6 +105,14 @@ RSpec.describe User, type: :model do
       it "is not too short" do
         user.password = user.password_confirmation = "a" * 6
         expect(user).to be_valid
+      end
+    end
+  end
+
+  describe "User model methods" do
+    describe "authenticated?" do
+      it "return false for a user with nil digest" do
+        expect(user.authenticated?('')).to be_falsey
       end
     end
   end
