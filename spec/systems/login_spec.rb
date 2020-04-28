@@ -63,7 +63,7 @@ RSpec.describe "Logins", type: :system do
       expect(page).not_to have_selector '.btn-login-extend'
       click_on 'ログアウト'
       expect(current_path).to eq root_path
-      expect(page).to have_selector '.home-container'
+      expect(page).to have_selector '.jumbotron-extend'
       expect(page).to have_selector '.btn-login-extend'
       expect(page).not_to have_selector '.btn-logout-extend'
     end

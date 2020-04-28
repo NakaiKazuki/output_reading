@@ -6,16 +6,16 @@ RSpec.describe "UsersSignups", type: :system do
 
     def submit_with_invalid_information
       fill_in '名前', with: ''
-      fill_in 'メールアドレス', with: 'user@invalid'
-      fill_in 'パスワード', with: 'foo'
+      fill_in 'メールアドレス（例：email@example.com）', with: 'user@invalid'
+      fill_in 'パスワード（6文字以上）', with: 'foo'
       fill_in 'パスワード（再入力）', with: 'bar'
       find(".form-submit").click
     end
 
     def submit_with_valid_information
       fill_in '名前', with: 'Example User'
-      fill_in 'メールアドレス', with: 'user@example.com'
-      fill_in 'パスワード', with: 'password'
+      fill_in 'メールアドレス（例：email@example.com）', with: 'user@example.com'
+      fill_in 'パスワード（6文字以上）', with: 'password'
       fill_in 'パスワード（再入力）', with: 'password'
       find(".form-submit").click
     end
