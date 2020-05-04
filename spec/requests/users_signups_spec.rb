@@ -27,14 +27,14 @@ RSpec.describe "UsersSignups", type: :request do
   describe "GET /signup" do
     it "is invalid signup information" do
       get signup_path
-        expect{post_invalid_information}.not_to change(User, :count)
+      expect{post_invalid_information}.not_to change(User, :count)
       expect(flash[:success]).to be nil
     end
 
     it "is valid signup information" do
       get signup_path
       expect{post_valid_information}.to change(User, :count).by(1)
-        expect(flash[:success]).to be_truthy
+      expect(flash[:success]).to be_truthy
     end
   end
 

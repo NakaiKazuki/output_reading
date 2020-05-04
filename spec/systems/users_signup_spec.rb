@@ -25,7 +25,8 @@ RSpec.describe "UsersSignups", type: :system do
         visit signup_path
         submit_with_invalid_information
         expect(current_path).to eq signup_path
-        expect(page).to have_selector "#error_explanation"
+        expect(page).to have_selector '.alert-danger'
+        expect(page).to have_selector '#error_explanation'
       end
     end
 
@@ -34,7 +35,8 @@ RSpec.describe "UsersSignups", type: :system do
         visit signup_path
         submit_with_valid_information
         expect(current_path).to eq user_path(1)
-        expect(page).not_to have_selector "#error_explanation"
+        expect(page).to have_selector '.alert-success'
+        expect(page).not_to have_selector '#error_explanation'
       end
     end
 

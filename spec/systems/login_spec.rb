@@ -11,9 +11,9 @@ RSpec.describe "Logins", type: :system do
 
   def submit_with_valid_information(remember_me = 0)
     fill_in 'メールアドレス', with: user.email
-    fill_in 'パスワード', with: 'password'
+    fill_in 'パスワード', with: user.password
     check 'session_remember_me' if remember_me == 1
-    find(".form-submit").click
+    find('.form-submit').click
   end
 
   describe "Login" do
@@ -31,6 +31,7 @@ RSpec.describe "Logins", type: :system do
         visit login_path
         submit_with_invalid_information
         expect(current_path).to eq login_path
+        expect(page).to have_selector '.alert-danger'
         visit root_path
         expect(page).not_to have_selector '.alert-danger'
       end
@@ -63,7 +64,7 @@ RSpec.describe "Logins", type: :system do
       expect(page).not_to have_selector '.btn-login-extend'
       click_on 'ログアウト'
       expect(current_path).to eq root_path
-      expect(page).to have_selector '.jumbotron-extend'
+      expect(page).to have_selector '.home-container'
       expect(page).to have_selector '.btn-login-extend'
       expect(page).not_to have_selector '.btn-logout-extend'
     end

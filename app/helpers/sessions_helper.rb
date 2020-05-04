@@ -5,6 +5,7 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
+  # 記憶トークン (cookie) に対応するユーザーを返す
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id) #current_userがある場合はcurrent_userを代入するけど、無い場合はUserモデルからsession使って探して代入する。
@@ -15,6 +16,11 @@ module SessionsHelper
         @current_user = user
       end
     end
+  end
+
+  # 渡されたユーザーがログイン済みユーザーであればtrueを返す
+  def current_user?(user)
+    user == current_user
   end
 
   # ユーザーがログインしていればtrue、その他ならfalseを返す
@@ -39,5 +45,16 @@ module SessionsHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
+  end
+
+  # 直前のリンクを記憶する
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
+  end
+
+  #記憶したリンクか任意のリンクにリダイレクトする
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
   end
 end

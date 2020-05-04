@@ -9,6 +9,7 @@ RSpec.describe SessionsHelper, type: :helper do
       expect(current_user).to eq user
       expect(is_logged_in?).to be_truthy
     end
+
     it "returns nil when remember digest is wrong" do
       remember(user)
       user.update_attribute(:remember_digest, User.digest(User.new_token))
