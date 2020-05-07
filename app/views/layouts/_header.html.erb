@@ -7,9 +7,9 @@
     <div id="menu" class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto">
         <% if logged_in? %>
-        <%= render "layouts/user_login"%>
+        <%= render "layouts/user_logged_in"%>
         <% else %>
-        <%= render "layouts/user_logout"%>
+        <%= render "layouts/user_logged_out"%>
         <% end %>
       </ul>
     </div>

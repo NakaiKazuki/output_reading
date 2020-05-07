@@ -2,8 +2,10 @@
 <% provide(:submit_text, 'この内容に変更する') %>
 <% provide(:url,   user_path) %>
 <div class="container edit-container">
-  <div class="edit-title">
-    <h1 class="form-title form-title-edit">プロフィール編集</h1>
-    <%= render "users/form" %>
+  <div class="row">
+    <div class="col">
+      <h1 class="edit-title">プロフィール編集</h1>
+      <%= render "users/form" %>
+    </div>
   </div>
 </div>

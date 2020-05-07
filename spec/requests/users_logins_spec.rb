@@ -14,7 +14,7 @@ RSpec.describe "UsersLogins", type: :request do
         }
       }
     end
-    
+
   def post_valid_information(remember_me = 0)
     post login_path,params:{
       session:{
@@ -58,6 +58,14 @@ RSpec.describe "UsersLogins", type: :request do
       end
     end
 
+    it "goes to previous link because they had logged in as right user" do
+      get edit_user_path(user)
+      follow_redirect!
+      expect(request.fullpath).to eq '/login'
+      log_in_as(user)
+      expect(request.fullpath).to eq '/users/1/edit'
+    end
+    
   end
 
   describe "remember_me" do

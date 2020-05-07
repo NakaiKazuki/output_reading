@@ -43,14 +43,14 @@ RSpec.describe "UsersEdits", type: :request do
       it "is invalid getting edit_user_path" do
         get edit_user_path(user)
         follow_redirect!
-        expect(flash[:warning]).not_to be_empty
+        expect(flash[:warning]).to be_truthy
         expect(request.fullpath).to eq '/login'
       end
 
       it "is invalid patch user_path" do
         patch_valid_information
         follow_redirect!
-        expect(flash[:warning]).not_to be_empty
+        expect(flash[:warning]).to be_truthy
         expect(request.fullpath).to eq '/login'
       end
     end
@@ -76,11 +76,11 @@ RSpec.describe "UsersEdits", type: :request do
         it "is invalid edit informaiton" do
           log_in_as(user)
           get edit_user_path(user)
-          expect(is_logged_in?).to be_truthy
+          expect(is_logged_in?).to be true
           expect(request.fullpath).to eq '/users/1/edit'
           patch_invalid_information
           expect(request.fullpath).to eq '/users/1'
-          expect(flash[:danger]).not_to be_empty
+          expect(flash[:danger]).to be_truthy
         end
       end
 
@@ -96,7 +96,7 @@ RSpec.describe "UsersEdits", type: :request do
           expect(user.reload.email).to eq 'foo@bar.com'
           # expect(user.reload.password).to eq 'foobar'           #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。手動で確認したところ更新されている。
           expect(request.fullpath).to eq '/users/1'
-          expect(flash[:success]).not_to be_empty
+          expect(flash[:success]).to be_truthy
         end
 
         it "is valid edit informaiton if password is empty" do
@@ -110,17 +110,9 @@ RSpec.describe "UsersEdits", type: :request do
           expect(user.reload.email).to eq 'foo@bar.com'
           # expect(user.password).to eq user.reload.password
           expect(request.fullpath).to eq '/users/1'
-          expect(flash[:success]).not_to be_empty
+          expect(flash[:success]).to be_truthy
         end
       end
-    end
-
-    it "goes to previous link because they had logged in as right user" do
-      get edit_user_path(user)
-      follow_redirect!
-      expect(request.fullpath).to eq '/login'
-      log_in_as(user)
-      expect(request.fullpath).to eq '/users/1/edit'
     end
 
   end

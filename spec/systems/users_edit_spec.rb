@@ -75,7 +75,6 @@ RSpec.describe "UsersEdits", type: :system do
           #expect(user.reload.password).to eq 'foobar'         #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。手動で確認したところ更新されている。
           expect(page).to have_selector '.show-container'
           expect(page).to have_selector '.alert-success'
-          expect(page).not_to have_selector '#error_explanation'
         end
 
         it "is valid information even if the password is empty" do
@@ -89,18 +88,9 @@ RSpec.describe "UsersEdits", type: :system do
           expect(current_path).to eq user_path(user)
           expect(page).to have_selector '.show-container'
           expect(page).to have_selector '.alert-success'
-          expect(page).not_to have_selector '#error_explanation'
         end
       end
     end
 
-    it "was a request as the correct user, so move to the previous link" do
-      visit edit_user_path(user)
-      expect(page).to have_selector '.login-container'
-      log_in_by(user)
-      expect(page).to have_selector '.edit-container'
-    end
-
   end
-
 end

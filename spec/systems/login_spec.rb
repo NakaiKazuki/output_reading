@@ -53,6 +53,14 @@ RSpec.describe "Logins", type: :system do
         expect(page).not_to have_selector '.btn-login-extend'
       end
     end
+
+    it "was a request as the correct user, so move to the previous link" do
+      visit edit_user_path(user)
+      expect(page).to have_selector '.login-container'
+      log_in_by(user)
+      expect(page).to have_selector '.edit-container'
+    end
+    
   end
 
   describe "Logout" do
