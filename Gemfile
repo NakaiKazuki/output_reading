@@ -19,14 +19,14 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'faker'
+gem 'faker-japanese'
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug' , platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem "factory_bot_rails"
-  gem 'faker'
-  gem 'faker-japanese'
 end
 
 group :development do
