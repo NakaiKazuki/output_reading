@@ -24,6 +24,18 @@ RSpec.describe "UsersSignups", type: :request do
     }
   end
 
+  def post_valid_information_with_image
+    post signup_path,params:{
+      user:{
+        name: "Example User",
+        email: "user@example.com",
+        password: "foobar",
+        password_confirmation: "foobar",
+        image: "spec/fixtures/fixtures/rails.png"
+      }
+    }
+  end
+
   describe "GET /signup" do
     it "is invalid signup information" do
       get signup_path
@@ -31,9 +43,15 @@ RSpec.describe "UsersSignups", type: :request do
       expect(flash[:success]).to be nil
     end
 
-    it "is valid signup information" do
+    it "is valid information even if there is no image" do
       get signup_path
       expect{post_valid_information}.to change(User, :count).by(1)
+      expect(flash[:success]).to be_truthy
+    end
+
+    it "is valid information even if you add images" do
+      get signup_path
+      expect{post_valid_information_with_image}.to change(User, :count).by(1)
       expect(flash[:success]).to be_truthy
     end
   end

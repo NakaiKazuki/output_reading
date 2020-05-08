@@ -2,20 +2,34 @@
   <%= render "shared/error_messages", object: form.object %>
 
   <div class="form-group">
-    <%= form.text_field :name, class: 'form-control', placeholder: "名前" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "名前" %>
   </div>
 
   <div class="form-group">
-    <%= form.email_field :email, class: 'form-control', placeholder: "メールアドレス（例：email@example.com）" %>
+    <%= form.email_field :email, class: "form-control", placeholder: "メールアドレス（例：email@example.com）" %>
   </div>
 
   <div class="form-group">
-    <%= form.password_field :password, class: 'form-control', placeholder: "パスワード（6文字以上）" %>
+    <%= form.password_field :password, class: "form-control", placeholder: "パスワード（6文字以上）" %>
   </div>
 
   <div class="form-group">
-    <%= form.password_field :password_confirmation, class: 'form-control', placeholder: "パスワード（再入力）" %>
+    <%= form.password_field :password_confirmation, class: "form-control", placeholder: "パスワード（再入力）" %>
   </div>
+
+    <div class="form-group">
+      <p>アイコンを設定する場合は以下の項目で、画像ファイルを選択してください。</p>
+      <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png" , class: "form-control image_form" %>
+    </div>
+
+    <script type="text/javascript">
+      $("#user_image").bind("change", function() {
+        var size_in_megabytes = this.files[0].size/1024/1024;
+        if (size_in_megabytes > 5) {
+          alert("最大ファイルサイズは5MBです。5MBより小さいファイルを選択してください。");
+        }
+      });
+    </script>
 
   <div class="form-group">
     <%= form.submit yield(:submit_text), class: "btn btn-md btn-outline-success btn-lg form-submit" %>

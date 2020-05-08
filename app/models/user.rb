@@ -2,6 +2,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token
   before_save :downcase_email
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  mount_uploader :image, UserImageUploader
 
   validates :name,
     presence: true,
@@ -16,6 +17,7 @@ class User < ApplicationRecord
     presence: true,
     length: {minimum: 6},
     allow_nil: true
+  validate  :image_size
 
   class << self #クラスメソッド定義
 
@@ -47,11 +49,18 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
-  
+
 private
 
   def downcase_email
     email.downcase!
+  end
+
+  # アップロードされた画像のサイズをバリデーションする
+  def image_size
+    if image.size > 5.megabytes
+      errors.add(:image, "は5MB未満にしてください")
+    end
   end
 
 end

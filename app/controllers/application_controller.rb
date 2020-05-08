@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def hello
-    render html: 'こんにちは, 世界!'
+    render html: "こんにちは, 世界!"
   end
 end

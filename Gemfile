@@ -17,9 +17,8 @@ gem 'bootstrap'
 gem 'bcrypt'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
-# gem 'carrierwave' , '~> 2.1.0'
-# gem 'mini_magick' 
-# gem 'sass-rails', '~> 5.0'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'sqlite3'

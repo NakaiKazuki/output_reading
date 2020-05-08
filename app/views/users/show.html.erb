@@ -6,6 +6,11 @@
   <div class="row">
     <div class="user_info">
       <h1>
+        <% if @user.image? %>
+          <%= image_tag @user.image.url, class:"user-image"%>
+        <% else %>
+          <%= image_tag "default.png" ,:size =>'80x80',class:"user-image-default" %>
+        <% end %>
         <%= @user.name %>
       </h1>
       <p><%= link_to "登録内容を編集する", edit_user_path if  current_user?(@user) %></p>

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update,:index]
+  before_action :logged_in_user, only: [:edit, :update,:show,:index]
   before_action :correct_user,   only: [:edit, :update]
 
   def new
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).per(16)
+    @users = User.page(params[:page]).per(10)
   end
 
   def show
@@ -32,18 +32,18 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = 'プロフィールを更新しました！'
+      flash[:success] = "プロフィールを更新しました！"
       redirect_to @user
     else
-      flash.now[:danger] = 'プロフィールの編集に失敗しました。'
-      render 'edit'
+      flash.now[:danger] = "プロフィールの編集に失敗しました。"
+      render "edit"
     end
   end
 
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation,:image)
   end
 
 # beforeアクション

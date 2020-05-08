@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "UsersEdits", type: :request do
   let(:user) { create(:user) }
@@ -37,6 +37,18 @@ RSpec.describe "UsersEdits", type: :request do
     }
   end
 
+  def patch_valid_information_if_add_an_image
+    patch user_path(user), params: {
+      user: {
+        name: "Foo Bar",
+        email: "foo@bar.com",
+        password: "",
+        password_confirmation: "",
+        image: "spec/fixtures/fixtures/rails.png"
+      }
+    }
+  end
+
   describe "GET /users/:id/edit" do
 
     context "user is not logged in" do
@@ -44,30 +56,30 @@ RSpec.describe "UsersEdits", type: :request do
         get edit_user_path(user)
         follow_redirect!
         expect(flash[:warning]).to be_truthy
-        expect(request.fullpath).to eq '/login'
+        expect(request.fullpath).to eq "/login"
       end
 
       it "is invalid patch user_path" do
         patch_valid_information
         follow_redirect!
         expect(flash[:warning]).to be_truthy
-        expect(request.fullpath).to eq '/login'
+        expect(request.fullpath).to eq "/login"
       end
     end
 
     context "access by other users" do
-      it "can't get edit_user_path because you are an invalid user" do
+      it "can not get edit_user_path because you are an invalid user" do
         log_in_as(other_user)
         get edit_user_path(user)
         follow_redirect!
-        expect(request.fullpath).to eq '/'
+        expect(request.fullpath).to eq "/"
       end
 
-      it "can't patch user_path because you are an invalid user" do
+      it "can not patch user_path because you are an invalid user" do
         log_in_as(other_user)
         patch_valid_information
         follow_redirect!
-        expect(request.fullpath).to eq '/'
+        expect(request.fullpath).to eq "/"
       end
     end
 
@@ -77,9 +89,9 @@ RSpec.describe "UsersEdits", type: :request do
           log_in_as(user)
           get edit_user_path(user)
           expect(is_logged_in?).to be true
-          expect(request.fullpath).to eq '/users/1/edit'
+          expect(request.fullpath).to eq "/users/1/edit"
           patch_invalid_information
-          expect(request.fullpath).to eq '/users/1'
+          expect(request.fullpath).to eq "/users/1"
           expect(flash[:danger]).to be_truthy
         end
       end
@@ -89,13 +101,13 @@ RSpec.describe "UsersEdits", type: :request do
           log_in_as(user)
           get edit_user_path(user)
           expect(is_logged_in?).to be_truthy
-          expect(request.fullpath).to eq '/users/1/edit'
+          expect(request.fullpath).to eq "/users/1/edit"
           patch_valid_information
           follow_redirect!
-          expect(user.reload.name).to eq 'Foo Bar'
-          expect(user.reload.email).to eq 'foo@bar.com'
-          # expect(user.reload.password).to eq 'foobar'           #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。手動で確認したところ更新されている。
-          expect(request.fullpath).to eq '/users/1'
+          expect(user.reload.name).to eq "Foo Bar"
+          expect(user.reload.email).to eq "foo@bar.com"
+          # expect(user.reload.password).to eq "foobar"           #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。手動で確認したところ更新されている。
+          expect(request.fullpath).to eq "/users/1"
           expect(flash[:success]).to be_truthy
         end
 
@@ -103,15 +115,31 @@ RSpec.describe "UsersEdits", type: :request do
           log_in_as(user)
           get edit_user_path(user)
           expect(is_logged_in?).to be_truthy
-          expect(request.fullpath).to eq '/users/1/edit'
+          expect(request.fullpath).to eq "/users/1/edit"
           patch_valid_information_if_password_is_empty
           follow_redirect!
-          expect(user.reload.name).to eq 'Foo Bar'
-          expect(user.reload.email).to eq 'foo@bar.com'
+          expect(user.reload.name).to eq "Foo Bar"
+          expect(user.reload.email).to eq "foo@bar.com"
           # expect(user.password).to eq user.reload.password
-          expect(request.fullpath).to eq '/users/1'
+          expect(request.fullpath).to eq "/users/1"
           expect(flash[:success]).to be_truthy
         end
+
+        it "is valid even when adding images" do
+          log_in_as(user)
+          get edit_user_path(user)
+          expect(is_logged_in?).to be_truthy
+          expect(request.fullpath).to eq "/users/1/edit"
+          patch_valid_information_if_add_an_image
+          follow_redirect!
+          expect(user.reload.name).to eq "Foo Bar"
+          expect(user.reload.email).to eq "foo@bar.com"
+          # expect(user.password).to eq user.reload.password
+          expect(user.reload.image).to be_truthy
+          expect(request.fullpath).to eq "/users/1"
+          expect(flash[:success]).to be_truthy
+        end
+
       end
     end
 

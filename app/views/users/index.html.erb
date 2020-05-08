@@ -1,4 +1,4 @@
-<% provide(:title, 'ユーザー一覧') %>
+<% provide(:title, "ユーザー一覧") %>
 <div class="container users-index-container">
   <div class="row">
     <div class="col">
@@ -7,7 +7,12 @@
       <ul class="users">
         <% @users.each do |user| %>
           <li>
-            <%= link_to user.name, user ,class: 'users-index-name' %>
+            <% if user.image? %>
+              <%= image_tag user.image.url ,class: "user-image" %>
+            <% else %>
+              <%= image_tag "default.png" ,:size =>'80x80',class: "user-image-default" %>
+            <% end %>
+            <%= link_to user.name, user ,class: "users-index-name" %>
           </li>
         <% end %>
       </ul>
