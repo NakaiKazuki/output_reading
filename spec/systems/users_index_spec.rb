@@ -16,6 +16,7 @@ RSpec.describe "UsersIndices", type: :system  do
       expect(page).to have_link user.name , href: user_path(user)
       expect(page).to have_link other_user.name , href: user_path(other_user)
       expect(page).to have_selector ".pagination"
+      expect(page).to have_selector ".page-link"
     end
   end
 end
