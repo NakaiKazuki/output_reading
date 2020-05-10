@@ -51,7 +51,7 @@ RSpec.describe "UsersEdits", type: :request do
 
   describe "GET /users/:id/edit" do
 
-    context "user is not logged in" do
+    context "user is not logged in is invalid" do
       it "is invalid getting edit_user_path" do
         get edit_user_path(user)
         follow_redirect!
@@ -67,7 +67,7 @@ RSpec.describe "UsersEdits", type: :request do
       end
     end
 
-    context "access by other users" do
+    context "access by other users is invalid" do
       it "can not get edit_user_path because you are an invalid user" do
         log_in_as(other_user)
         get edit_user_path(user)
@@ -81,7 +81,19 @@ RSpec.describe "UsersEdits", type: :request do
         follow_redirect!
         expect(request.fullpath).to eq "/"
       end
+
+      it "administrator privileges cannot be changed" do
+        log_in_as(other_user)
+        expect(other_user.admin).to be false
+        patch user_path(other_user), params:{
+                                       user:{password:              other_user.password,
+                                             password_confirmation: other_user.password,
+                                             admin: true}}
+        expect(other_user.reload.admin).to be false
+      end
+
     end
+
 
     context "matching user" do
       context "invalid" do

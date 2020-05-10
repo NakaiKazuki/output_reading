@@ -5,6 +5,7 @@ FactoryBot.define do
     email{"user@example.com"}
     password{"password"}
     password_confirmation{"password"}
+    admin{true}
   end
 
   factory :user_add_image, class: User do
@@ -12,6 +13,7 @@ FactoryBot.define do
     email{"user@example.com"}
     password{"password"}
     password_confirmation{"password"}
+    admin{true}
     image{ Rack::Test::UploadedFile.new(File.join(Rails.root, "/spec/fixtures/images.jpg"))}
   end
 
@@ -20,6 +22,7 @@ FactoryBot.define do
     email { "duchess@example.gov" }
     password { "foobar" }
     password_confirmation { "foobar" }
+    admin{false}
   end
 
 #複数ユーザーの作成 _spec で let!(:users) { create_list(:users,15) }のように記述。15は作りたい個数
@@ -29,6 +32,7 @@ FactoryBot.define do
     sequence(:email){|n| "test#{n}@example.com"}
     password{"password"}
     password_confirmation{"password"}
+    admin{false}
   end
 
 end

@@ -13,6 +13,10 @@
               <%= image_tag "default.png" ,:size =>'80x80',class: "user-image-default" %>
             <% end %>
             <%= link_to user.name, user ,class: "users-index-name" %>
+            <% if current_user.admin? && !current_user?(user) %>
+              | <%= link_to "削除", user, method: :delete,
+                                            data: { confirm: "選択したユーザーを削除します。" } ,class: "user-delete-link" %>
+            <% end %>
           </li>
         <% end %>
       </ul>
