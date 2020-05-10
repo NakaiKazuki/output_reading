@@ -40,15 +40,7 @@ RSpec.describe "UsersEdits", type: :system do
 
   describe "users/:id/edit layout" do
 
-    context "access for users who are not logged in" do
-      it "is invalid getting edit_user_path" do
-        visit edit_user_path(user)
-        expect(page).to have_selector ".alert-warning"
-        expect(page).to have_selector ".login-container"
-      end
-    end
-
-    context "access by other users" do
+    context "access by other users is invalid" do
       it "can not get edit_user_path of others." do
         log_in_by(other_user)
         expect(page).to have_selector ".show-container"

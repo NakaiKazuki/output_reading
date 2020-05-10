@@ -1,7 +1,8 @@
 User.create!(name:  "Kazuki",
              email: "example@railstutorial.org",
-             password:              "111111",
-             password_confirmation: "111111")
+             password:              "hogehogehoge",
+             password_confirmation: "hogehogehoge",
+             admin: true)
 
 
 20.times do |n|
