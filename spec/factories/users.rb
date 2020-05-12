@@ -28,7 +28,7 @@ FactoryBot.define do
 #複数ユーザーの作成 _spec で let!(:users) { create_list(:users,15) }のように記述。15は作りたい個数
 
   factory :users, class:User do
-    sequence(:name){|n| "test#{n}"}
+    name{ "test" }
     sequence(:email){|n| "test#{n}@example.com"}
     password{"password"}
     password_confirmation{"password"}

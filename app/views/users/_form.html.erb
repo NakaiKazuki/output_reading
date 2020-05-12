@@ -18,8 +18,8 @@
   </div>
 
     <div class="form-group">
-      <p>アイコンを設定する場合は以下の項目で、画像ファイルを選択してください。</p>
-      <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png" , class: "form-control image_form" %>
+      <%= form.label "プロフィール画像は下記の項目で選択できます。"%>
+      <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png" , class: "form-control image-form" %>
     </div>
 
     <script type="text/javascript">

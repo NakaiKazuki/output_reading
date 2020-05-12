@@ -28,16 +28,16 @@ RSpec.describe "UsersIndices", type: :request do
 
   describe "DELETE /users/:id " do
     context "invalid" do
-      # it "should redirect destroy when not logged in" do
-      #   delete user_path(other_user)  #unless current_user.admin?でエラーになる。current_userが存在していないことが原因？？取り敢えず放置
-      #   follow_redirect!
-      #   expect(flash[:warning]).to be_truthy
-      #   expect(request.fullpath).to eq "/login"
-      # end
+      it "should redirect destroy when not logged in" do
+        delete user_path(other_user)
+        follow_redirect!
+        expect(flash[:warning]).to be_truthy
+        expect(request.fullpath).to eq "/login"
+      end
 
       it "should redirect destroy when logged in as a non-admin" do
         log_in_as(other_user)
-        expect{delete user_path(admin)}.to change(User, :count).by(0)
+        expect{delete user_path(admin)}.to change {User.count}.by(0)
         follow_redirect!
         expect(request.fullpath).to eq "/"
       end
@@ -47,8 +47,9 @@ RSpec.describe "UsersIndices", type: :request do
     context "valid" do
       it "delete is valid when logged in as an admin" do
         log_in_as(admin)
-        expect{delete user_path(other_user)}.to change(User, :count).by(-1)
+        expect{delete user_path(other_user)}.to change {User.count}.by(-1)
         follow_redirect!
+        expect(flash[:success]).to be_truthy
         expect(request.fullpath).to eq "/users"
       end
     end

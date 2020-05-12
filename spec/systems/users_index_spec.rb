@@ -4,7 +4,7 @@ RSpec.describe "UsersIndices", type: :system  do
 include SessionsHelper
   let!(:admin_add_image) { create(:user_add_image) }
   let!(:non_admin) { create(:other_user) }
-  let!(:users) { create_list(:users,9) }
+  let!(:users) { create_list(:users,10) }
 
   describe "/users layout" do
     it "index as admin including pagination and delete links" do
@@ -12,17 +12,27 @@ include SessionsHelper
       visit users_path
       expect(page).to have_selector ".users-index-container"
       expect(page).to have_selector ".pagination"
+      expect(page).to have_selector ".users-index-name",count:10
       expect(page).not_to have_link "削除",href: user_path(admin_add_image)
-      #コントローラーで @usersがここでのfirst_page_of_users
+      #コントローラーでの@usersがここでのfirst_page_of_users
       first_page_of_users =  User.page(1).per(10)
       first_page_of_users.each do |user|
         expect(page).to have_link user.name ,href: user_path(user)
         expect(page).to have_link "削除",href: user_path(user) unless user == admin_add_image
       end
+      expect(page).to have_link non_admin.name,href: user_path(non_admin)
+      find_link("削除",href: user_path(non_admin)).click
+      expect{
+        page.accept_confirm "選択したユーザーを削除しますか？"
+        expect(page).to have_selector ".alert-success"
+      }.to change {User.count}.by(-1)
+      expect(page).to have_selector ".users-index-container"
+      expect(page).not_to have_link non_admin.name,href: user_path(non_admin)
     end
     #User.page(1).per(10)が無くても書けるようになるのが課題。今はシラネ
 
-    it "Index as non-admin show if image is registered by user" do
+    it "log in as a non-administrator, there is no delete link.
+        If the image is set by the user, it will be displayed." do
       log_in_by(non_admin)
       visit users_path
       expect(page).to have_selector ".users-index-container"
