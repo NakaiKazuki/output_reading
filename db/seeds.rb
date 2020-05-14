@@ -2,7 +2,8 @@ User.create!(name:  "Kazuki",
              email: "example@railstutorial.org",
              password:              "hogehogehoge",
              password_confirmation: "hogehogehoge",
-             admin: true)
+             admin: true,
+             activated: true)
 
 
 20.times do |n|
@@ -12,5 +13,7 @@ User.create!(name:  "Kazuki",
   User.create!(name:  name,
                email: email,
                password:              password,
-               password_confirmation: password)
+               password_confirmation: password,
+               admin: false,
+               activated: true)
 end

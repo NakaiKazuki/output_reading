@@ -43,21 +43,15 @@ RSpec.describe "UsersSignups", type: :system do
       it "is valid because it fulfils condition of input" do
         visit signup_path
         submit_with_valid_information
-        expect(current_path).to eq user_path(1)
-        expect(page).to have_selector ".alert-success"
-        expect(page).to have_selector ".show-container"
-        expect(page).to have_selector ".user-image-default"
-        expect(page).not_to have_selector "#error_explanation"
+        expect(current_path).to eq root_path
+        expect(page).to have_selector '.alert-info'
       end
 
       it " input conditions are satisfied even if there is an image" do
         visit signup_path
         submit_with_valid_information_if_add_image
-        expect(current_path).to eq user_path(1)
-        expect(page).to have_selector ".alert-success"
-        expect(page).to have_selector ".show-container"
-        expect(page).to have_selector ".user-image"
-        expect(page).not_to have_selector "#error_explanation"
+        expect(current_path).to eq root_path
+        expect(page).to have_selector '.alert-info'
       end
     end
 

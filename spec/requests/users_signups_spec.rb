@@ -46,13 +46,19 @@ RSpec.describe "UsersSignups", type: :request do
     it "is valid information even if there is no image" do
       get signup_path
       expect{post_valid_information}.to change {User.count}.by(1)
-      expect(flash[:success]).to be_truthy
+      expect(is_logged_in?).to be_falsey
+      follow_redirect!
+      expect(request.fullpath).to eq '/'
+      expect(flash[:info]).to be_truthy
     end
 
     it "is valid information even if you add images" do
       get signup_path
       expect{post_valid_information_with_image}.to change {User.count}.by(1)
-      expect(flash[:success]).to be_truthy
+      expect(is_logged_in?).to be_falsey
+      follow_redirect!
+      expect(request.fullpath).to eq '/'
+      expect(flash[:info]).to be_truthy
     end
   end
 

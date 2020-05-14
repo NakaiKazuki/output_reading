@@ -6,6 +6,7 @@ FactoryBot.define do
     password{"password"}
     password_confirmation{"password"}
     admin{true}
+    activated { true }
   end
 
   factory :user_add_image, class: User do
@@ -15,6 +16,7 @@ FactoryBot.define do
     password_confirmation{"password"}
     admin{true}
     image{ Rack::Test::UploadedFile.new(File.join(Rails.root, "/spec/fixtures/images.jpg"))}
+    activated { true }
   end
 
   factory :other_user, class: User do
@@ -22,9 +24,18 @@ FactoryBot.define do
     email { "duchess@example.gov" }
     password { "foobar" }
     password_confirmation { "foobar" }
-    admin{false}
+    admin{ false }
+    activated { true }
   end
 
+  factory :no_activation_user, class: User do
+    name { "No Activation" }
+    email { "no@activation.co.jp" }
+    password { "foobar" }
+    password_confirmation { "foobar" }
+    admin{ false }
+    activated { false }
+  end
 #複数ユーザーの作成 _spec で let!(:users) { create_list(:users,15) }のように記述。15は作りたい個数
 
   factory :users, class:User do
@@ -33,6 +44,7 @@ FactoryBot.define do
     password{"password"}
     password_confirmation{"password"}
     admin{false}
+    activated { true }
   end
 
 end
