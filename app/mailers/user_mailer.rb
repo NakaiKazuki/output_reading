@@ -5,13 +5,8 @@ class UserMailer < ApplicationMailer
     mail to: user.email,subject: "【重要】Output Readingよりアカウント有効化に必要なメールを届けました。"
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.password_reset.subject
-  #
-  def password_reset
-    @greeting = "Hi"
-    mail to: "to@example.org"
+  def password_reset(user)
+    @user = user
+    mail to: user.email, subject: "【重要】Output Readingよりパスワード再設定のためのメールを届けました。"
   end
 end

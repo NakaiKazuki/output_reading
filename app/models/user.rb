@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token #インスタンス変数を直接変更して操作ができるようにする。
   before_save :downcase_email
   before_create :create_activation_digest #create前に呼び出される
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -62,8 +62,25 @@ class User < ApplicationRecord
     update_attribute(:activated, true)
   end
 
+  # パスワード再設定の属性を設定する
+  #コントローラで使うため、Userクラスを超える。よってprivateには置けない。
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
+  end
+
+  #パスワード再設定メール送信
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
 private
 
+  #Userクラス内でしか使わないためprivate(余計なスコープを広げないため)
   def create_activation_digest
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
