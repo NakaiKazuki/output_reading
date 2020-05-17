@@ -6,21 +6,20 @@ RSpec.describe "PasswordResets", type: :request do
    describe "Post /password_resets" do
      it "is invalid email address" do
        get new_password_reset_path
-       expect(request.fullpath).to eq '/password_resets/new'
+       expect(request.fullpath).to eq "/password_resets/new"
        post password_resets_path, params: { password_reset: { email: "" } }
        expect(flash[:danger]).to be_truthy
-       expect(request.fullpath).to eq '/password_resets'
-       #railsの振る舞いとして/newがなくなるのは正しい、/newを維持するにはsessionのほうをいじるみたい？不都合はないため放置
+       expect(request.fullpath).to eq "/password_resets" #railsの振る舞いとして/newがなくなるのは正しい、/newを維持するにはsessionのほうをいじるみたい？不都合はないため放置
      end
 
      it "is valid email address" do
        get new_password_reset_path
-       expect(request.fullpath).to eq '/password_resets/new'
+       expect(request.fullpath).to eq "/password_resets/new"
        post password_resets_path, params: { password_reset: { email: user.email } }
        expect(flash[:info]).to be_truthy
        expect(flash[:danger]).to be_falsey
        follow_redirect!
-       expect(request.fullpath).to eq '/'
+       expect(request.fullpath).to eq "/"
      end
    end
 
@@ -32,7 +31,7 @@ RSpec.describe "PasswordResets", type: :request do
          get edit_password_reset_path(user.reset_token, email: "")
          expect(flash[:danger]).to be_truthy
          follow_redirect!
-         expect(request.fullpath).to eq '/password_resets/new'
+         expect(request.fullpath).to eq "/password_resets/new"
        end
 
        it "is invalid user" do
@@ -42,17 +41,17 @@ RSpec.describe "PasswordResets", type: :request do
          get edit_password_reset_path(user.reset_token, email: user.email)
          expect(flash[:danger]).to be_truthy
          follow_redirect!
-         expect(request.fullpath).to eq '/password_resets/new'
+         expect(request.fullpath).to eq "/password_resets/new"
          user.toggle!(:activated)
        end
 
        it "is invalid token" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = assigns(:user)
-         get edit_password_reset_path('wrong token', email: user.email)
+         get edit_password_reset_path("wrong token", email: user.email)
          expect(flash[:danger]).to be_truthy
          follow_redirect!
-         expect(request.fullpath).to eq '/password_resets/new'
+         expect(request.fullpath).to eq "/password_resets/new"
        end
      end
 
@@ -109,7 +108,7 @@ RSpec.describe "PasswordResets", type: :request do
          }
          expect(flash[:danger]).to be_truthy
          follow_redirect!
-         expect(request.fullpath).to eq '/password_resets/new'
+         expect(request.fullpath).to eq "/password_resets/new"
        end
 
 
