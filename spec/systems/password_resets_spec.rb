@@ -41,7 +41,6 @@ RSpec.describe "PasswordResets", type: :system do
   end
 
   describe "/password_resets/:id/edit layout" do
-
     it "move by clicking the link in the email" do
       visit new_password_reset_path
       fill_in "メールアドレス", with: user.email

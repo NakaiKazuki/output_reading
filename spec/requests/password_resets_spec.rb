@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "PasswordResets", type: :request do
+
+  before do
+    ActionMailer::Base.deliveries.clear
+  end
+  
    let(:user) { create(:user) }
 
    describe "Post /password_resets" do
