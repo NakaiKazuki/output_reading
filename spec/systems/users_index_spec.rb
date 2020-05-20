@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "UsersIndices", type: :system  do
 include SessionsHelper
+
   let!(:admin_add_image) { create(:user_add_image) }
   let!(:non_admin) { create(:other_user) }
   let!(:users) { create_list(:users,10) }
@@ -14,12 +15,6 @@ include SessionsHelper
       expect(page).to have_selector ".pagination"
       expect(page).to have_selector ".users-index-name",count:10
       expect(page).not_to have_link "削除",href: user_path(admin_add_image)
-      #コントローラーでの@usersがここでのfirst_page_of_users
-      first_page_of_users =  User.page(1).per(10)
-      first_page_of_users.each do |user|
-        expect(page).to have_link user.name ,href: user_path(user)
-        expect(page).to have_link "削除",href: user_path(user) unless user == admin_add_image
-      end
       expect(page).to have_link non_admin.name,href: user_path(non_admin)
       find_link("削除",href: user_path(non_admin)).click
       expect{
@@ -29,7 +24,6 @@ include SessionsHelper
       expect(page).to have_selector ".users-index-container"
       expect(page).not_to have_link non_admin.name,href: user_path(non_admin)
     end
-    #User.page(1).per(10)が無くても書けるようになるのが課題。今はシラネ
 
     it "log in as a non-administrator, there is no delete link.
         If the image is set by the user, it will be displayed." do

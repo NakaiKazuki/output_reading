@@ -21,14 +21,13 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'faker'
 gem 'faker-japanese'
-#gem 'mail-iso-2022-jp' #ターミナルにてメールの文字化け直すgem application_mailer.rbに
+gem 'mail-iso-2022-jp'
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug' , platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.9.1'
   gem "factory_bot_rails"
-  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -40,6 +39,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'capybara-email'
   gem 'webdrivers'
 end
 
