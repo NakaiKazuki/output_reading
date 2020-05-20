@@ -9,7 +9,7 @@ RSpec.describe "PasswordResets", type: :request do
        expect(request.fullpath).to eq "/password_resets/new"
        post password_resets_path, params: { password_reset: { email: "" } }
        expect(flash[:danger]).to be_truthy
-       expect(request.fullpath).to eq "/password_resets" #railsの振る舞いとして/newがなくなるのは正しい、/newを維持するにはsessionのほうをいじるみたい？不都合はないため放置
+       expect(request.fullpath).to eq "/password_resets"
      end
 
      it "is valid email address" do
@@ -27,27 +27,28 @@ RSpec.describe "PasswordResets", type: :request do
      context "invalid" do
        it "is invalid email address" do
          post password_resets_path, params: { password_reset: { email: user.email } }
-         user = assigns(:user)
+         user = controller.instance_variable_get(:@user)
          get edit_password_reset_path(user.reset_token, email: "")
          expect(flash[:danger]).to be_truthy
          follow_redirect!
          expect(request.fullpath).to eq "/password_resets/new"
        end
+       #object.instance_variable_get(:インスタンス変数)
+       #によってインスタンス変数を取得できる。今回はcontrollerの@userを取得
 
        it "is invalid user" do
          post password_resets_path, params: { password_reset: { email: user.email } }
-         user = assigns(:user)
+         user = controller.instance_variable_get(:@user)
          user.toggle!(:activated)
          get edit_password_reset_path(user.reset_token, email: user.email)
          expect(flash[:danger]).to be_truthy
          follow_redirect!
          expect(request.fullpath).to eq "/password_resets/new"
-         user.toggle!(:activated)
        end
 
        it "is invalid token" do
          post password_resets_path, params: { password_reset: { email: user.email } }
-         user = assigns(:user)
+         user = controller.instance_variable_get(:@user)
          get edit_password_reset_path("wrong token", email: user.email)
          expect(flash[:danger]).to be_truthy
          follow_redirect!
@@ -57,7 +58,7 @@ RSpec.describe "PasswordResets", type: :request do
 
      it "is valid information" do
        post password_resets_path, params: { password_reset: { email: user.email } }
-       user = assigns(:user)
+       user = controller.instance_variable_get(:@user)
        get edit_password_reset_path(user.reset_token, email: user.email)
        expect(flash[:danger]).to be_falsey
        expect(request.fullpath).to eq "/password_resets/#{user.reset_token}/edit?email=#{CGI.escape(user.email)}"
@@ -68,7 +69,7 @@ RSpec.describe "PasswordResets", type: :request do
      context "invalid" do
        it "is invalid password" do
          post password_resets_path, params: { password_reset: { email: user.email } }
-         user = assigns(:user)
+         user = controller.instance_variable_get(:@user)
          get edit_password_reset_path(user.reset_token, email: user.email)
          patch password_reset_path(user.reset_token), params: {
            email: user.email,
@@ -82,7 +83,7 @@ RSpec.describe "PasswordResets", type: :request do
 
        it "is empty password" do
          post password_resets_path, params: { password_reset: { email: user.email } }
-         user = assigns(:user)
+         user = controller.instance_variable_get(:@user)
          get edit_password_reset_path(user.reset_token, email: user.email)
          patch password_reset_path(user.reset_token), params: {
            email: user.email,
@@ -96,7 +97,7 @@ RSpec.describe "PasswordResets", type: :request do
 
        it "has expired token" do
          post password_resets_path, params: { password_reset: { email: user.email } }
-         user = assigns(:user)
+         user = controller.instance_variable_get(:@user)
          user.update_attribute(:reset_sent_at, 3.hours.ago)
          get edit_password_reset_path(user.reset_token, email: user.email)
          patch password_reset_path(user.reset_token), params: {
@@ -116,7 +117,7 @@ RSpec.describe "PasswordResets", type: :request do
 
      it "is valid information" do
        post password_resets_path, params: { password_reset: { email: user.email } }
-       user = assigns(:user)
+       user = controller.instance_variable_get(:@user)
        get edit_password_reset_path(user.reset_token, email: user.email)
        patch password_reset_path(user.reset_token), params: {
          email: user.email,
@@ -131,7 +132,7 @@ RSpec.describe "PasswordResets", type: :request do
        expect(request.fullpath).to eq "/users/1"
      end
    end
-   #user = assigns(:user) とする理由
+   #user = controller.instance_variable_get(:@user) とする理由
    #edit_password_reset_pathの引数に当たるreset_tokenは、
    #attr_accessorによって生成された仮属性である。
    #そのためletで生成したuserにはreset_tokenが存在しないためエラーとなる。

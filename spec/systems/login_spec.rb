@@ -77,4 +77,13 @@ RSpec.describe "Logins", type: :system do
       expect(page).not_to have_selector ".btn-logout-extend"
     end
   end
+
+  it "is a link for the password reset page in the page" do
+    visit login_path
+    find_link("こちら",href: new_password_reset_path).click
+    expect(page).to have_selector ".password_reset_new-container"
+    find_link("こちら",href: login_path).click
+    expect(page).to have_selector ".login-container"
+  end
+
 end
