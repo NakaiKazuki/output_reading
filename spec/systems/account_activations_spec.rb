@@ -15,7 +15,7 @@ RSpec.describe "AccountActivations", type: :system do
     find(".form-submit").click
   end
 
-  it "is valid" do
+  it "is valid when first authentication" do
     expect{
       user_create
       expect(page).to have_selector '.alert-info'
