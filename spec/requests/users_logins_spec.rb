@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "UsersLogins", type: :request do
-  include SessionsHelper
 
   let(:user) { create(:user) }
   let(:no_activation_user) { create(:no_activation_user) }
@@ -27,7 +26,7 @@ RSpec.describe "UsersLogins", type: :request do
     end
 
   describe "GET /login" do
-    context "invalid information" do
+    context "invalid form information" do
       it "fails having a danger flash message" do
         get login_path
         post_invalid_information
@@ -46,7 +45,7 @@ RSpec.describe "UsersLogins", type: :request do
       end
     end
 
-    context "valid information" do
+    context "valid form information" do
       it "succeeds having no danger flash message" do
         get login_path
         post_valid_information(user)

@@ -42,7 +42,7 @@ RSpec.describe "Logins", type: :system do
         visit login_path
         submit_with_valid_information
         expect(current_path).to eq user_path(1)
-        expect(page).to have_selector ".show-container"
+        expect(page).to have_selector ".users-show-container"
       end
 
       it "contains logout button without login button at user path" do

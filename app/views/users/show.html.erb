@@ -1,19 +1,26 @@
 <% provide(:title, @user.name) %>
-<div class="container show-container">
+<div class="container users-show-container">
   <div class="title-container">
     <h1 class = "title-users-show" >プロフィール</h1>
   </div>
   <div class="row">
-    <div class="user_info">
-      <h1>
-        <% if @user.image? %>
-          <%= image_tag @user.image.url, class:"user-image"%>
-        <% else %>
-          <%= image_tag "default.png" ,:size =>'80x80',class:"user-image-default" %>
-        <% end %>
-        <%= @user.name %>
-      </h1>
-      <p><%= link_to "登録内容を編集する", edit_user_path if  current_user?(@user) %></p>
+    <aside class="col-md-4">
+      <section class="user_info">
+        <h1>
+          <% if @user.image? %>
+            <%= image_tag @user.image.url, class:"user-image"%>
+          <% else %>
+            <%= image_tag "default.png" ,:size =>'80x80',class:"user-image-default" %>
+          <% end %>
+          <%= @user.name %>
+        </h1>
+        <p><%= link_to "登録内容を編集する", edit_user_path if  current_user?(@user) %></p>
+      </section>
+    </aside>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= render "posts/post" %>
     </div>
   </div>
 </div>

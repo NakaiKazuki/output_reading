@@ -19,11 +19,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).per(10)
+    @users = User.page(params[:page]).per(15)
   end
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page]).per(10)
   end
 
   def edit

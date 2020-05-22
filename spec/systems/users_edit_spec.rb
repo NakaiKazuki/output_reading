@@ -43,7 +43,7 @@ RSpec.describe "UsersEdits", type: :system do
     context "access by other users is invalid" do
       it "can not get edit_user_path of others." do
         log_in_by(other_user)
-        expect(page).to have_selector ".show-container"
+        expect(page).to have_selector ".users-show-container"
         visit edit_user_path(user)
         expect(page).not_to have_selector ".edit-container"
         expect(page).to have_selector ".home-container"
@@ -74,7 +74,7 @@ RSpec.describe "UsersEdits", type: :system do
           expect(user.reload.name).to eq "Foo Bar"
           expect(user.reload.email).to eq "foo@bar.com"
           #expect(user.reload.password).to eq "foobar"         #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。手動で確認したところ更新されている。
-          expect(page).to have_selector ".show-container"
+          expect(page).to have_selector ".users-show-container"
           expect(page).to have_selector ".alert-success"
         end
 
@@ -87,7 +87,7 @@ RSpec.describe "UsersEdits", type: :system do
           expect(user.reload.email).to eq "foo@bar.com"
           # expect(user.password).to eq user.reload.password
           expect(current_path).to eq user_path(user)
-          expect(page).to have_selector ".show-container"
+          expect(page).to have_selector ".users-show-container"
           expect(page).to have_selector ".alert-success"
         end
 
@@ -102,7 +102,7 @@ RSpec.describe "UsersEdits", type: :system do
           expect(user.reload.email).to eq "foo@bar.com"
           # expect(user.password).to eq user.reload.password
           expect(current_path).to eq user_path(user)
-          expect(page).to have_selector ".show-container"
+          expect(page).to have_selector ".users-show-container"
           expect(page).to have_selector ".user-image"
           expect(page).to have_selector ".alert-success"
         end

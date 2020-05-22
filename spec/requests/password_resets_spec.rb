@@ -5,9 +5,10 @@ RSpec.describe "PasswordResets", type: :request do
   before do
     ActionMailer::Base.deliveries.clear
   end
-  
-   let(:user) { create(:user) }
 
+   let(:user) { create(:user) }
+   let(:no_activation_user){ create(:no_activation_user) }
+   
    describe "Post /password_resets" do
      it "is invalid email address" do
        get new_password_reset_path
@@ -42,10 +43,9 @@ RSpec.describe "PasswordResets", type: :request do
        #によってインスタンス変数を取得できる。今回はcontrollerの@userを取得
 
        it "is invalid user" do
-         post password_resets_path, params: { password_reset: { email: user.email } }
-         user = controller.instance_variable_get(:@user)
-         user.toggle!(:activated)
-         get edit_password_reset_path(user.reset_token, email: user.email)
+         post password_resets_path, params: { password_reset: { email: no_activation_user.email } }
+         no_activation_user = controller.instance_variable_get(:@user)
+         get edit_password_reset_path(no_activation_user.reset_token, email: no_activation_user.email)
          expect(flash[:danger]).to be_truthy
          follow_redirect!
          expect(request.fullpath).to eq "/password_resets/new"

@@ -1,22 +1,16 @@
 FactoryBot.define do
 
-  factory :user do
+  factory :user, class: User do
     name{"Example User"}
     email{"user@example.com"}
     password{"password"}
     password_confirmation{"password"}
     admin{true}
     activated { true }
-  end
 
-  factory :user_add_image, class: User do
-    name{"Example User add image"}
-    email{"user@example.com"}
-    password{"password"}
-    password_confirmation{"password"}
-    admin{true}
-    image{ Rack::Test::UploadedFile.new(File.join(Rails.root, "/spec/fixtures/images.jpg"))}
-    activated { true }
+    trait :add_image do
+      image{ Rack::Test::UploadedFile.new(File.join(Rails.root, "/spec/fixtures/images.jpg"))}
+    end
   end
 
   factory :other_user, class: User do

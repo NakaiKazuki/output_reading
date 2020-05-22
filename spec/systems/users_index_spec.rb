@@ -1,11 +1,10 @@
 require "rails_helper"
 
 RSpec.describe "UsersIndices", type: :system  do
-include SessionsHelper
 
-  let!(:admin_add_image) { create(:user_add_image) }
+  let!(:admin_add_image) { create(:user,:add_image) }
   let!(:non_admin) { create(:other_user) }
-  let!(:users) { create_list(:users,10) }
+  let!(:users) { create_list(:users,15) }
 
   describe "/users layout" do
     it "index as admin including pagination and delete links" do
@@ -13,7 +12,7 @@ include SessionsHelper
       visit users_path
       expect(page).to have_selector ".users-index-container"
       expect(page).to have_selector ".pagination"
-      expect(page).to have_selector ".users-index-name",count:10
+      expect(page).to have_selector ".users-index-name",count:15
       expect(page).not_to have_link "削除",href: user_path(admin_add_image)
       expect(page).to have_link non_admin.name,href: user_path(non_admin)
       find_link("削除",href: user_path(non_admin)).click
@@ -31,7 +30,7 @@ include SessionsHelper
       visit users_path
       expect(page).to have_selector ".users-index-container"
       expect(page).to have_selector ".pagination"
-      expect(page).to have_selector ".users-index-name",count:10
+      expect(page).to have_selector ".users-index-name",count:15
       expect(page).to have_selector ".user-image"
       expect(page).to have_selector ".user-image-default"
       expect(page).not_to have_link "削除",href: user_path(non_admin)
