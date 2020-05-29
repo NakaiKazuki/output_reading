@@ -29,8 +29,8 @@ RSpec.describe "UsersSignups", type: :system do
       find(".form-submit").click
     end
 
-    context "invalid signup form" do
-      it "is invalid because it has no name" do
+    context "無効な登録フォーム" do
+      it "名前がない場合は無効でフラッシュメッセージが表示される" do
         visit signup_path
         submit_with_invalid_information
         expect(current_path).to eq signup_path
@@ -39,15 +39,15 @@ RSpec.describe "UsersSignups", type: :system do
       end
     end
 
-    context "valid signup form" do
-      it "is valid because it fulfils condition of input" do
+    context "有効な登録フォーム" do
+      it "入力の条件を満たすため有効" do
         visit signup_path
         submit_with_valid_information
         expect(current_path).to eq root_path
         expect(page).to have_selector '.alert-info'
       end
 
-      it " input conditions are satisfied even if there is an image" do
+      it "画像を追加しても入力の条件を満たすため有効" do
         visit signup_path
         submit_with_valid_information_if_add_image
         expect(current_path).to eq root_path

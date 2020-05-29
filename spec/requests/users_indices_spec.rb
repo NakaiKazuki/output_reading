@@ -7,8 +7,8 @@ RSpec.describe "UsersIndices", type: :request do
 
   describe "GET /users" do
 
-    context "user is not logged in is invalid" do
-      it "is invalid getting users_path" do
+    context "ユーザーがログインしていない場合は無効" do
+      it "ログインしていないusers_pathの取得は無効" do
         get users_path
         follow_redirect!
         expect(flash[:warning]).to be_truthy
@@ -16,26 +16,25 @@ RSpec.describe "UsersIndices", type: :request do
       end
     end
 
-    context "user is logged in is valid" do
+    context "ユーザーがログインしている場合は有効" do
       it "is valid gettin users_path" do
         log_in_as(admin)
         get users_path
         expect(request.fullpath).to eq "/users"
-        # expect(User.page(1).per(10).limit_value).to eq 10
       end
     end
   end
 
   describe "DELETE /users/:id " do
-    context "invalid" do
-      it "should redirect destroy when not logged in" do
+    context "無効" do
+      it "ログインしていない時に削除を実行すると、ログイン画面に移動" do
         delete user_path(other_user)
         follow_redirect!
         expect(flash[:warning]).to be_truthy
         expect(request.fullpath).to eq "/login"
       end
 
-      it "should redirect destroy when logged in as a non-admin" do
+      it "管理者以外の削除は無効になりホーム画面に移動" do
         log_in_as(other_user)
         expect{delete user_path(admin)}.to change {User.count}.by(0)
         follow_redirect!
@@ -44,8 +43,8 @@ RSpec.describe "UsersIndices", type: :request do
 
     end
 
-    context "valid" do
-      it "delete is valid when logged in as an admin" do
+    context "有効" do
+      it "管理者がログインして削除を実行する場合は有効" do
         log_in_as(admin)
         expect{delete user_path(other_user)}.to change {User.count}.by(-1)
         follow_redirect!

@@ -21,13 +21,6 @@
   padding-top:7rem;
  }
 
- // max-width = 768px
- @media (max-width: 768px) {
-   .nav-item-extend {
-     margin-top: 0.6rem;
-   }
- }
-
  // button
  .btn-extend {
    width: 8.5rem;
@@ -53,6 +46,7 @@
  .nav-item-extend a{
    margin-left: 1rem;
    float: right;
+   margin-top: 0.6rem;
  }
 
  // jumbotron
@@ -124,6 +118,69 @@
    margin: 1.5rem 0 1rem;
  }
 
+// Book
+  .books-container{
+    .non-book{
+      text-align: center;
+      border: 0.065rem solid green;
+      display: block;
+      padding:2rem 0;
+    }
+  }
+
+  .books{
+    list-style: none;
+    padding-left: 0;
+    li{
+      padding:1rem;
+      margin-bottom:1rem;
+      border: 0.065rem solid green;
+    }
+    .book-edit-delete{
+      text-align: right;
+    }
+    .book-title a{
+      padding:0.3rem 0;
+      color: black;
+      display: block;
+      &:hover{
+        background-color: honeydew;
+        text-decoration: none;
+      }
+    }
+  }
+
+  // Book index
+  .books-index-container{
+    margin-top:1.8rem;
+    padding:3.5rem;
+    background-color:white;
+    border: 0.63rem double darkorange;
+    border-radius: 4.4rem;
+    .title-container{
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+    .book-user-name{
+      color: green;
+    }
+    .book-timestamp{
+      text-align: right;
+    }
+  }
+// login
+  .login-container{
+   margin-top:1.8rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   text-align: center;
+   .form-go-to-signup-or-login{
+     margin-top:1.8rem;
+    }
+  }
+
  // Users show　未完成
 
  .users-show-container{
@@ -134,24 +191,19 @@
    border-radius: 4.4rem;
    .title-container{
      text-align: center;
+     padding-bottom: 2rem;
    }
-   .user_info{
-     h1{
-       font-size: 2rem;
+   .users_info{
+     border:0.065rem solid green;
+     padding: 1.5rem 0 3rem ;
+     margin-bottom: 3.5rem;
+     .profile-edit{
+       text-align: right;
+       padding-right: 5rem;
      }
-   }
- }
-
- // login
- .login-container{
-   margin-top:1.8rem;
-   padding:3.5rem;
-   background-color:white;
-   border: 0.63rem double darkorange;
-   border-radius: 4.4rem;
-   text-align: center;
-   .form-go-to-signup-or-login{
-     margin-top:1.8rem;
+     .profile{
+       font-size: 1.7rem;
+     }
    }
  }
 

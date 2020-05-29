@@ -1,0 +1,28 @@
+<% if @user.books.any? %>
+  <div class="container book-items">
+    <ul class="books">
+    <% @books.each do |book|%>
+      <li id="book-<%= book.id %>">
+        <div class = "row book-title">
+          <span class="col-md col-md-offset-1 col-book-items">
+            <div class="row book-timestamp">
+              <span class="book-timestamp col"><%= time_ago_in_words(book.created_at) %>前</span>
+            </div>
+            <div class="row image-content">
+              <% if book.user.image? %>
+                <%= image_tag book.user.image.url,size:65,class: "user-image d-none d-md-inline-block" %>
+              <% else %>
+                <%= image_tag "default.png" ,size:65,class: "user-image user-image-default d-none d-md-inline-block" %>
+              <% end %>
+              <span class="books-title col-md col-md-offset-1"><%= book.title %></span>
+            </div>
+          </span>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+  <%= paginate @books %>
+<% else %>
+    <span>まだ投稿がありません</span>
+<% end %>

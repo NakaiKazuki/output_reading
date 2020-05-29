@@ -1,20 +1,56 @@
 require "rails_helper"
 
 RSpec.describe "SiteLayouts", type: :system do
+
+  let(:user) { create(:user) }
+
   describe "home layout"do
-    it "contains root link"do
-      visit root_path
-      expect(page).to have_link "Output Reading", href: root_path , count:1
+    context "ユーザーがログインしていない場合" do
+      it "/ へのリンクがある"do
+        visit root_path
+        expect(page).to have_link "Output Reading", href: root_path , count:1
+      end
+
+      it "/login へのリンクがある" do
+        visit root_path
+        expect(page).to have_link "ログイン", href: login_path , count:1
+      end
+
+      it "/signup へのリンクがる" do
+        visit root_path
+        expect(page).to have_link  href: signup_path , count:2
+      end
     end
 
-    it "contains login link" do
-      visit root_path
-      expect(page).to have_link "ログイン", href: login_path , count:1
-    end
+    context "ユーザーがログインしている場合" do
+      before do
+        log_in_by(user)
+      end
 
-    it "contains signup link" do
-      visit root_path
-      expect(page).to have_link  href: signup_path , count:2
+      it "/ へのリンクがある"do
+        visit root_path
+        expect(page).to have_link "Output Reading", href: root_path , count:1
+      end
+
+      it "/books へのリンクがある" do
+        visit root_path
+        expect(page).to have_link "投稿一覧", href: books_path , count:1
+      end
+
+      it "/users へのリンクがある" do
+        visit root_path
+        expect(page).to have_link "ユーザー一覧", href: users_path , count:1
+      end
+
+      it "/user/:idへのリンクがある" do
+        visit root_path
+        expect(page).to have_link "プロフィール", href: user_path(user) , count:1
+      end
+      
+      it "ログアウトボタンがある" do
+        visit root_path
+        expect(page).to have_link "ログアウト", href: logout_path , count:1
+      end
     end
   end
 end

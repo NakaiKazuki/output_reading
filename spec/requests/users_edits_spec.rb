@@ -51,15 +51,15 @@ RSpec.describe "UsersEdits", type: :request do
 
   describe "GET /users/:id/edit" do
 
-    context "user is not logged in is invalid" do
-      it "is invalid getting edit_user_path" do
+    context "ユーザーがログインしていない場合" do
+      it "edit_user_pathの取得は無効" do
         get edit_user_path(user)
         follow_redirect!
         expect(flash[:warning]).to be_truthy
         expect(request.fullpath).to eq "/login"
       end
 
-      it "is invalid patch user_path" do
+      it "ユーザー情報の変更は無効" do
         patch_valid_information
         follow_redirect!
         expect(flash[:warning]).to be_truthy
@@ -67,22 +67,22 @@ RSpec.describe "UsersEdits", type: :request do
       end
     end
 
-    context "access by other users is invalid" do
-      it "can not get edit_user_path because you are an invalid user" do
+    context "異なるユーザーのアクセスした場合は無効" do
+      it "自身以外のユーザー情報編集画面へのアクセスは無効" do
         log_in_as(other_user)
         get edit_user_path(user)
         follow_redirect!
         expect(request.fullpath).to eq "/"
       end
 
-      it "can not patch user_path because you are an invalid user" do
+      it "自身以外のユーザーの登録情報編集は無効" do
         log_in_as(other_user)
         patch_valid_information
         follow_redirect!
         expect(request.fullpath).to eq "/"
       end
 
-      it "administrator privileges cannot be changed" do
+      it "管理者権限の付与は無効" do
         log_in_as(other_user)
         expect(other_user.admin).to be false
         patch user_path(other_user), params:{
@@ -95,9 +95,9 @@ RSpec.describe "UsersEdits", type: :request do
     end
 
 
-    context "matching user" do
-      context "invalid" do
-        it "is invalid edit informaiton" do
+    context "ユーザーが一致した場合" do
+      context "無効" do
+        it "無効な編集情報" do
           log_in_as(user)
           get edit_user_path(user)
           expect(is_logged_in?).to be true
@@ -109,7 +109,7 @@ RSpec.describe "UsersEdits", type: :request do
       end
 
       context "valid" do
-        it "is valid edit informaiton" do
+        it "有効な編集情報" do
           log_in_as(user)
           get edit_user_path(user)
           expect(is_logged_in?).to be_truthy
@@ -123,7 +123,7 @@ RSpec.describe "UsersEdits", type: :request do
           expect(flash[:success]).to be_truthy
         end
 
-        it "is valid edit informaiton if password is empty" do
+        it "パスワードが空でも編集は有効" do
           log_in_as(user)
           get edit_user_path(user)
           expect(is_logged_in?).to be_truthy
@@ -137,7 +137,7 @@ RSpec.describe "UsersEdits", type: :request do
           expect(flash[:success]).to be_truthy
         end
 
-        it "is valid even when adding images" do
+        it "画像を追加した場合も編集は有効" do
           log_in_as(user)
           get edit_user_path(user)
           expect(is_logged_in?).to be_truthy

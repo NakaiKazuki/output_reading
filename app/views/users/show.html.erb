@@ -3,24 +3,25 @@
   <div class="title-container">
     <h1 class = "title-users-show" >プロフィール</h1>
   </div>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <h1>
-          <% if @user.image? %>
-            <%= image_tag @user.image.url, class:"user-image"%>
-          <% else %>
-            <%= image_tag "default.png" ,:size =>'80x80',class:"user-image-default" %>
-          <% end %>
-          <%= @user.name %>
-        </h1>
-        <p><%= link_to "登録内容を編集する", edit_user_path if  current_user?(@user) %></p>
-      </section>
-    </aside>
-  </div>
-  <div class="row">
+    <article class="users_info">
+      <p class="profile-edit">
+        <%= link_to "登録内容を編集する", edit_user_path,class: " btn btn-md btn-outline-success "if  current_user?(@user) %>
+      </p>
+      <div class="profile">
+        <% if @user.image? %>
+          <%= image_tag @user.image.url,size:80, class:"user-image"%>
+        <% else %>
+          <%= image_tag "default.png" ,size:80,class:"user-image-default" %>
+        <% end %>
+        <span><%= @user.name %></span>
+      </div>
+    </article>
+  <article class="row user-books-container">
     <div class="col">
-      <%= render "posts/post" %>
+      <div class="title-container">
+        <h2 class="users-books">ユーザー投稿一覧</h2>
+      </div>
+      <%= render "users_books" %>
     </div>
-  </div>
+  </article>
 </div>

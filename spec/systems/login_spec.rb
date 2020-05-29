@@ -16,9 +16,9 @@ RSpec.describe "Logins", type: :system do
     find(".form-submit").click
   end
 
-  describe "Login" do
-    context "invalid" do
-      it "has no information and has flash danger message" do
+  describe "/login layout" do
+    context "無効" do
+      it "入力情報が無い場合は、フラッシュメッセージdangerが表示される" do
         visit login_path
         expect(page).to have_selector ".login-container"
         submit_with_invalid_information
@@ -27,7 +27,7 @@ RSpec.describe "Logins", type: :system do
         expect(page).to have_selector ".alert-danger"
       end
 
-      it "deletes flash messages when users input invalid information then other links" do
+      it "別のリンクへ移動すれば、フラッシュメッセージdangerは消える" do
         visit login_path
         submit_with_invalid_information
         expect(current_path).to eq login_path
@@ -37,53 +37,39 @@ RSpec.describe "Logins", type: :system do
       end
     end
 
-    context "valid" do
-      it "has valid information and will link to user path" do
+    context "有効" do
+      it "有効な情報の場合は、ユーザーのプロフィールページに移動する" do
         visit login_path
         submit_with_valid_information
-        expect(current_path).to eq user_path(1)
+        expect(current_path).to eq user_path(user)
         expect(page).to have_selector ".users-show-container"
       end
 
-      it "contains logout button without login button at user path" do
+      it "ログイン後はログインボタンが消えて、ログアウトボタンが表示される" do
         visit login_path
         submit_with_valid_information
-        expect(current_path).to eq user_path(1)
-        expect(page).to have_selector ".btn-logout-extend"
+        expect(current_path).to eq user_path(user)
         expect(page).not_to have_selector ".btn-login-extend"
+        expect(page).to have_selector ".btn-logout-extend"
       end
     end
 
-    it "was a request as the correct user, so move to the previous link" do
+    it "ログイン前に開こうとしたページにログイン後移動する" do
       visit edit_user_path(user)
-      expect(page).to have_selector ".login-container"
+      expect(current_path).to eq login_path
       log_in_by(user)
-      expect(page).to have_selector ".edit-container"
+      expect(current_path).to eq edit_user_path(user)
     end
 
   end
 
-  describe "Logout" do
-    it "contains login button without logout button at root path" do
-      visit login_path
-      submit_with_valid_information
-      expect(current_path).to eq user_path(1)
-      expect(page).to have_selector ".btn-logout-extend"
-      expect(page).not_to have_selector ".btn-login-extend"
-      click_on "ログアウト"
-      expect(current_path).to eq root_path
-      expect(page).to have_selector ".home-container"
-      expect(page).to have_selector ".btn-login-extend"
-      expect(page).not_to have_selector ".btn-logout-extend"
-    end
-  end
-
-  it "is a link for the password reset page in the page" do
+  it "パスワードリセットページと相互リンクがある" do
     visit login_path
+    expect(current_path).to eq login_path
     find_link("こちら",href: new_password_reset_path).click
-    expect(page).to have_selector ".password_reset_new-container"
+    expect(current_path).to eq new_password_reset_path
     find_link("こちら",href: login_path).click
-    expect(page).to have_selector ".login-container"
+    expect(current_path).to eq login_path
   end
 
 end

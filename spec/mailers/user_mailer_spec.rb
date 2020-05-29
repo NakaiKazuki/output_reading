@@ -4,7 +4,7 @@ RSpec.describe UserMailer, type: :mailer do
   let(:user) { create(:user) }
 
   describe "account_activation" do
-    it "renders mails" do
+    it "メール送信" do
       user.activation_token = User.new_token
       mail = UserMailer.account_activation(user)
       expect(mail.subject).to eq("【重要】Output Readingよりアカウント有効化に必要なメールを届けました。")
@@ -15,7 +15,7 @@ RSpec.describe UserMailer, type: :mailer do
   end
 
   describe "password_reset" do
-    it "renders mails" do
+    it "メール送信" do
       user.reset_token = User.new_token
       mail = UserMailer.password_reset(user)
       expect(mail.subject).to eq("【重要】Output Readingよりパスワード再設定のためのメールを届けました。")

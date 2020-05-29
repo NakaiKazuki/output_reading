@@ -8,7 +8,7 @@ RSpec.describe "PasswordResets", type: :system do
 
   let(:user){ create(:user) }
 
-  def visit_password_resets_edit
+  def visit_edit_password_reset
     visit new_password_reset_path
     fill_in "メールアドレス", with: user.email
     find(".form-submit").click
@@ -17,43 +17,44 @@ RSpec.describe "PasswordResets", type: :system do
   end
 
   describe "/password_resets/new layout" do
-    it "is invalid email address " do
+    it "無効なメールアドレス" do
       visit new_password_reset_path
-      expect(page).to have_selector ".password_reset_new-container"
+      expect(current_path).to eq new_password_reset_path
       fill_in "メールアドレス", with: ""
       expect{
         find(".form-submit").click
         expect(page).to have_selector ".alert-danger"
       }.to change {ActionMailer::Base.deliveries.size }.by(0)
+      expect(current_path).to eq "/password_resets"
       expect(page).to have_selector ".password_reset_new-container"
     end
 
-    it "is valid email address" do
+    it "有効なメールアドレス" do
       visit new_password_reset_path
-      expect(page).to have_selector ".password_reset_new-container"
+      expect(current_path).to eq new_password_reset_path
       fill_in "メールアドレス", with: user.email
       expect{
         find(".form-submit").click
         expect(page).to have_selector ".alert-info"
       }.to change { ActionMailer::Base.deliveries.size }.by(1)
-      expect(page).to have_selector ".home-container"
+      expect(current_path).to eq root_path
     end
   end
 
   describe "/password_resets/:id/edit layout" do
 
-    it " is invalid because expired token" do
+    it "有効期限の過ぎたreset_tokenは無効" do
       visit new_password_reset_path
       fill_in "メールアドレス", with: user.email
       find(".form-submit").click
       user.update_attribute(:reset_sent_at, 3.hours.ago)
       open_email("user@example.com")
       current_email.click_link 'パスワードを再設定する'
+      expect(current_path).to eq new_password_reset_path
       expect(page).to have_selector ".alert-danger"
-      expect(page).to have_selector ".password_reset_new-container"
     end
 
-    it "is valid link" do
+    it "有効なリンク" do
       visit new_password_reset_path
       fill_in "メールアドレス", with: user.email
       find(".form-submit").click
@@ -64,17 +65,17 @@ RSpec.describe "PasswordResets", type: :system do
   end
 
   describe "PATCH /password_resets/:id" do
-    context "invalid" do
-      it "is invalid password" do
-        visit_password_resets_edit
+    context "無効" do
+      it "無効なパスワード" do
+        visit_edit_password_reset
         fill_in "パスワード（6文字以上）",with: "foobaz"
         fill_in "パスワード（再入力）" , with: "barquux"
         find(".form-submit").click
         expect(page).to have_selector ".password_reset_edit-container"
       end
 
-      it "is empty password" do
-        visit_password_resets_edit
+      it "空のパスワード" do
+        visit_edit_password_reset
         fill_in "パスワード（6文字以上）",with: ""
         fill_in "パスワード（再入力）" , with: ""
         find(".form-submit").click
@@ -82,14 +83,14 @@ RSpec.describe "PasswordResets", type: :system do
       end
     end
 
-    context "valid" do
-      it "is valid information" do
-        visit_password_resets_edit
+    context "有効" do
+      it "有効な情報" do
+        visit_edit_password_reset
         fill_in "パスワード（6文字以上）",with: "foobar"
         fill_in "パスワード（再入力）" , with: "foobar"
         find(".form-submit").click
+        expect(current_path).to eq user_path(user)
         expect(page).to have_selector ".alert-success"
-        expect(page).to have_selector ".users-show-container"
       end
     end
   end

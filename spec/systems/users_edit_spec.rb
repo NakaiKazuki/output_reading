@@ -40,19 +40,19 @@ RSpec.describe "UsersEdits", type: :system do
 
   describe "users/:id/edit layout" do
 
-    context "access by other users is invalid" do
-      it "can not get edit_user_path of others." do
+    context "異なったユーザーのアクセス" do
+      it "edit_user_pathの取得は無効" do
         log_in_by(other_user)
-        expect(page).to have_selector ".users-show-container"
+        expect(current_path).to eq user_path(other_user)
         visit edit_user_path(user)
-        expect(page).not_to have_selector ".edit-container"
-        expect(page).to have_selector ".home-container"
+        expect(current_path).not_to eq edit_user_path(user)
+        expect(current_path).to eq root_path
       end
     end
 
-    context "access by matching user" do
-      context "invalid edit form" do
-        it "is invalid information" do
+    context "正しいユーザーのアクセス" do
+      context "無効な編集フォーム" do
+        it "無効な情報" do
           log_in_by(user)
           visit edit_user_path(user)
           expect(current_path).to eq edit_user_path(user)
@@ -64,21 +64,20 @@ RSpec.describe "UsersEdits", type: :system do
         end
       end
 
-      context "valid edit form" do
-        it "is valid information" do
+      context "有効な編集フォーム" do
+        it "有効な情報" do
           log_in_by(user)
           visit edit_user_path(user)
           expect(current_path).to eq edit_user_path(user)
           submit_with_valid_information
-          expect(current_path).to eq user_path(user)
           expect(user.reload.name).to eq "Foo Bar"
           expect(user.reload.email).to eq "foo@bar.com"
           #expect(user.reload.password).to eq "foobar"         #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。手動で確認したところ更新されている。
-          expect(page).to have_selector ".users-show-container"
+          expect(current_path).to eq user_path(user)
           expect(page).to have_selector ".alert-success"
         end
 
-        it "is valid information even if the password is empty" do
+        it "パスワードが空でも有効な情報" do
           log_in_by(user)
           visit edit_user_path(user)
           expect(current_path).to eq edit_user_path(user)
@@ -87,11 +86,10 @@ RSpec.describe "UsersEdits", type: :system do
           expect(user.reload.email).to eq "foo@bar.com"
           # expect(user.password).to eq user.reload.password
           expect(current_path).to eq user_path(user)
-          expect(page).to have_selector ".users-show-container"
           expect(page).to have_selector ".alert-success"
         end
 
-        it "is image changes when you send image" do
+        it "画像が追加された場合でも有効な情報" do
           log_in_by(user)
           expect(current_path).to eq user_path(user)
           expect(page).to have_selector ".user-image-default"
@@ -102,7 +100,6 @@ RSpec.describe "UsersEdits", type: :system do
           expect(user.reload.email).to eq "foo@bar.com"
           # expect(user.password).to eq user.reload.password
           expect(current_path).to eq user_path(user)
-          expect(page).to have_selector ".users-show-container"
           expect(page).to have_selector ".user-image"
           expect(page).to have_selector ".alert-success"
         end

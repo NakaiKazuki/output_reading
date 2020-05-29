@@ -1,0 +1,16 @@
+<div class="container books-container">
+  <% if @user.books.any? %>
+  <ul class="books">
+    <% @books.each do |book|%>
+    <li id="book-<%= book.id %>">
+      <span class="book-title">
+        <%= link_to book.title,"#"%>
+      </span>
+    </li>
+    <% end %>
+  </ul>
+  <%= paginate @books %>
+  <% else %>
+    <span class="non-book">まだ投稿がありません</span>
+  <% end %>
+</div>

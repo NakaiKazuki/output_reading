@@ -15,7 +15,7 @@ RSpec.describe "AccountActivations", type: :system do
     find(".form-submit").click
   end
 
-  it "is valid when first authentication" do
+  it "最初の認証は有効" do
     expect{
       user_create
       expect(page).to have_selector '.alert-info'
@@ -24,18 +24,18 @@ RSpec.describe "AccountActivations", type: :system do
     open_email("user@example.com")
     current_email.click_link '認証する'
     expect(page).to have_selector ".alert-success"
-    expect(current_path).to eq "/users/1"
+    expect(current_path).to eq user_path(1)
   end
 
-  it "is invalid when second authentication" do
+  it "認証後さらに認証は無効" do
     expect{
       user_create
       }.to change{ ActionMailer::Base.deliveries.size }.by(1)
     open_email("user@example.com")
     current_email.click_link '認証する'
-    expect(current_path).to eq "/users/1"
+    expect(current_path).to eq user_path(1)
     current_email.click_link '認証する'
     expect(page).to have_selector ".alert-danger"
-    expect(current_path).to eq "/"
+    expect(current_path).to eq root_path
   end
 end

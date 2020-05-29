@@ -8,9 +8,9 @@ RSpec.describe "PasswordResets", type: :request do
 
    let(:user) { create(:user) }
    let(:no_activation_user){ create(:no_activation_user) }
-   
+
    describe "Post /password_resets" do
-     it "is invalid email address" do
+     it "無効なメールアドレス" do
        get new_password_reset_path
        expect(request.fullpath).to eq "/password_resets/new"
        post password_resets_path, params: { password_reset: { email: "" } }
@@ -18,7 +18,7 @@ RSpec.describe "PasswordResets", type: :request do
        expect(request.fullpath).to eq "/password_resets"
      end
 
-     it "is valid email address" do
+     it "有効なメールアドレス" do
        get new_password_reset_path
        expect(request.fullpath).to eq "/password_resets/new"
        post password_resets_path, params: { password_reset: { email: user.email } }
@@ -30,8 +30,8 @@ RSpec.describe "PasswordResets", type: :request do
    end
 
    describe "GET /password_resets/:id/edit" do
-     context "invalid" do
-       it "is invalid email address" do
+     context "無効" do
+       it "無効なメールアドレス" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = controller.instance_variable_get(:@user)
          get edit_password_reset_path(user.reset_token, email: "")
@@ -42,7 +42,7 @@ RSpec.describe "PasswordResets", type: :request do
        #object.instance_variable_get(:インスタンス変数)
        #によってインスタンス変数を取得できる。今回はcontrollerの@userを取得
 
-       it "is invalid user" do
+       it "無効なユーザー" do
          post password_resets_path, params: { password_reset: { email: no_activation_user.email } }
          no_activation_user = controller.instance_variable_get(:@user)
          get edit_password_reset_path(no_activation_user.reset_token, email: no_activation_user.email)
@@ -51,7 +51,7 @@ RSpec.describe "PasswordResets", type: :request do
          expect(request.fullpath).to eq "/password_resets/new"
        end
 
-       it "is invalid token" do
+       it "無効なトークン" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = controller.instance_variable_get(:@user)
          get edit_password_reset_path("wrong token", email: user.email)
@@ -61,7 +61,7 @@ RSpec.describe "PasswordResets", type: :request do
        end
      end
 
-     it "is valid information" do
+     it "有効な情報" do
        post password_resets_path, params: { password_reset: { email: user.email } }
        user = controller.instance_variable_get(:@user)
        get edit_password_reset_path(user.reset_token, email: user.email)
@@ -71,8 +71,8 @@ RSpec.describe "PasswordResets", type: :request do
    end
 
    describe "PATCH /password_resets/:id" do
-     context "invalid" do
-       it "is invalid password" do
+     context "無効" do
+       it "無効なパスワード" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = controller.instance_variable_get(:@user)
          get edit_password_reset_path(user.reset_token, email: user.email)
@@ -86,7 +86,7 @@ RSpec.describe "PasswordResets", type: :request do
          expect(request.fullpath).to eq "/password_resets/#{user.reset_token}"
        end
 
-       it "is empty password" do
+       it "パスワードが空" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = controller.instance_variable_get(:@user)
          get edit_password_reset_path(user.reset_token, email: user.email)
@@ -100,7 +100,7 @@ RSpec.describe "PasswordResets", type: :request do
          expect(request.fullpath).to eq "/password_resets/#{user.reset_token}"
        end
 
-       it "has expired token" do
+       it "有効期限の過ぎたトークン" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = controller.instance_variable_get(:@user)
          user.update_attribute(:reset_sent_at, 3.hours.ago)
@@ -120,7 +120,7 @@ RSpec.describe "PasswordResets", type: :request do
 
      end
 
-     it "is valid information" do
+     it "有効な情報" do
        post password_resets_path, params: { password_reset: { email: user.email } }
        user = controller.instance_variable_get(:@user)
        get edit_password_reset_path(user.reset_token, email: user.email)
@@ -142,5 +142,5 @@ RSpec.describe "PasswordResets", type: :request do
    #attr_accessorによって生成された仮属性である。
    #そのためletで生成したuserにはreset_tokenが存在しないためエラーとなる。
    #エラーを回避するために、reset_tokenが代入されたPasswordResetsコントローラの
-   #インスタンス変数userを使用する必要がある。
+   #@userを使用する必要がある。
 end

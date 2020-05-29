@@ -37,13 +37,13 @@ RSpec.describe "UsersSignups", type: :request do
   end
 
   describe "GET /signup" do
-    it "is invalid signup information" do
+    it "無効な登録情報" do
       get signup_path
       expect{post_invalid_information}.not_to change(User, :count)
       expect(flash[:success]).to be nil
     end
 
-    it "is valid information even if there is no image" do
+    it "有効な登録情報" do
       get signup_path
       expect{post_valid_information}.to change {User.count}.by(1)
       expect(is_logged_in?).to be_falsey
@@ -52,7 +52,7 @@ RSpec.describe "UsersSignups", type: :request do
       expect(flash[:info]).to be_truthy
     end
 
-    it "is valid information even if you add images" do
+    it "画像が追加された場合でも有効な登録情報" do
       get signup_path
       expect{post_valid_information_with_image}.to change {User.count}.by(1)
       expect(is_logged_in?).to be_falsey

@@ -26,8 +26,8 @@ RSpec.describe "UsersLogins", type: :request do
     end
 
   describe "GET /login" do
-    context "invalid form information" do
-      it "fails having a danger flash message" do
+    context "無効なフォーム情報" do
+      it "失敗したときは、フラッシュメッセージdangerが表示される" do
         get login_path
         post_invalid_information
         expect(flash[:danger]).to be_truthy
@@ -35,7 +35,7 @@ RSpec.describe "UsersLogins", type: :request do
         expect(request.fullpath).to eq '/login'
       end
 
-      it "fails because they have not activated account" do
+      it "アカウントが有効化されていない場合は、フラッシュメッセージdangerが表示される" do
         get login_path
         post_valid_information(no_activation_user)
         expect(flash[:danger]).to be_truthy
@@ -45,8 +45,8 @@ RSpec.describe "UsersLogins", type: :request do
       end
     end
 
-    context "valid form information" do
-      it "succeeds having no danger flash message" do
+    context "有効なフォーム情報" do
+      it "成功時フラッシュメッセージdangerは表示されない" do
         get login_path
         post_valid_information(user)
         expect(flash[:danger]).to be_falsey
@@ -55,7 +55,7 @@ RSpec.describe "UsersLogins", type: :request do
         expect(request.fullpath).to eq '/users/1'
       end
 
-      it "succeeds login and logout" do
+      it "ログインとログアウト" do
         get login_path
         post_valid_information(user)
         expect(is_logged_in?).to be_truthy
@@ -68,7 +68,7 @@ RSpec.describe "UsersLogins", type: :request do
       end
     end
 
-    it "goes to previous link because they had logged in as right user" do
+    it "正しいユーザーとしてログインされたら、表示しようとしていた画面に移動" do
       get edit_user_path(user)
       follow_redirect!
       expect(request.fullpath).to eq '/login'
@@ -79,7 +79,7 @@ RSpec.describe "UsersLogins", type: :request do
   end
 
   describe "remember_me" do
-    it "does not log out twice" do
+    it "別のウインドウで2度目のログアウトは無効" do
       get login_path
       post_valid_information(user,0)
       expect(is_logged_in?).to be_truthy
@@ -95,21 +95,21 @@ RSpec.describe "UsersLogins", type: :request do
       expect(request.fullpath).to eq '/'
     end
 
-    it "succeeds remember_token because of check remember_me" do
+    it "remember_meがチェックされた時remember_tokenが作成される" do
       get login_path
       post_valid_information(user,1)
       expect(is_logged_in?).to be_truthy
       expect(cookies[:remember_token]).not_to be_empty
     end
 
-    it "has no remember_token because of check remember_me" do
+    it "remember_meがチェックされない時remember_tokenは作成されない" do
       get login_path
       post_valid_information(user,0)
       expect(is_logged_in?).to be_truthy
       expect(cookies[:remember_token]).to be_nil
     end
 
-    it "has no remember_token when users logged out and logged in" do
+    it "ログアウトしたらremember_tokenは空になる" do
       get login_path
       post_valid_information(user,1)
       expect(is_logged_in?).to be_truthy
