@@ -1,0 +1,33 @@
+<% provide(:title, @book.title) %>
+<div class="container books-show-container">
+  <div class="row">
+    <div class="col">
+      <h2 class="title-container"><%= @book.title %></h2>
+      <%= paginate @chapters %>
+    <ul class = "chapters">
+      <% @chapters.each do |chapter| %>
+        <div class="row">
+          <span class="chapter-timestamp col"><%= time_ago_in_words(chapter.created_at) %>前に投稿</span>
+        </div>
+        <li>
+          <div class="row">
+              <div class = "chapter-number col-md-9">第chapter.number章未作成</div>
+            <% if current_user?(chapter.user) %>
+            <span class = "chapter-edit-delete-btn col-3 d-none d-md-inline-block">
+              <span><%= link_to "編集","#",class:"btn btn-sm btn-outline-success" %></span>
+              <span><%= link_to "削除","#",class:"btn btn-sm btn-outline-success" %></span>
+            </span>
+            <div class = "chapter-edit-delete-btn d-md-none col row">
+              <span class = "col-6"><%= link_to "編集","#",class:"btn btn-sm btn-outline-success smart-btn" %></span>
+              <span class = "col-6"><%= link_to "削除","#",class:"btn btn-sm btn-outline-success smart-btn" %></span>
+            </div>
+            <% end %>
+          </div>
+          <div class = "chapter-content"><%= chapter.content %></div>
+        </li>
+      <% end %>
+    </ul>
+    <%= paginate @chapters %>
+    </div>
+  </div>
+</div>

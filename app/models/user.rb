@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :books
   has_many :books, dependent: :destroy
+  has_many :chapters
+  has_many :chapters, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token #インスタンス変数を直接変更して操作ができるようにする。
   before_save :downcase_email
   before_create :create_activation_digest #create前に呼び出される

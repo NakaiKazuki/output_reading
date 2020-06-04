@@ -68,7 +68,7 @@ RSpec.describe "UsersLogins", type: :request do
       end
     end
 
-    it "正しいユーザーとしてログインされたら、表示しようとしていた画面に移動" do
+    it "権限のあるユーザーとしてログインしたら、表示しようとしていた画面に移動" do
       get edit_user_path(user)
       follow_redirect!
       expect(request.fullpath).to eq '/login'

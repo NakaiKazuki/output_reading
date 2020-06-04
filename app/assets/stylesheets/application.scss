@@ -12,21 +12,21 @@
  *
  */
 
- @import "bootstrap";
+@import "bootstrap";
 
- // universal
+// universal
 
  body{
   background-image: image-url("body_background.jpg");
   padding-top:7rem;
  }
 
- // button
+// button
  .btn-extend {
    width: 8.5rem;
  }
 
- // header
+// header
  .navbar-extend {
    margin-bottom: 0;
    background-color: limegreen;
@@ -34,6 +34,7 @@
      padding: 0.375rem 1.5rem;
    }
  }
+
  .navbar-brand{
   font-size: 1.43rem;
   background-color:white;
@@ -49,7 +50,7 @@
    margin-top: 0.6rem;
  }
 
- // jumbotron
+// jumbotron
  .jumbotron-extend {
   margin-top:1.8rem;
   background-color:white;
@@ -72,7 +73,7 @@
   }
  }
 
- // Signup
+// Signup
  .signup-container{
    margin-top:1.8rem;
    padding:3.5rem;
@@ -82,7 +83,7 @@
    text-align: center;
  }
 
- // Form
+// Form
  .form-group:first-of-type{
    margin-top: 1.8rem;
  }
@@ -92,10 +93,10 @@
  .form-submit{
    width:100%;
  }
-.image-form{
-  height:auto;
-  margin-top:0.4rem;
-}
+ .image-form{
+   height:auto;
+   margin-top:0.4rem;
+ }
 
  #error_explanation {
    color: red;
@@ -110,7 +111,21 @@
    border-color: red;
  }
 
- // Alert
+// login
+ .login-container{
+   margin-top:1.8rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   text-align: center;
+   }
+ .form-go-to-signup-or-login{
+   margin-top:1.8rem;
+ }
+
+
+// Alert
  .alert{
    text-align: center;
  }
@@ -119,70 +134,96 @@
  }
 
 // Book
-  .books-container{
-    .non-book{
-      text-align: center;
-      border: 0.065rem solid green;
-      display: block;
-      padding:2rem 0;
-    }
-  }
+ .non-book{
+   text-align: center;
+   border: 0.065rem solid green;
+   display: block;
+   padding:2rem 0;
+ }
 
-  .books{
-    list-style: none;
-    padding-left: 0;
-    li{
-      padding:1rem;
-      margin-bottom:1rem;
-      border: 0.065rem solid green;
-    }
-    .book-edit-delete{
-      text-align: right;
-    }
-    .book-title a{
-      padding:0.3rem 0;
-      color: black;
-      display: block;
-      &:hover{
-        background-color: honeydew;
-        text-decoration: none;
-      }
-    }
+ .books{
+   list-style: none;
+   padding-left: 0;
+   li{
+    padding:1rem;
+    margin-bottom:1rem;
+    border: 0.065rem solid green;
   }
+ }
 
-  // Book index
-  .books-index-container{
-    margin-top:1.8rem;
-    padding:3.5rem;
-    background-color:white;
-    border: 0.63rem double darkorange;
-    border-radius: 4.4rem;
-    .title-container{
-      text-align: center;
-      padding-bottom: 2rem;
-    }
-    .book-user-name{
-      color: green;
-    }
-    .book-timestamp{
-      text-align: right;
-    }
-  }
-// login
-  .login-container{
+ .book-title a{
+   padding:0.3rem 0;
+   color: black;
+   display: block;
+   white-space: pre-line;
+   &:hover{
+     background-color: honeydew;
+     text-decoration: none;
+   }
+ }
+
+ // Book index
+ .books-index-container{
    margin-top:1.8rem;
    padding:3.5rem;
    background-color:white;
    border: 0.63rem double darkorange;
    border-radius: 4.4rem;
-   text-align: center;
-   .form-go-to-signup-or-login{
-     margin-top:1.8rem;
-    }
+   .title-container{
+     text-align: center;
+     padding-bottom: 2rem;
+   }
+  .user-name{
+    color: green;
   }
+  .book-timestamp{
+    text-align: right;
+  }
+ }
 
- // Users show　未完成
+ // Books show
+ .books-show-container{
+   margin-top:2rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   .title-container{
+     white-space: pre-line;
+     text-align: center;
+     padding-bottom: 2rem;
+   }
+   .chapters {
+     list-style: none;
+     padding-left:0;
+     text-align: left;
+     .chapter-timestamp{
+       margin-top: 1rem;
+       text-align: right;
+     }
+     li{
+       padding:0.6rem 0.2rem 0.6rem 0.6rem;
+       border: 0.063rem solid green;
+       border-bottom: 0.063rem solid green;
+       .chapter-number{
+         color:green;
+       }
+       .chapter-edit-delete-btn{
+         text-align: right;
+         .smart-btn{
+           width:100%;
+           margin:0.5rem 0;
+         }
+       }
+       .chapter-content{
+         white-space: pre-line;
+       }
+     }
+   }
+ }
 
+// User
+ // Users show
  .users-show-container{
    margin-top:2rem;
    padding:3.5rem;
@@ -208,7 +249,7 @@
  }
 
  // Users edit
- .edit-container{
+ .users-edit-container{
    margin-top:1.8rem;
    padding:3.5rem;
    background-color:white;
@@ -227,23 +268,26 @@
    text-align: center;
    .users {
      list-style: none;
-     margin: 0;
+     padding-left: 0;
      text-align: left;
      li{
        overflow: auto;
        padding: 0.65rem 0;
        border: 0.065rem solid palegreen;
+       .user-name{
+         color: green;
+       }
      }
    }
  }
 
  // Pagination
-.pagination{
-  padding-top:1.5rem;
-  justify-content: center;
-  .page-item {
-    &.active .page-link{
-      background:limegreen;
+ .pagination{
+   padding-top:1.5rem;
+   justify-content: center;
+   .page-item {
+     &.active .page-link{
+       background:limegreen;
     }
     .page-link{
       border:none;
@@ -256,12 +300,12 @@
   }
 }
 
-// PasswordResets
-.password_reset-container{
-  margin-top:1.8rem;
-  padding:3.5rem;
-  background-color:white;
-  border: 0.63rem double darkorange;
-  border-radius: 4.4rem;
-  text-align: center;
-}
+ // PasswordResets
+ .password_reset-container{
+   margin-top:1.8rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   text-align: center;
+ }

@@ -1,10 +1,10 @@
-<div class="container books-container">
+<div class="container user-book-container">
   <% if @user.books.any? %>
   <ul class="books">
     <% @books.each do |book|%>
     <li id="book-<%= book.id %>">
       <span class="book-title">
-        <%= link_to book.title,"#"%>
+        <%= link_to book.title,book %>
       </span>
     </li>
     <% end %>

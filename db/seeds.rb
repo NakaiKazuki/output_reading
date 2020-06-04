@@ -17,3 +17,11 @@ User.create!(name:  "かずき",
                admin: false,
                activated: true)
 end
+
+Book.create!(title: "テストタイトル",
+             user_id:1,
+             )
+
+Chapter.create!(content: "テスト投稿",
+             user_id:1,
+             book_id:1)

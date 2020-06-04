@@ -58,7 +58,7 @@ RSpec.describe "UsersEdits", type: :system do
           expect(current_path).to eq edit_user_path(user)
           submit_with_invalid_information
           expect(current_path).to eq user_path(user)
-          expect(page).to have_selector ".edit-container"
+          expect(page).to have_selector ".users-edit-container"
           expect(page).to have_selector ".alert-danger"
           expect(page).to have_selector "#error_explanation"
         end

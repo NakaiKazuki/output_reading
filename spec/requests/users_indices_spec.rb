@@ -7,8 +7,8 @@ RSpec.describe "UsersIndices", type: :request do
 
   describe "GET /users" do
 
-    context "ユーザーがログインしていない場合は無効" do
-      it "ログインしていないusers_pathの取得は無効" do
+    context "ユーザーがログインしていない場合" do
+      it "users_pathの取得は無効" do
         get users_path
         follow_redirect!
         expect(flash[:warning]).to be_truthy
@@ -16,8 +16,8 @@ RSpec.describe "UsersIndices", type: :request do
       end
     end
 
-    context "ユーザーがログインしている場合は有効" do
-      it "is valid gettin users_path" do
+    context "ユーザーがログインしている場合" do
+      it "users_path の取得に成功" do
         log_in_as(admin)
         get users_path
         expect(request.fullpath).to eq "/users"
@@ -40,7 +40,6 @@ RSpec.describe "UsersIndices", type: :request do
         follow_redirect!
         expect(request.fullpath).to eq "/"
       end
-
     end
 
     context "有効" do

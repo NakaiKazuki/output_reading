@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "UsersShows", type: :request do
 
   let(:user) { create(:user) }
-
+  let!(:books) { create_list(:books,15,user: user) }
+  
   describe "GET /users/:id" do
     context "ユーザーがログインしていない場合" do
       it "/users/:idの取得は無効" do

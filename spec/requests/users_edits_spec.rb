@@ -108,7 +108,7 @@ RSpec.describe "UsersEdits", type: :request do
         end
       end
 
-      context "valid" do
+      context "有効" do
         it "有効な編集情報" do
           log_in_as(user)
           get edit_user_path(user)

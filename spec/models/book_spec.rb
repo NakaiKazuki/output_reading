@@ -10,10 +10,10 @@ RSpec.describe Book, type: :model do
     end
 
     it "新しいものが最初に来る" do
-      create(:book, :book_1, user: user, created_at: 10.minutes.ago)
-      create(:book, :book_2, user: user, created_at: 3.years.ago)
-      create(:book, :book_3, user: user, created_at: 2.hours.ago)
-      book_4 = create(:book, :book_4,user: user, created_at: Time.zone.now)
+      create(:book, user: user, created_at: 10.minutes.ago)
+      create(:book_2, user: user, created_at: 3.years.ago)
+      create(:book_3, user: user, created_at: 2.hours.ago)
+      book_4 = create(:book_4,user: user, created_at: Time.zone.now)
       expect(Book.first).to eq book_4
     end
   end
@@ -44,6 +44,5 @@ RSpec.describe Book, type: :model do
         expect(book).to be_valid
       end
     end
-
   end
 end

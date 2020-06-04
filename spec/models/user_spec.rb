@@ -117,7 +117,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "Assosinated Book"do
+  describe "Book関連"do
     it "ユーザー削除時に紐づいたBookのデータを削除" do
       user.books.create!(title: "Book Title")
       expect{ user.destroy }.to change{ Book.count }.by(-1)

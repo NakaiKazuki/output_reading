@@ -2,7 +2,7 @@
 <div class="container users-index-container">
   <div class="row">
     <div class="col">
-      <h1 class="index-title">ユーザー一覧</h1>
+      <h1 class="title-container">ユーザー一覧</h1>
       <%= paginate @users %>
       <ul class="users">
         <% @users.each do |user| %>
@@ -12,7 +12,7 @@
             <% else %>
               <%= image_tag "default.png" ,:size =>'80x80',class: "user-image user-image-default" %>
             <% end %>
-            <%= link_to user.name, user ,class: "users-index-name" %>
+            <%= link_to user.name, user ,class: "user-name" %>
             <% if current_user.admin? && !current_user?(user) %>
               | <%= link_to "削除", user, method: :delete,
                                             data: { confirm: "選択したユーザーを削除しますか？" } ,class: "user-delete-link" %>

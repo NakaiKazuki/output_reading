@@ -20,11 +20,22 @@ RSpec.describe "SiteLayouts", type: :system do
         visit root_path
         expect(page).to have_link  href: signup_path , count:2
       end
+
+      it "/books へのリンクがある" do
+        visit root_path
+        expect(page).to have_link "投稿一覧", href: books_path , count:1
+      end
+
     end
 
     context "ユーザーがログインしている場合" do
       before do
         log_in_by(user)
+      end
+
+      it "/ へのリンクがある"do
+        visit root_path
+        expect(page).to have_link "Output Reading", href: root_path , count:1
       end
 
       it "/ へのリンクがある"do
@@ -46,7 +57,7 @@ RSpec.describe "SiteLayouts", type: :system do
         visit root_path
         expect(page).to have_link "プロフィール", href: user_path(user) , count:1
       end
-      
+
       it "ログアウトボタンがある" do
         visit root_path
         expect(page).to have_link "ログアウト", href: logout_path , count:1
