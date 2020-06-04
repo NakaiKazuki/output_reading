@@ -5,7 +5,7 @@ ruby '2.6.6'
 
 gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
 gem 'puma', '~> 3.11'
-gem 'sassc-rails'
+gem 'sassc-rails' , '2.1.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails' , '~> 4.2'
 gem 'turbolinks', '~> 5'
@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rails-i18n'
 gem 'jquery-rails'
-gem 'bootstrap','4.4.1'
+gem 'bootstrap'
 gem 'bcrypt'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
@@ -21,7 +21,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'faker'
 gem 'faker-japanese'
-gem 'mail-iso-2022-jp'
 
 group :development, :test do
   gem 'sqlite3'
@@ -35,6 +34,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'mail-iso-2022-jp'
 end
 
 group :test do
