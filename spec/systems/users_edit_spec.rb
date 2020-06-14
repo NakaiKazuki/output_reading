@@ -45,7 +45,6 @@ RSpec.describe "UsersEdits", type: :system do
         log_in_by(other_user)
         expect(current_path).to eq user_path(other_user)
         visit edit_user_path(user)
-        expect(current_path).not_to eq edit_user_path(user)
         expect(current_path).to eq root_path
       end
     end

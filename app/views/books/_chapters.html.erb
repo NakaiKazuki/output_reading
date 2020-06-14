@@ -1,0 +1,31 @@
+<div class="chapters-container">
+  <% if @chapters.any? %>
+    <%= paginate @chapters %>
+    <ul class = "chapters">
+    <% @chapters.each do |chapter| %>
+      <div class="row">
+        <span class="chapter-timestamp col"><%= time_ago_in_words(chapter.created_at) %>前に投稿</span>
+      </div>
+      <li>
+        <div class="row">
+          <div class = "chapter-number col-md-8">第chapter.number章未作成</div>
+          <% if current_user?(chapter.user) %>
+          <span class = "chapter-edit-delete-btn col-4 d-none d-md-inline-block">
+            <span><%= link_to "投稿編集","#",class:"btn btn-sm btn-outline-success" %></span>
+            <span><%= link_to "投稿削除","#",class:"btn btn-sm btn-outline-success" %></span>
+          </span>
+          <div class = "chapter-edit-delete-btn d-md-none col">
+            <span><%= link_to "投稿編集","#",class:"btn btn-sm btn-outline-success smart-btn" %></span>
+            <span><%= link_to "投稿削除","#",class:"btn btn-sm btn-outline-success smart-btn" %></span>
+          </div>
+          <% end %>
+        </div>
+        <div class = "chapter-content"><%= chapter.content %></div>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate @chapters %>
+  <% else %>
+    <span class="non-chapter">まだ投稿がありません</span>
+  <% end %>
+</div>

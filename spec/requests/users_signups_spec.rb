@@ -38,13 +38,11 @@ RSpec.describe "UsersSignups", type: :request do
 
   describe "GET /signup" do
     it "無効な登録情報" do
-      get signup_path
-      expect{post_invalid_information}.not_to change(User, :count)
+      expect{post_invalid_information}.not_to change {User.count}
       expect(flash[:success]).to be nil
     end
 
     it "有効な登録情報" do
-      get signup_path
       expect{post_valid_information}.to change {User.count}.by(1)
       expect(is_logged_in?).to be_falsey
       follow_redirect!
@@ -53,7 +51,6 @@ RSpec.describe "UsersSignups", type: :request do
     end
 
     it "画像が追加された場合でも有効な登録情報" do
-      get signup_path
       expect{post_valid_information_with_image}.to change {User.count}.by(1)
       expect(is_logged_in?).to be_falsey
       follow_redirect!

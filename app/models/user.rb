@@ -1,7 +1,5 @@
 class User < ApplicationRecord
-  has_many :books
   has_many :books, dependent: :destroy
-  has_many :chapters
   has_many :chapters, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token #インスタンス変数を直接変更して操作ができるようにする。
   before_save :downcase_email
@@ -92,13 +90,6 @@ private
 
   def downcase_email
     email.downcase!
-  end
-
-  # アップロードされた画像のサイズをバリデーションする
-  def image_size
-    if image.size > 5.megabytes
-      errors.add(:image, "は5MB未満にしてください")
-    end
   end
 
 end

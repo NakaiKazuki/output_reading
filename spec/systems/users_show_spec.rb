@@ -9,25 +9,27 @@ RSpec.describe "UsersShows", type: :system do
   let!(:books) { create_list(:books,10,user: user) }
 
   describe "users/:id layout" do
-    context "ログインしているユーザーが一致しない場合" do
-      it "編集画面へのリンクは存在しない" do
-        log_in_by(other_user)
-        visit user_path(user)
-        expect(current_path).to eq user_path(user)
-        expect(page).not_to have_link "登録内容を編集する", href:edit_user_path(user)
+    describe "Users" do
+      context "ログインしているユーザーが一致しない場合" do
+        it "編集画面へのリンクは存在しない" do
+          log_in_by(other_user)
+          visit user_path(user)
+          expect(current_path).to eq user_path(user)
+          expect(page).not_to have_link "登録内容を編集する", href:edit_user_path(user)
+        end
+      end
+
+      context "ログインしているユーザーと一致する場合" do
+        it "編集画面へのリンクが存在する" do
+          log_in_by(user)
+          visit user_path(user)
+          expect(current_path).to eq user_path(user)
+          expect(page).to have_link "登録内容を編集する", href:edit_user_path(user), count:1
+        end
       end
     end
 
-    context "ログインしているユーザーと一致する場合" do
-      it "編集画面へのリンクが存在する" do
-        log_in_by(user)
-        visit user_path(user)
-        expect(current_path).to eq user_path(user)
-        expect(page).to have_link "登録内容を編集する", href:edit_user_path(user), count:1
-      end
-    end
-
-    describe "books layout in /users/:id" do
+    describe "Books" do
       it "ページネーションで表示されるタイトルは1ページにつき10個まで" do
         log_in_by(user)
         visit user_path(user)
@@ -36,7 +38,7 @@ RSpec.describe "UsersShows", type: :system do
         expect(page).to have_selector ".book-title" ,count:10
       end
 
-      it "他人の投稿は表示されない" do
+      it "他人の投稿はログインしているユーザーのページに表示されない" do
         log_in_by(user)
         visit user_path(user)
         expect(current_path).to eq user_path(user)
@@ -49,6 +51,41 @@ RSpec.describe "UsersShows", type: :system do
         expect(current_path).to eq user_path(user)
         find_link(book.title,href: book_path(1)).click
         expect(current_path).to eq book_path(1)
+      end
+
+      describe "GET edit_book_path" do
+        it "他人の投稿編集のリンクは表示されない" do
+          log_in_by(user)
+          visit user_path(other_user)
+          expect(page).not_to have_link "編集", href:edit_book_path(other_book)
+        end
+
+        it "自分の投稿編集ページへのリンクは表示される" do
+          log_in_by(user)
+          visit user_path(user)
+          expect(page).to have_link "編集",href:edit_book_path(book)
+          find_link("編集",href:edit_book_path(book)).click
+          expect(current_path).to eq edit_book_path(book)
+        end
+      end
+    end
+
+    describe "DLETE book_path" do
+      it "他人の投稿削除のリンクは表示されない" do
+        log_in_by(user)
+        visit user_path(other_user)
+        expect(page).not_to have_link "削除", href:book_path(other_book)
+      end
+
+      it "自分の投稿削除のリンクは表示される" do
+        log_in_by(user)
+        visit user_path(user)
+        expect(page).to have_link "削除",href:book_path(book)
+        expect{
+          find_link("削除",href: book_path(book)).click
+          page.accept_confirm "選択した投稿を削除しますか？（関連する投稿も削除されます。）"
+          expect(page).to have_selector ".alert-success"
+        }.to change {Book.count}.by(-1)
       end
     end
   end

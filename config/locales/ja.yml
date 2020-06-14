@@ -3,12 +3,20 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      book: 本
+      chapter: チャプター
     attributes:
       user:
         name: 名前
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（再入力）
+        image: 画像
+      book:
+        title: タイトル
+        image: 画像
+      chapter:
+        content: 文章
         image: 画像
     errors:
       messages:

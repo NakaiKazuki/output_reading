@@ -91,7 +91,6 @@ RSpec.describe "UsersEdits", type: :request do
                                              admin: true}}
         expect(other_user.reload.admin).to be false
       end
-
     end
 
 
@@ -118,7 +117,7 @@ RSpec.describe "UsersEdits", type: :request do
           follow_redirect!
           expect(user.reload.name).to eq "Foo Bar"
           expect(user.reload.email).to eq "foo@bar.com"
-          # expect(user.reload.password).to eq "foobar"           #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。手動で確認したところ更新されている。
+          # expect(user.reload.password).to eq "foobar"           #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。digestになってるからやろ
           expect(request.fullpath).to eq "/users/1"
           expect(flash[:success]).to be_truthy
         end
@@ -151,7 +150,6 @@ RSpec.describe "UsersEdits", type: :request do
           expect(request.fullpath).to eq "/users/1"
           expect(flash[:success]).to be_truthy
         end
-
       end
     end
 

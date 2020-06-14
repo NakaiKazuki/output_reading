@@ -33,7 +33,7 @@ RSpec.describe "BooksIndices", type: :system  do
       expect(current_path).to eq user_path(other_user)
     end
 
-    it "一覧内の投稿内容をクリックで、その投稿の詳細へ移動" do
+    it "一覧内の投稿内容をクリックで、投稿詳細へ移動" do
       log_in_by(user)
       visit books_path
       expect(current_path).to eq books_path

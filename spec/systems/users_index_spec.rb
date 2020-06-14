@@ -38,6 +38,15 @@ RSpec.describe "UsersIndices", type: :system  do
       expect(page).to have_selector ".user-image-default"
     end
 
+    context "非管理者としてログイン" do
+      it "非管理者としてログインした場合は、一覧内にユーザー削除リンクは表示されない" do
+        log_in_by(non_admin)
+        visit users_path
+        expect(current_path).to eq users_path
+        expect(page).not_to have_link "削除",href: user_path(non_admin)
+      end
+    end
+
     context "管理者としてログイン" do
       it "管理者としてログインしユーザー一覧を表示した場合は、
           一覧内に非管理者ユーザーの削除リンクがある" do
@@ -46,22 +55,13 @@ RSpec.describe "UsersIndices", type: :system  do
         expect(current_path).to eq users_path
         expect(page).not_to have_link "削除",href: user_path(admin_add_image),count:14
         expect(page).to have_link non_admin.name,href: user_path(non_admin)
-        find_link("削除",href: user_path(non_admin)).click
         expect{
+          find_link("削除",href: user_path(non_admin)).click
           page.accept_confirm "選択したユーザーを削除しますか？"
           expect(page).to have_selector ".alert-success"
         }.to change {User.count}.by(-1)
         expect(current_path).to eq users_path
         expect(page).not_to have_link non_admin.name,href: user_path(non_admin)
-      end
-    end
-
-    context "非管理者としてログイン" do
-      it "非管理者としてログインした場合は、一覧内にユーザー削除リンクは表示されない" do
-        log_in_by(non_admin)
-        visit users_path
-        expect(current_path).to eq users_path
-        expect(page).not_to have_link "削除",href: user_path(non_admin)
       end
     end
   end

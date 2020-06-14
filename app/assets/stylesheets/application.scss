@@ -93,12 +93,16 @@
  .form-submit{
    width:100%;
  }
- .image-form{
+
+ .image-form , .books-image-form{
    height:auto;
    margin-top:0.4rem;
  }
 
+
+
  #error_explanation {
+   text-align: center;
    color: red;
    ul {
      display: inline-block;
@@ -148,6 +152,9 @@
     padding:1rem;
     margin-bottom:1rem;
     border: 0.065rem solid green;
+    .book-edit-delete-btn{
+      padding-right: 0.6rem;
+    }
   }
  }
 
@@ -202,7 +209,7 @@
        text-align: right;
      }
      li{
-       padding:0.6rem 0.2rem 0.6rem 0.6rem;
+       padding:0.6rem 0.6rem 0.6rem 0.6rem;
        border: 0.063rem solid green;
        border-bottom: 0.063rem solid green;
        .chapter-number{
@@ -219,6 +226,32 @@
          white-space: pre-line;
        }
      }
+   }
+ }
+
+// Books new
+ .books-new-container{
+   margin-top:2rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   .title-container{
+     text-align: center;
+     padding-bottom: 2rem;
+   }
+ }
+// Books edit
+ .books-edit-container{
+   margin-top:2rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   text-align: center;
+   .title-container{
+     text-align: center;
+     padding-bottom: 2rem;
    }
  }
 

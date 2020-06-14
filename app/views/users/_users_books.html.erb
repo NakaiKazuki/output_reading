@@ -3,9 +3,27 @@
   <ul class="books">
     <% @books.each do |book|%>
     <li id="book-<%= book.id %>">
-      <span class="book-title">
-        <%= link_to book.title,book %>
-      </span>
+      <div class="row">
+        <span class="book-title col">
+          <%= link_to book.title,book %>
+        </span>
+        <% if current_user?(@user)%>
+          <span class = "book-edit-delete-btn d-none d-md-inline-block">
+            <span><%= link_to "編集",edit_book_path(book),class:"btn btn-sm btn-outline-success"%></span>
+            <span>
+              <%= link_to "削除",book,method: :delete,
+              data: { confirm: "選択した投稿を削除しますか？（関連する投稿も削除されます。）" } , class:"btn btn-sm btn-outline-success" %>
+            </span>
+          </span>
+          <div class = "book-edit-delete-btn d-md-none">
+            <span><%= link_to "編集",edit_book_path(book),class:"btn btn-sm btn-outline-success smart-btn"%></span>
+            <span>
+              <%= link_to "削除",book,method: :delete,
+              data: { confirm: "選択した投稿を削除しますか？（関連する投稿も削除されます。）" } , class:"btn btn-sm btn-outline-success smart-btn" %>
+            </span>
+          </div>
+        <% end %>
+      </div>
     </li>
     <% end %>
   </ul>
