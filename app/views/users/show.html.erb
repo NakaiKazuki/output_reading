@@ -11,7 +11,7 @@
         <% if @user.image? %>
           <%= image_tag @user.image.url,size:80, class:"user-image"%>
         <% else %>
-          <%= image_tag "default.png" ,size:80,class:"user-image-default" %>
+          <%= image_tag "default.png" ,size:80,class:" user-image user-image-default" %>
         <% end %>
         <span><%= @user.name %></span>
       </div>
