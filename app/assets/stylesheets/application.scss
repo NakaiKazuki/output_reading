@@ -15,7 +15,6 @@
 @import "bootstrap";
 
 // universal
-
  body{
   background-image: image-url("body_background.jpg");
   padding-top:7rem;
@@ -152,9 +151,6 @@
     padding:1rem;
     margin-bottom:1rem;
     border: 0.065rem solid green;
-    .book-edit-delete-btn{
-      padding-right: 0.6rem;
-    }
   }
  }
 
@@ -179,9 +175,6 @@
    .title-container{
      text-align: center;
      padding-bottom: 2rem;
-   }
-   .user-image-book-title{
-     margin-left: 0.1rem;
    }
   .user-name{
     color: green;
@@ -272,7 +265,7 @@
    }
    .users_info{
      border:0.065rem solid green;
-     padding: 1.5rem 0 3rem 1rem;
+     padding: 1.5rem 0 3rem;
      margin-bottom: 3.5rem;
      .profile-edit{
        text-align: right;
