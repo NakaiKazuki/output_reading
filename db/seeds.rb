@@ -24,4 +24,5 @@ Book.create!(title: "テストタイトル",
 
 Chapter.create!(content: "テスト投稿",
              user_id:1,
-             book_id:1)
+             book_id:1,
+             number:1)

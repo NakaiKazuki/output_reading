@@ -1,0 +1,11 @@
+<% provide(:title, "新規投稿作成") %>
+<% provide(:submit_text, "この内容で作成する") %>
+<% provide(:url, book_chapters_path) %>
+<div class="container chapters-new-container">
+  <div class="row">
+    <div class="col">
+      <h1 class="title-container">新規投稿タイトル作成</h1>
+      <%= render "form" %>
+    </div>
+  </div>
+</div>

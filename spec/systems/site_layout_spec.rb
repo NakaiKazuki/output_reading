@@ -25,7 +25,6 @@ RSpec.describe "SiteLayouts", type: :system do
         visit root_path
         expect(page).to have_link "投稿一覧", href: books_path , count:1
       end
-
     end
 
     context "ユーザーがログインしている場合" do
@@ -43,11 +42,6 @@ RSpec.describe "SiteLayouts", type: :system do
         expect(page).to have_link "Output Reading", href: root_path , count:1
       end
 
-      it "/books/newへのリンクがある" do
-        visit root_path
-        expect(page).to have_link "新規投稿作成", href: new_book_path, count:1
-      end
-      
       it "/books へのリンクがある" do
         visit root_path
         expect(page).to have_link "投稿一覧", href: books_path , count:1

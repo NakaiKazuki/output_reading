@@ -60,7 +60,6 @@ RSpec.describe "Logins", type: :system do
       log_in_by(user)
       expect(current_path).to eq edit_user_path(user)
     end
-
   end
 
   it "パスワードリセットページと相互リンクがある" do
@@ -71,5 +70,4 @@ RSpec.describe "Logins", type: :system do
     find_link("こちら",href: login_path).click
     expect(current_path).to eq login_path
   end
-
 end

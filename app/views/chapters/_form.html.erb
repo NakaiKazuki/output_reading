@@ -1,0 +1,31 @@
+<%= form_with(model: @chapter, url: yield(:url), local: true) do |form| %>
+  <%= render "shared/error_messages", object: form.object %>
+  <%= form.hidden_field :book_id,value: params[:book_id],class: "form-control" %>
+
+  <div class="form-group">
+    <%= form.label :number, "章番号を選択してください" %>
+    <%= form.select :number,options_for_select((1..25).to_a),class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.text_area :content, rows: 20,class: "form-control", placeholder: "ここに文章を入力してください（4000文字以内）" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image, "投稿に画像を表示する場合は、下記の項目で追加してください。"%>
+    <%= form.file_field :image, accept: "image/jpeg,image/gif,image/png" , class: "form-control chapter-image-form" %>
+  </div>
+
+  <script type="text/javascript">
+    $("#chapter_image").bind("change", function() {
+      var size_in_megabytes = this.files[0].size/1024/1024;
+      if (size_in_megabytes > 5) {
+        alert("最大ファイルサイズは5MBです。5MBより小さいファイルを選択してください。");
+      }
+    });
+  </script>
+
+  <div class="form-group">
+    <%= form.submit yield(:submit_text), class: "btn btn-md btn-outline-success btn-lg form-submit" %>
+  </div>
+<% end %>

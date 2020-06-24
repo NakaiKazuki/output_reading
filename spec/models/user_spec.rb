@@ -117,11 +117,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "Book関連"do
+  describe "アソシエーション"do
+
+    let!(:book) { create(:book, user: user) }
+
     it "ユーザー削除時に紐づいたBookのデータを削除" do
-      user.books.create!(title: "Book Title")
       expect{ user.destroy }.to change{ Book.count }.by(-1)
     end
-  end
 
+    it "ユーザー削除時に紐づいたChapterのデータを削除" do
+      user.chapters.create!(content: "Chapter content",number:1,user:user,book: book)
+      expect{ user.destroy }.to change{ Chapter.count }.by(-1)
+    end
+  end
 end

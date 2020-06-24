@@ -14,15 +14,23 @@
                     <span class="col-6">投稿者: <%= link_to book.user.name,book.user,class: "user-name" %></span>
                     <span class="col-6 book-timestamp"><%= time_ago_in_words(book.created_at) %>前に投稿</span>
                   </span>
-                  <div class="row user-image-book-title">
+                  <div class="row user-image-book-title-image">
                     <% if book.user.image? %>
                       <%= image_tag book.user.image.url,size:65,class: "user-image d-none d-md-inline-block" %>
                     <% else %>
                       <%= image_tag "default.png" ,size:65,class: "user-image user-image-default d-none d-md-inline-block" %>
                     <% end %>
-                    <span class="col book-title">
-                      <%= link_to book.title,book %>
-                    </span>
+                    <div class="col book-title-image">
+                      <div class="book-title">
+                        <%= link_to book.title,book %>
+                      </div>
+                      <% if book.image?%>
+                        <div class="col book-image">
+                          <%= image_tag book.image.url,class:"d-none d-md-inline-block" %>
+                          <%= image_tag book.image.url,class:"d-md-none md-image" %>
+                        </div>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>

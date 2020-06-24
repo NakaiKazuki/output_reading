@@ -22,7 +22,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @chapters = @book.chapters.page(params[:page]).per(15)
+    @chapters = @book.chapters.page(params[:page]).per(10)
   end
 
   def edit

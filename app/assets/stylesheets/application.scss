@@ -94,11 +94,10 @@
    width:100%;
  }
 
- .image-form , .books-image-form{
+ .image-form , .book-image-form,.chapter-image-form{
    height:auto;
    margin-top:0.4rem;
  }
-
 
 
  #error_explanation {
@@ -136,15 +135,15 @@
  .alert-form-extend {
    margin: 1.5rem 0 1rem;
  }
-
-// Book
- .non-book{
+// Book and Chapter
+ .non-item{
    text-align: center;
    border: 0.065rem solid green;
    display: block;
    padding:2rem 0;
  }
 
+// Book
  .books{
    list-style: none;
    padding-left: 0;
@@ -156,6 +155,11 @@
       padding-right: 0.6rem;
     }
   }
+ }
+
+ .book-new-link{
+   margin-top:1rem;
+   width:100%;
  }
 
  .book-title a{
@@ -180,11 +184,18 @@
      text-align: center;
      padding-bottom: 2rem;
    }
-   .user-image-book-title{
-     margin-left: 0.1rem;
-   }
   .user-name{
     color: green;
+  }
+  .user-image-book-title-image{
+    margin-left: 0.1rem;
+    .book-image{
+      padding-top:1rem;
+      text-align: center;
+      .md-image{
+        width:100%;
+      }
+    }
   }
   .book-timestamp{
     text-align: right;
@@ -203,30 +214,44 @@
      text-align: center;
      padding-bottom: 2rem;
    }
-   .chapters {
-     list-style: none;
-     padding-left:0;
-     text-align: left;
-     .chapter-timestamp{
-       margin-top: 1rem;
-       text-align: right;
+   .book-show-chapter-container{
+     width:100%;
+     .chapter-new-link{
+       margin-top:1rem;
+       width:100%;
      }
-     li{
-       padding:0.6rem 0.6rem 0.6rem 0.6rem;
-       border: 0.063rem solid green;
-       border-bottom: 0.063rem solid green;
-       .chapter-number{
-         color:green;
-       }
-       .chapter-edit-delete-btn{
+     .chapters {
+       list-style: none;
+       padding-left:0;
+       text-align: left;
+       .chapter-timestamp{
+         margin-top: 1rem;
          text-align: right;
-         .smart-btn{
-           width:100%;
-           margin:0.5rem 0;
-         }
        }
-       .chapter-content{
-         white-space: pre-line;
+       li{
+         padding:0.6rem 0.6rem 0.6rem 0.6rem;
+         border: 0.063rem solid green;
+         border-bottom: 0.063rem solid green;
+         .chapter-number{
+           color:green;
+         }
+         .chapter-edit-delete-btn{
+           text-align: right;
+           width:100%;
+         }
+         .small-d-btn{
+           margin-right: 1rem;
+         }
+         .chapter-content{
+           white-space: pre-line;
+         }
+         .chapter-image{
+           padding-top:1rem;
+           text-align: center;
+           .md-image{
+             width:100%;
+           }
+         }
        }
      }
    }
@@ -258,6 +283,19 @@
    }
  }
 
+// Chapter
+ // Chpter new
+ .chapters-new-container,.chapters-edit-container{
+   margin-top:2rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   .title-container{
+     text-align: center;
+     padding-bottom: 2rem;
+   }
+ }
 // User
  // Users show
  .users-show-container{
@@ -276,7 +314,7 @@
      margin-bottom: 3.5rem;
      .profile-edit{
        text-align: right;
-       padding-right: 5rem;
+       padding-right: 1rem;
      }
      .profile{
        font-size: 1.7rem;

@@ -16,6 +16,7 @@ ja:
         title: タイトル
         image: 画像
       chapter:
+        number: 章番号
         content: 文章
         image: 画像
     errors:

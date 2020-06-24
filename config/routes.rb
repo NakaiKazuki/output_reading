@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :books
-  resources :chapters
+  resources :books do
+    resources :chapters, only:[:new, :create, :edit, :update, :destroy],param: :number
+  end
 end

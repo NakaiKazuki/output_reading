@@ -1,6 +1,6 @@
-<div class="chapters-container">
+<div class="book-show-chapter-container">
+  <%= paginate @chapters %>
   <% if @chapters.any? %>
-    <%= paginate @chapters %>
     <ul class = "chapters">
     <% @chapters.each do |chapter| %>
       <div class="row">
@@ -8,24 +8,40 @@
       </div>
       <li>
         <div class="row">
-          <div class = "chapter-number col-md-8">第chapter.number章未作成</div>
+          <div class = "chapter-number col-md-8">第<%= chapter.number %>章</div>
           <% if current_user?(chapter.user) %>
-          <span class = "chapter-edit-delete-btn col-4 d-none d-md-inline-block">
-            <span><%= link_to "投稿編集","#",class:"btn btn-sm btn-outline-success" %></span>
-            <span><%= link_to "投稿削除","#",class:"btn btn-sm btn-outline-success" %></span>
-          </span>
-          <div class = "chapter-edit-delete-btn d-md-none col">
-            <span><%= link_to "投稿編集","#",class:"btn btn-sm btn-outline-success smart-btn" %></span>
-            <span><%= link_to "投稿削除","#",class:"btn btn-sm btn-outline-success smart-btn" %></span>
-          </div>
+            <span class = "chapter-edit-delete-btn col-4 d-none d-md-inline-block">
+              <span><%= link_to "投稿編集",edit_book_chapter_path(book_id:chapter.book_id,number:chapter.number),
+                                class:"btn btn-sm btn-outline-success" %></span>
+              <span><%= link_to "投稿削除",book_chapter_path(book_id:chapter.book_id,number:chapter.number),
+                                method: :delete,data: { confirm: "選択した投稿を削除しますか？" },
+                                class:"btn btn-sm btn-outline-success" %></span>
+            </span>
+            <div class = "chapter-edit-delete-btn d-md-none small-d-btn">
+              <span><%= link_to "投稿編集",edit_book_chapter_path(book_id:chapter.book_id,number:chapter.number),
+                                class:"btn btn-sm btn-outline-success" %></span>
+              <span><%= link_to "投稿削除",book_chapter_path(book_id:chapter.book_id,number:chapter.number),
+                                method: :delete,data: { confirm: "選択した投稿を削除しますか？" },
+                                class:"btn btn-sm btn-outline-success" %></span>
+            </div>
           <% end %>
         </div>
-        <div class = "chapter-content"><%= chapter.content %></div>
+        <div class="col">
+          <div class = "chapter-content"><%= chapter.content %></div>
+          <% if chapter.image?%>
+            <div class="chapter-image">
+              <%= image_tag chapter.image.url,class:"d-none d-md-inline-block"%>
+              <%= image_tag chapter.image.url,class:"d-md-none md-image" %>
+            </div>
+          <%end%>
+        </div>
       </li>
     <% end %>
   </ul>
-  <%= paginate @chapters %>
   <% else %>
-    <span class="non-chapter">まだ投稿がありません</span>
+    <span class="non-item">まだ投稿がありません</span>
   <% end %>
+  <%= link_to "読んだ本の内容を書き出す",new_book_chapter_path(@book),
+              class:"btn btn-md btn-success chapter-new-link" if current_user?(@book.user)%>
+  <%= paginate @chapters %>
 </div>

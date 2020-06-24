@@ -1,7 +1,7 @@
 <% provide(:title, "投稿内容編集") %>
 <% provide(:submit_text, "この内容に変更する") %>
-<% provide(:url,   chapter_path) %>
-<div class="container books-edit-container">
+<% provide(:url,   book_chapter_path(book_id: @chapter.book_id,number:@chapter.number)) %>
+<div class="container chapters-edit-container">
   <div class="row">
     <div class="col">
       <h1 class="title-container edit-title">投稿内容編集</h1>

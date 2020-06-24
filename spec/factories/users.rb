@@ -22,7 +22,7 @@ FactoryBot.define do
     activated { true }
   end
 
-  factory :no_activation_user, class: User do
+  factory :non_activation_user, class: User do
     name { "No Activation" }
     email { "no@activation.co.jp" }
     password { "foobar" }
@@ -30,8 +30,8 @@ FactoryBot.define do
     admin{ false }
     activated { false }
   end
+  
 #複数ユーザーの作成 _spec で let!(:users) { create_list(:users,15) }のように記述。15は作りたい個数
-
   factory :users, class:User do
     name{ "test" }
     sequence(:email){|n| "test#{n}@example.com"}
@@ -40,5 +40,4 @@ FactoryBot.define do
     admin{false}
     activated { true }
   end
-
 end

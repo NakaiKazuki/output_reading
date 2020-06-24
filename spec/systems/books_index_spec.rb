@@ -4,20 +4,22 @@ RSpec.describe "BooksIndices", type: :system  do
 
   let(:user) { create(:user,:add_image) }
   let(:other_user) { create(:other_user) }
-  let!(:other_book) { create(:other_book,user: other_user) }
-  let!(:books) { create_list(:books,21,user: user) }
+  let!(:other_book) { create(:other_book,:add_image,user: other_user) }
 
   describe "/books layout" do
-    it "ページネーションで表示される投稿数1ページ20個まで" do
+    
+    it "ページネーションで表示される投稿数1ページ20個。投稿に画像があれば追加で表示" do
+      create_list(:books,21,user: user)
       log_in_by(user)
       visit books_path
       expect(current_path).to eq books_path
       expect(page).to have_selector ".pagination"
       expect(page).to have_selector ".user-name",count:20
       expect(page).to have_selector ".book-title",count:20
+      expect(page).to have_selector ".book-image",count:1
     end
 
-    it "ユーザーが画像を設定していれば、設定されている画像を表示する。なければデフォルト画像を表示" do
+    it "ユーザーがプロフィール画像を設定していれば、設定されている画像を表示する。なければデフォルト画像を表示" do
       log_in_by(user)
       visit books_path
       expect(current_path).to eq books_path
@@ -40,6 +42,5 @@ RSpec.describe "BooksIndices", type: :system  do
       find_link(other_book.title,href: book_path(other_book)).click
       expect(current_path).to eq book_path(other_book)
     end
-
   end
 end

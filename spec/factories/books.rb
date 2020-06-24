@@ -11,21 +11,21 @@ FactoryBot.define do
   end
 
   factory :book_2,class: Book do
-      title { "Book title2" }
-      created_at { 1.years.ago }
-      association :user, factory: :user
+    title { "Book title2" }
+    created_at { 1.years.ago }
+    association :user, factory: :user
   end
 
   factory :book_3,class: Book do
-      title { "Book title3"  }
-      created_at { 2.hours.ago }
-      association :user, factory: :user
+    title { "Book title3"  }
+    created_at { 2.hours.ago }
+    association :user, factory: :user
   end
 
   factory :book_4,class: Book do
-      title { "Book title4" }
-      created_at { Time.zone.now }
-      association :user, factory: :user
+    title { "Book title4" }
+    created_at { Time.zone.now }
+    association :user, factory: :user
   end
 
   factory :user_book,class: Book do
@@ -38,6 +38,10 @@ FactoryBot.define do
     title { "Other user Book title" }
     created_at { 3.years.ago }
     association :user, factory: :other_user
+
+    trait :add_image do
+      image{ Rack::Test::UploadedFile.new(File.join(Rails.root, "/spec/fixtures/images.jpg"))}
+    end
   end
 
   factory :books,class: Book do

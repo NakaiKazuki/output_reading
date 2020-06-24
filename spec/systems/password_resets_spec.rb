@@ -94,5 +94,4 @@ RSpec.describe "PasswordResets", type: :system do
       end
     end
   end
-
 end

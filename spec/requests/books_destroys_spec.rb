@@ -1,16 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe "BooksDestoys", type: :request do
+RSpec.describe "BooksDestroys", type: :request do
 
   let(:user) { create(:user) }
   let(:other_user) { create(:other_user) }
-  let!(:book) { create(:book, user: user) }
-  let!(:other_book) { create(:other_book, user: other_user) }
 
   describe "DLETE /books/:id" do
     describe "無効" do
+
+      let!(:other_book) { create(:other_book, user: other_user) }
+
       it "ログインしていない時に削除を実行すると、ログイン画面に移動" do
-        delete book_path(book)
+        delete book_path(other_book)
         follow_redirect!
         expect(flash[:warning]).to be_truthy
         expect(request.fullpath).to eq "/login"
@@ -25,6 +26,9 @@ RSpec.describe "BooksDestoys", type: :request do
     end
 
     describe "有効" do
+
+      let!(:book) { create(:book, user: user) }
+      
       it "投稿者による削除は有効" do
         log_in_as(user)
         expect{delete book_path(book)}.to change {Book.count}.by(-1)

@@ -86,6 +86,7 @@ RSpec.describe "BooksEdits", type: :request do
       it "有効な情報" do
         log_in_as(user)
         patch_valid_information(book)
+        follow_redirect!
         expect(flash[:success]).to be_truthy
         expect(book.reload.title).to eq "投稿内容の編集"
         expect(request.fullpath).to eq book_path(book)
@@ -94,6 +95,7 @@ RSpec.describe "BooksEdits", type: :request do
       it "画像を追加した場合でも有効" do
         log_in_as(user)
         patch_valid_information_add_image(book)
+        follow_redirect!
         expect(flash[:success]).to be_truthy
         expect(book.reload.title).to eq "投稿内容の編集"
         expect(book.reload.image).to be_truthy

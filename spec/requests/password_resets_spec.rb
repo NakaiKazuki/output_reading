@@ -7,7 +7,7 @@ RSpec.describe "PasswordResets", type: :request do
   end
 
    let(:user) { create(:user) }
-   let(:no_activation_user){ create(:no_activation_user) }
+   let(:non_activation_user){ create(:non_activation_user) }
 
    describe "Post /password_resets" do
      it "無効なメールアドレス" do
@@ -43,9 +43,9 @@ RSpec.describe "PasswordResets", type: :request do
        #によってインスタンス変数を取得できる。今回はcontrollerの@userを取得
 
        it "無効なユーザー" do
-         post password_resets_path, params: { password_reset: { email: no_activation_user.email } }
-         no_activation_user = controller.instance_variable_get(:@user)
-         get edit_password_reset_path(no_activation_user.reset_token, email: no_activation_user.email)
+         post password_resets_path, params: { password_reset: { email: non_activation_user.email } }
+         non_activation_user = controller.instance_variable_get(:@user)
+         get edit_password_reset_path(non_activation_user.reset_token, email: non_activation_user.email)
          expect(flash[:danger]).to be_truthy
          follow_redirect!
          expect(request.fullpath).to eq "/password_resets/new"

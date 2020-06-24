@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Book, type: :model do
   let(:user){ create(:user) }
-  let(:book){ user.books.build(title: "Book title",user:user) }
+  let(:book){ user.books.create(title: "Book title",user:user) }
 
   describe "Book" do
     it "有効" do
@@ -43,6 +43,13 @@ RSpec.describe Book, type: :model do
         book.title = "a" * 50
         expect(book).to be_valid
       end
+    end
+  end
+
+  describe "アソシエーション"do
+    it "ユーザー削除時に紐づいたChapterのデータを削除" do
+      user.chapters.create!(content: "Chapter content",number:1,user: user,book: book)
+      expect{ book.destroy }.to change{ Chapter.count }.by(-1)
     end
   end
 end

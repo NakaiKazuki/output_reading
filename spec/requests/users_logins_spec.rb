@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "UsersLogins", type: :request do
 
   let(:user) { create(:user) }
-  let(:no_activation_user) { create(:no_activation_user) }
+  let(:non_activation_user) { create(:non_activation_user) }
 
    # ログインのメソッド
    def post_invalid_information
@@ -37,7 +37,7 @@ RSpec.describe "UsersLogins", type: :request do
 
       it "アカウントが有効化されていない場合は、フラッシュメッセージdangerが表示される" do
         get login_path
-        post_valid_information(no_activation_user)
+        post_valid_information(non_activation_user)
         expect(flash[:danger]).to be_truthy
         expect(is_logged_in?).to be_falsey
         follow_redirect!
