@@ -6,8 +6,8 @@ RSpec.describe "UsersShows", type: :system do
   let(:other_user) { create(:other_user) }
 
   describe "users/:id layout" do
-    describe "Users" do
-      context "ログインしているユーザーが一致しない場合" do
+    describe "User　Profile" do
+      describe "ログインしているユーザーが一致しない場合" do
         it "編集画面へのリンクは存在しない" do
           log_in_by(other_user)
           visit user_path(user)
@@ -15,15 +15,22 @@ RSpec.describe "UsersShows", type: :system do
           expect(page).not_to have_link "登録内容を編集する", href:edit_user_path(user)
         end
 
-        it "新規Bookデータ作成リンクは存在しない" do
+        it "ユーザーの投稿一覧ページへのリンクがある" do
           log_in_by(other_user)
           visit user_path(user)
           expect(current_path).to eq user_path(user)
-          expect(page).not_to have_link "新しく読んだ本を追加する", href:new_book_path
+          expect(page).to have_link "ユーザー投稿一覧", href:user_path(user)
+        end
+
+        it "ユーザーのお気に入り投稿リストページへのリンクがある" do
+          log_in_by(other_user)
+          visit user_path(user)
+          expect(current_path).to eq user_path(user)
+          expect(page).to have_link "お気に入り投稿一覧", href:favorite_books_user_path(user)
         end
       end
 
-      context "ログインしているユーザーと一致する場合" do
+      describe "ログインしているユーザーと一致する場合" do
         it "ユーザー情報編集画面へのリンクが存在する" do
           log_in_by(user)
           visit user_path(user)
@@ -31,11 +38,11 @@ RSpec.describe "UsersShows", type: :system do
           expect(page).to have_link "登録内容を編集する", href:edit_user_path(user), count:1
         end
 
-        it "新規Bookデータ作成リンクが存在する" do
+        it "ユーザーのお気に入り投稿リストページへのリンクがある" do
           log_in_by(user)
           visit user_path(user)
           expect(current_path).to eq user_path(user)
-          expect(page).to have_link "新しく読んだ本を追加する", href:new_book_path, count:1
+          expect(page).to have_link "お気に入り投稿一覧", href:favorite_books_user_path(user)
         end
       end
     end
@@ -45,6 +52,7 @@ RSpec.describe "UsersShows", type: :system do
       let!(:book) { create(:book,user: user) }
       let!(:other_book) { create(:other_book,user: other_user) }
       let!(:books) { create_list(:books,10,user: user) }
+
 
       it "ページネーションで表示されるタイトルは1ページにつき10個まで" do
         log_in_by(user)
@@ -61,12 +69,35 @@ RSpec.describe "UsersShows", type: :system do
         expect(page).not_to have_link other_book.title ,href:book_path(other_book)
       end
 
+      it "新規Bookデータ作成リンクが存在する" do
+        log_in_by(user)
+        visit user_path(user)
+        expect(current_path).to eq user_path(user)
+        expect(page).to have_link "新しい投稿を作成する", href:new_book_path, count:1
+      end
+
       it "一覧のタイトルをクリックで詳細へ移動する" do
         log_in_by(user)
         visit user_path(user)
         expect(current_path).to eq user_path(user)
         find_link(book.title,href: book_path(1)).click
         expect(current_path).to eq book_path(1)
+      end
+
+      describe "GET new_book_path" do
+        it "ログインしているユーザーが一致しない場合は、新規Bookデータ作成リンクは存在しない" do
+          log_in_by(other_user)
+          visit user_path(user)
+          expect(current_path).to eq user_path(user)
+          expect(page).not_to have_link "新新しい投稿を作成する", href:new_book_path
+        end
+
+        it "ログインしているユーザーが一致する場合は、新規Bookデータ作成リンクが存在する" do
+          log_in_by(user)
+          visit user_path(user)
+          expect(current_path).to eq user_path(user)
+          expect(page).to have_link "新しい投稿を作成する", href:new_book_path, count:1
+        end
       end
 
       describe "GET edit_book_path" do

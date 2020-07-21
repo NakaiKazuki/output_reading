@@ -1,13 +1,14 @@
 class CreateChapters < ActiveRecord::Migration[5.2]
   def change
     create_table :chapters do |t|
-      t.integer :number
-      t.text :content
-      t.references :user, foreign_key: true
-      t.references :book, foreign_key: true
+      t.integer :number,null: false
+      t.text :content,null: false
+      t.references :user, foreign_key: true,null: false
+      t.references :book, foreign_key: true,null: false
 
       t.timestamps
     end
-    add_index :chapters, [:number,:user_id,:book_id, :created_at],name: 'chapters_index'
+    add_index :chapters, [:number,:book_id],unique: true
+    add_index :chapters, [:user_id,:created_at]
   end
 end

@@ -1,0 +1,9 @@
+<% if logged_in? %>
+  <div id="favorite_form" class = "favorite-form">
+  <% if  current_user.like?(@book) %>
+    <%= render "/books/unfavorite" %>
+  <% else %>
+    <%= render "/books/favorite" %>
+  <% end %>
+  </div>
+<% end %>

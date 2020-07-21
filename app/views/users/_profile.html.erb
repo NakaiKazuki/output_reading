@@ -1,0 +1,31 @@
+<div class="container user-profile-container">
+  <div class="title-container">
+    <h1>プロフィール</h1>
+  </div>
+  <div class="users_info">
+    <% if current_user?(@user) %>
+    <p class="profile-edit">
+      <%= link_to "登録内容を編集する", edit_user_path,class: " btn btn-success " %>
+    </p>
+    <% else %>
+    <p class="user-follow">
+      <%= link_to "フォロー", "#",class: " btn btn-outline-success " %>
+    </p>
+    <p class="user-unfollow">
+      <%= link_to "フォロー解除", "#",class: " btn btn-success " %>
+    </p>
+    <% end %>
+    <div class="profile">
+      <% if @user.image? %>
+        <%= image_tag @user.image.url,size:80, class:"user-image"%>
+      <% else %>
+          <%= image_tag "default.png" ,size:80,class:" user-image user-image-default" %>
+      <% end %>
+      <span><%= @user.name %></span>
+    </div>
+    <div>
+      <%= link_to "ユーザー投稿一覧", user_path(@user),class: " btn btn-outline-success user-link" %>
+      <%= link_to "お気に入り投稿一覧", favorite_books_user_path(@user),class: " btn btn-outline-success user-link" %>
+    </div>
+  </div>
+</div>

@@ -28,6 +28,11 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  # ユーザーがログアウトしていればtrue、その他ならfalseを返す
+  def logged_out?
+    current_user.nil?
+  end
+
   # 現在のユーザーをログアウトする
   def log_out
     forget(current_user)
@@ -57,7 +62,7 @@ module SessionsHelper
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
-  
+
   private
   # ログイン済みユーザーかどうか確認
     def logged_in_user

@@ -5,7 +5,6 @@ RSpec.describe Chapter, type: :model do
   let(:user){ create(:user) }
   let(:book){ create(:book,user: user) }
   let(:chapter){ user.chapters.build(content: "Chapter content",number:1,user:user,book: book) }
-  let(:chapter_2){ user.chapters.build(content: "Chapter content_2",number:1,user:user,book: book) }
 
   describe "Chapter" do
     it "有効" do
@@ -25,7 +24,8 @@ RSpec.describe Chapter, type: :model do
     end
 
     it "一つの本にある章番号は一意であるべき" do
-      create(:chapter,number:1,content:"テスト",user:user,book:book)
+      user.chapters.create(number:1,content:"Chapter content",user:user,book:book)
+      chapter_2 = user.chapters.build(content: "Chapter content_2",number:1,user:user,book: book)
       expect(chapter_2).to be_invalid
     end
   end

@@ -5,10 +5,15 @@ Rails.application.routes.draw do
   get   "/login"  , to: "sessions#new"
   post  "/login" ,  to: "sessions#create"
   delete "/logout" , to: "sessions#destroy"
-  resources :users
+  resources :users do
+    member do
+      get :favorite_books
+    end
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :books do
     resources :chapters, only:[:new, :create, :edit, :update, :destroy],param: :number
   end
+  resources :favorites,       only: [:create, :destroy],param: nil
 end

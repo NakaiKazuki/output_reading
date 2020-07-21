@@ -13,7 +13,8 @@
  */
 
 @import "bootstrap";
-
+@import "font-awesome-sprockets";
+@import "font-awesome";
 // universal
 
  body{
@@ -144,34 +145,46 @@
  }
 
 // Book
- .books{
-   list-style: none;
-   padding-left: 0;
-   li{
-    padding:1rem;
-    margin-bottom:1rem;
-    border: 0.065rem solid green;
-    .book-edit-delete-btn{
-      padding-right: 0.6rem;
-    }
+.user-books-container{
+  margin-top:1.8rem;
+  padding:3.5rem;
+  background-color:white;
+  border: 0.63rem double darkorange;
+  border-radius: 4.4rem;
+  .title-container{
+    text-align: center;
+    padding-bottom: 2rem;
   }
- }
+}
 
- .book-new-link{
-   margin-top:1rem;
-   width:100%;
- }
-
- .book-title a{
-   padding:0.3rem 0;
-   color: black;
-   display: block;
-   white-space: pre-line;
-   &:hover{
-     background-color: honeydew;
-     text-decoration: none;
+.books{
+  list-style: none;
+  padding-left: 0;
+  li{
+   padding:1rem;
+   margin-bottom:1rem;
+   border: 0.065rem solid green;
+   .book-edit-delete-btn{
+     padding-right: 0.6rem;
    }
  }
+}
+
+.book-new-link{
+  margin-top:1rem;
+  width:100%;
+}
+
+.book-title a{
+  padding:0.3rem 0;
+  color: black;
+  display: block;
+  white-space: pre-line;
+  &:hover{
+    background-color: honeydew;
+    text-decoration: none;
+  }
+}
 
  // Book index
  .books-index-container{
@@ -213,6 +226,19 @@
      white-space: pre-line;
      text-align: center;
      padding-bottom: 2rem;
+   }
+   .book-image{
+     padding:1rem 0;
+     text-align: center;
+     .md-image{
+       width:100%;
+     }
+   }
+   p{
+     text-align: right;
+     .user-name{
+       color: green;
+     }
    }
    .book-show-chapter-container{
      width:100%;
@@ -257,6 +283,11 @@
    }
  }
 
+ // Favorite btn
+ .favorite-form{
+   text-align: right;
+ }
+
 // Books new
  .books-new-container{
    margin-top:2rem;
@@ -284,7 +315,7 @@
  }
 
 // Chapter
- // Chpter new
+ // Chpter new Chapter edit
  .chapters-new-container,.chapters-edit-container{
    margin-top:2rem;
    padding:3.5rem;
@@ -296,9 +327,10 @@
      padding-bottom: 2rem;
    }
  }
+
 // User
- // Users show
- .users-show-container{
+ // Users profile
+ .user-profile-container{
    margin-top:2rem;
    padding:3.5rem;
    background-color:white;
@@ -318,6 +350,10 @@
      }
      .profile{
        font-size: 1.7rem;
+     }
+     .user-link{
+       margin:1rem 0 0 1rem;
+       width:12rem;
      }
    }
  }
@@ -354,6 +390,35 @@
        }
      }
    }
+ }
+
+ // User Favoritebooks
+ .favorite-books-container{
+   margin-top:1.8rem;
+   padding:3.5rem;
+   background-color:white;
+   border: 0.63rem double darkorange;
+   border-radius: 4.4rem;
+   .title-container{
+     text-align: center;
+     padding-bottom: 2rem;
+   }
+  .user-name{
+    color: green;
+  }
+  .user-image-book-title-image{
+    margin-left: 0.1rem;
+    .book-image{
+      padding-top:1rem;
+      text-align: center;
+      .md-image{
+        width:100%;
+      }
+    }
+  }
+  .book-timestamp{
+    text-align: right;
+  }
  }
 
  // Pagination

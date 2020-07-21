@@ -21,12 +21,14 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'faker'
 gem 'faker-japanese'
+gem 'sorcery'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug' , platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.9.1'
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
 end
 
 group :development do

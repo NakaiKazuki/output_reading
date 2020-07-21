@@ -1,10 +1,10 @@
 <%= form_with(model: @chapter, url: yield(:url), local: true) do |form| %>
   <%= render "shared/error_messages", object: form.object %>
-  <%= form.hidden_field :book_id,value: params[:book_id],class: "form-control" %>
+  <div><%= form.hidden_field :book_id,value: params[:book_id] %></div>
 
   <div class="form-group">
     <%= form.label :number, "章番号を選択してください" %>
-    <%= form.select :number,options_for_select((1..25).to_a),class: "form-control" %>
+    <%= form.select :number,options_for_select((1..25).to_a,@chapter.number),class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -26,6 +26,6 @@
   </script>
 
   <div class="form-group">
-    <%= form.submit yield(:submit_text), class: "btn btn-md btn-outline-success btn-lg form-submit" %>
+    <%= form.submit yield(:submit_text), class: "btn btn-outline-success btn-lg form-submit" %>
   </div>
 <% end %>

@@ -115,6 +115,16 @@ RSpec.describe User, type: :model do
         expect(user.authenticated?(:remember,"")).to be_falsey
       end
     end
+
+    describe "like?" do
+      let(:book) { create(:book,user: user) }
+
+      it "ユーザーがお気に入り登録していたらtrueを無ければfalseを返す" do
+        expect(user.favorite_books.include?(book)).to be_falsey
+        create(:favorite,user: user,book: book)
+        expect(user.favorite_books.include?(book)).to be_truthy
+      end
+    end
   end
 
   describe "アソシエーション"do

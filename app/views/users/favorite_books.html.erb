@@ -1,0 +1,49 @@
+<% provide(:title, "お気にり投稿一覧") %>
+<%= render "profile" %>
+<div class="container favorite-books-container">
+  <div class="row">
+    <div class="col">
+      <h1 class="title-container">お気に入り投稿一覧</h1>
+      <% if @user.favorites.any?%>
+        <%= paginate @books %>
+        <div class="book-items">
+          <ul class="books">
+            <% @books.each do |book|%>
+              <li id="book-<%= book.id %>">
+                <div class = "row book-list">
+                  <div class="col-md col-book-item">
+                    <span class = "row">
+                      <span class="col-6">投稿者: <%= link_to book.user.name,book.user,class: "user-name" %></span>
+                      <span class="col-6 book-timestamp"><%= time_ago_in_words(book.created_at) %>前に投稿</span>
+                    </span>
+                    <div class="row user-image-book-title-image">
+                      <% if book.user.image? %>
+                        <%= image_tag book.user.image.url,size:65,class: "user-image d-none d-md-inline-block" %>
+                      <% else %>
+                        <%= image_tag "default.png" ,size:65,class: "user-image user-image-default d-none d-md-inline-block" %>
+                      <% end %>
+                      <div class="col book-title-image">
+                        <div class="book-title">
+                          <%= link_to book.title,book %>
+                        </div>
+                        <% if book.image?%>
+                          <div class="col book-image">
+                            <%= image_tag book.image.url,class:"d-none d-md-inline-block" %>
+                            <%= image_tag book.image.url,class:"d-md-none md-image" %>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <%= paginate @books %>
+      <% else %>
+          <span class="non-item">まだお気に入り投稿がありません</span>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,27 +1,46 @@
 <% provide(:title, @user.name) %>
-<div class="container users-show-container">
-  <div class="title-container">
-    <h1 class = "title-users-show" >プロフィール</h1>
-  </div>
-    <article class="users_info">
-      <p class="profile-edit">
-        <%= link_to "登録内容を編集する", edit_user_path,class: " btn btn-md btn-outline-success "if  current_user?(@user) %>
-      </p>
-      <div class="profile">
-        <% if @user.image? %>
-          <%= image_tag @user.image.url,size:80, class:"user-image"%>
-        <% else %>
-          <%= image_tag "default.png" ,size:80,class:" user-image user-image-default" %>
-        <% end %>
-        <span><%= @user.name %></span>
-      </div>
-    </article>
-  <article class="row user-books-container">
+<%= render "profile" %>
+<div class="user-books-container">
+  <div class="row">
     <div class="col">
       <div class="title-container">
-        <h2>読んだ本一覧</h2>
+        <h1>投稿一覧</h1>
       </div>
-      <%= render "users_books" %>
+      <div class="container">
+        <% if @user.books.any? %>
+        <ul class="books">
+          <% @books.each do |book|%>
+          <li id="book-<%= book.id %>">
+            <div class="row">
+              <span class="book-title col">
+                <%= link_to book.title,book %>
+              </span>
+              <% if current_user?(@user)%>
+                <span class = "book-edit-delete-btn d-none d-md-inline-block">
+                  <span><%= link_to "編集",edit_book_path(book),class:"btn btn-sm btn-outline-success"%></span>
+                  <span>
+                    <%= link_to "削除",book_path(book),method: :delete,
+                    data: { confirm: "選択した投稿を削除しますか？（関連する投稿も削除されます。）" } , class:"btn btn-sm btn-outline-success" %>
+                  </span>
+                </span>
+                <div class = "book-edit-delete-btn d-md-none">
+                  <span><%= link_to "編集",edit_book_path(book),class:"btn btn-sm btn-outline-success smart-btn"%></span>
+                  <span>
+                    <%= link_to "削除",book_path(book),method: :delete,
+                    data: { confirm: "選択した投稿を削除しますか？（関連する投稿も削除されます。）" } , class:"btn btn-sm btn-outline-success sm-btn" %>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+        <%= paginate @books %>
+        <% else %>
+          <span class="non-item">まだ投稿がありません</span>
+        <% end %>
+        <%= link_to "新しい投稿を作成する",new_book_path,class:"btn btn-md btn-success book-new-link" if current_user?(@user)%>
+      </div>
     </div>
-  </article>
+  </div>
 </div>

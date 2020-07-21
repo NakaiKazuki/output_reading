@@ -42,7 +42,6 @@ RSpec.describe "Logins", type: :system do
         visit login_path
         submit_with_valid_information
         expect(current_path).to eq user_path(user)
-        expect(page).to have_selector ".users-show-container"
       end
 
       it "ログイン後はログインボタンが消えて、ログアウトボタンが表示される" do

@@ -119,5 +119,4 @@ RSpec.describe "UsersLogins", type: :request do
       expect(cookies[:remember_token]).to be_empty
     end
   end
-
 end

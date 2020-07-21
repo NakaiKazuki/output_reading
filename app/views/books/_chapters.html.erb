@@ -41,7 +41,7 @@
   <% else %>
     <span class="non-item">まだ投稿がありません</span>
   <% end %>
-  <%= link_to "読んだ本の内容を書き出す",new_book_chapter_path(@book),
+  <%= link_to "本の内容を書き出す",new_book_chapter_path(@book),
               class:"btn btn-md btn-success chapter-new-link" if current_user?(@book.user)%>
   <%= paginate @chapters %>
 </div>

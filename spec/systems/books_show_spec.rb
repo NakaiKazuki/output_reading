@@ -4,7 +4,7 @@ RSpec.describe "BooksShows", type: :system  do
 
   let(:user) { create(:user) }
   let(:other_user) { create(:other_user) }
-  let(:book) { create(:book,user: user) }
+  let(:book) { create(:book,:add_image,user: user) }
   let(:other_book) { create(:book_2,user: user)}
   let!(:chapter) { create(:chapter,user: user,book: book) }
   let!(:other_book_chapter) { create(:other_book_chapter,user: user,book: other_book) }
@@ -23,6 +23,16 @@ RSpec.describe "BooksShows", type: :system  do
         expect(page).to have_selector ".chapter-content",count:10
       end
 
+      it "投稿に画像があれば表示される" do
+        visit book_path(book)
+        expect(page).to have_selector ".book-image"
+      end
+
+      it "投稿者の名前がある" do
+        visit book_path(book)
+        expect(page).to have_link book.user.name ,href:user_path(user)
+      end
+
       it "別のBookデータに紐づいたChapterデータは投稿者が同じでも表示されない" do
         visit book_path(book)
         expect(chapter.user_id).to eq other_book_chapter.user_id
@@ -30,7 +40,7 @@ RSpec.describe "BooksShows", type: :system  do
         expect(page).not_to have_selector ".chapter-content",text: other_book_chapter.content
       end
 
-      it "非ログイン時投稿の編集と削除のリンクは表示されない" do
+      it "非ログイン時章の投稿の編集と削除のリンクは表示されない" do
         visit book_path(book)
         expect(page).not_to have_link "編集",href: edit_book_chapter_path(book_id:chapter.book_id,number:chapter.number)
         expect(page).not_to have_link "削除",href: book_chapter_path(book_id:chapter.book_id,number:chapter.number)
@@ -43,6 +53,21 @@ RSpec.describe "BooksShows", type: :system  do
         visit book_path(book)
         expect(page).not_to have_link "編集",href: edit_book_chapter_path(book_id:chapter.book_id,number:chapter.number)
         expect(page).not_to have_link "削除",href: book_chapter_path(book_id:chapter.book_id,number:chapter.number)
+      end
+
+      it "お気に入り登録と削除ボタンが機能している" do
+        log_in_by(other_user)
+        visit book_path(book)
+        expect{
+          click_button("お気に入り登録")
+          wait_for_ajax
+        }.to change {Favorite.count}.by(1)
+        expect(current_path).to eq book_path(book)
+        expect{
+          click_button("お気に入り登録解除")
+          wait_for_ajax
+        }.to change {Favorite.count}.by(-1)
+        expect(current_path).to eq book_path(book)
       end
     end
 
@@ -75,8 +100,23 @@ RSpec.describe "BooksShows", type: :system  do
       it "新規投稿作成リンク" do
         log_in_by(user)
         visit book_path(book)
-        find_link("読んだ本の内容を書き出す",href: new_book_chapter_path(book_id:book)).click
+        find_link("本の内容を書き出す",href: new_book_chapter_path(book_id:book)).click
         expect(current_path).to eq new_book_chapter_path(book_id:book)
+      end
+
+      it "お気に入り登録と削除ボタンが機能している" do
+        log_in_by(user)
+        visit book_path(book)
+        expect{
+          click_button("お気に入り登録")
+          wait_for_ajax
+        }.to change {Favorite.count}.by(1)
+        expect(current_path).to eq book_path(book)
+        expect{
+          click_button("お気に入り登録解除")
+          wait_for_ajax
+        }.to change {Favorite.count}.by(-1)
+        expect(current_path).to eq book_path(book)
       end
     end
   end
