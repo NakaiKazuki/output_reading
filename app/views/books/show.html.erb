@@ -4,13 +4,13 @@
     <div class="col">
       <%= render "/books/favorite_form"%>
       <h2 class="title-container"><%= @book.title %></h2>
+      <p class = "col">投稿者: <%= link_to @book.user.name,@book.user,class: "user-name" %></p>
       <% if @book.image?%>
         <div class="col book-image">
           <%= image_tag @book.image.url,class:"d-none d-md-inline-block" %>
           <%= image_tag @book.image.url,class:"d-md-none md-image" %>
         </div>
       <% end %>
-      <p class = "col">投稿者: <%= link_to @book.user.name,@book.user,class: "user-name" %></p>
       <%= render "chapters"%>
     </div>
   </div>
