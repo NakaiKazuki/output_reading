@@ -17,7 +17,7 @@ RSpec.describe "Logins", type: :system do
   end
 
   describe "/login layout" do
-    context "無効" do
+    describe "無効" do
       it "入力情報が無い場合は、フラッシュメッセージdangerが表示される" do
         visit login_path
         expect(page).to have_selector ".login-container"
@@ -37,7 +37,7 @@ RSpec.describe "Logins", type: :system do
       end
     end
 
-    context "有効" do
+    describe "有効" do
       it "有効な情報の場合は、ユーザーのプロフィールページに移動する" do
         visit login_path
         submit_with_valid_information

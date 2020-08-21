@@ -26,7 +26,7 @@ RSpec.describe Book, type: :model do
   end
 
   describe "title" do
-    context "何も入ってない場合は無効" do
+    describe "何も入ってない場合は無効" do
       it "存在するべき" do
         book.title = nil
         expect(book).to be_invalid
@@ -38,7 +38,7 @@ RSpec.describe Book, type: :model do
       end
     end
 
-    context "有効" do
+    describe "有効" do
       it "50文字までは有効" do
         book.title = "a" * 50
         expect(book).to be_valid
@@ -47,9 +47,14 @@ RSpec.describe Book, type: :model do
   end
 
   describe "アソシエーション"do
-    it "ユーザー削除時に紐づいたChapterのデータを削除" do
-      user.chapters.create!(content: "Chapter content",number:1,user: user,book: book)
+    it "Bookデータ削除時に紐づいたChapterのデータを削除" do
+      user.chapters.create(content: "Chapter content",number:1,user: user,book: book)
       expect{ book.destroy }.to change{ Chapter.count }.by(-1)
+    end
+
+    it "Bookデータ削除時に紐づいたFavoriteのデータ削除" do
+      user.favorites.create(user:user,book:book)
+      expect{ book.destroy }.to change{ Favorite.count }.by(-1)
     end
   end
 end

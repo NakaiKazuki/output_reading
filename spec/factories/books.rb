@@ -28,14 +28,8 @@ FactoryBot.define do
     association :user, factory: :user
   end
 
-  factory :user_book,class: Book do
-    title { "User Book title" }
-    created_at { 2.years.ago }
-    association :user, factory: :user
-  end
-
   factory :other_book,class: Book do
-    title { "Other user Book title" }
+    title { "Other User Book Title" }
     created_at { 3.years.ago }
     association :user, factory: :other_user
 

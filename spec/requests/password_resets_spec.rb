@@ -30,7 +30,7 @@ RSpec.describe "PasswordResets", type: :request do
    end
 
    describe "GET /password_resets/:id/edit" do
-     context "無効" do
+     describe "無効" do
        it "無効なメールアドレス" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = controller.instance_variable_get(:@user)
@@ -71,7 +71,7 @@ RSpec.describe "PasswordResets", type: :request do
    end
 
    describe "PATCH /password_resets/:id" do
-     context "無効" do
+     describe "無効" do
        it "無効なパスワード" do
          post password_resets_path, params: { password_reset: { email: user.email } }
          user = controller.instance_variable_get(:@user)

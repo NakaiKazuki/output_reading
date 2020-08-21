@@ -1,8 +1,17 @@
 <% provide(:title, "投稿タイトル一覧") %>
+<% provide(:name, "投稿検索") %>
 <div class="container books-index-container">
   <div class="row">
     <div class="col">
       <h1 class="title-container">全ての投稿タイトル</h1>
+      <div class="search">
+        <%= search_form_for @q do |f| %>
+          <%= f.label :title, "投稿検索" %>
+          <%= f.search_field :title_cont, class:"text-field" ,placeholder: "検索ワードを入力" %>
+
+          <%= f.submit "検索" ,class: "search-submit" %>
+        <% end %>
+      </div>
       <%= paginate @books %>
       <div class="book-items">
         <ul class="books">

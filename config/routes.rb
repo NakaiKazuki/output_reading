@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   delete "/logout" , to: "sessions#destroy"
   resources :users do
     member do
-      get :favorite_books
+      get :favorite_books,:following, :followers
     end
   end
   resources :account_activations, only: [:edit]
@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   resources :books do
     resources :chapters, only:[:new, :create, :edit, :update, :destroy],param: :number
   end
-  resources :favorites,       only: [:create, :destroy],param: nil
+  resources :favorites,  only: [:create, :destroy],param: nil
+  resources :relationships,       only: [:create, :destroy]
 end

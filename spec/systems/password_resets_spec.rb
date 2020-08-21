@@ -65,7 +65,7 @@ RSpec.describe "PasswordResets", type: :system do
   end
 
   describe "PATCH /password_resets/:id" do
-    context "無効" do
+    describe "無効" do
       it "無効なパスワード" do
         visit_edit_password_reset
         fill_in "パスワード（6文字以上）",with: "foobaz"
@@ -83,7 +83,7 @@ RSpec.describe "PasswordResets", type: :system do
       end
     end
 
-    context "有効" do
+    describe "有効" do
       it "有効な情報" do
         visit_edit_password_reset
         fill_in "パスワード（6文字以上）",with: "foobar"
