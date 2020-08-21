@@ -3,6 +3,15 @@ class User < ApplicationRecord
   has_many :chapters, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_books, through: :favorites, source: :book
+  has_many :active_relationships,   class_name:  "Relationship",
+                                    foreign_key: "follower_id",
+                                    dependent:   :destroy
+  has_many :passive_relationships,  class_name:  "Relationship",
+                                    foreign_key: "followed_id",
+                                    dependent:   :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
   attr_accessor :remember_token, :activation_token, :reset_token #インスタンス変数を直接変更して操作ができるようにする。
   before_save :downcase_email
   before_create :create_activation_digest #create前に呼び出される
@@ -84,16 +93,36 @@ class User < ApplicationRecord
 
 # お気に入り登録
 
+  #お気に入り登録する
   def like(book)
     favorite_books << book
   end
 
+  #お気に入り登録解除
   def unlike(book)
     favorites.find_by(book_id: book.id).destroy
   end
 
+  # 現在のユーザーがお気に入り登録してたらtrueを返す
   def like?(book)
     favorite_books.include?(book)
+  end
+
+#ユーザーフォロー
+
+  # ユーザーをフォローする
+  def follow(other_user)
+    following << other_user
+  end
+
+  # ユーザーをフォロー解除する
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # 現在のユーザーがフォローしてたらtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
   end
 
 private

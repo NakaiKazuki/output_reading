@@ -26,7 +26,7 @@ RSpec.describe "UsersLogins", type: :request do
     end
 
   describe "GET /login" do
-    context "無効なフォーム情報" do
+    describe "無効なフォーム情報" do
       it "失敗したときは、フラッシュメッセージdangerが表示される" do
         get login_path
         post_invalid_information
@@ -45,7 +45,7 @@ RSpec.describe "UsersLogins", type: :request do
       end
     end
 
-    context "有効なフォーム情報" do
+    describe "有効なフォーム情報" do
       it "成功時フラッシュメッセージdangerは表示されない" do
         get login_path
         post_valid_information(user)

@@ -3,6 +3,7 @@ class Book < ApplicationRecord
   has_many :chapters, dependent: :destroy
   has_many :favorites, dependent: :destroy
   # has_many :favorite_users, through: :favorites, source: :user
+
   default_scope -> { order(created_at: :desc) }
   mount_uploader :image, BookImageUploader
 

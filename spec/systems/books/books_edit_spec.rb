@@ -30,7 +30,7 @@ RSpec.describe "BooksEdits", type: :system  do
 
   describe "/books/:id/edit layout" do
     describe "無効" do
-      it "ログインしていない場合無効" do
+      it "ログインしていない場合は無効" do
         visit edit_book_path(book)
         expect(current_path).to eq login_path
         expect(page).to have_selector ".alert-warning"

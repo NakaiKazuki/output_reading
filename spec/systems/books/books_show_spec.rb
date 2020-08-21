@@ -10,7 +10,7 @@ RSpec.describe "BooksShows", type: :system  do
   let!(:other_book_chapter) { create(:other_book_chapter,user: user,book: other_book) }
 
   describe  "/book/:id layout" do
-    describe "非ログイン状態" do
+    describe "ログインしていない場合" do
       it "ログインしていなくてもアクセス可能" do
         visit book_path(book)
         expect(current_path).to eq book_path(book)
@@ -44,6 +44,12 @@ RSpec.describe "BooksShows", type: :system  do
         visit book_path(book)
         expect(page).not_to have_link "編集",href: edit_book_chapter_path(book_id:chapter.book_id,number:chapter.number)
         expect(page).not_to have_link "削除",href: book_chapter_path(book_id:chapter.book_id,number:chapter.number)
+      end
+
+      it "フォローボタンは存在しない" do
+        visit book_path(book)
+        expect(current_path).to eq book_path(book)
+        expect(page).not_to have_button "お気に入り登録"
       end
     end
 

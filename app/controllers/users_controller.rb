@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update,:index,:destroy,:show,:favorite_books]
+  before_action :logged_in_user, only: [:edit, :update,:index,:destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
@@ -19,7 +19,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).per(15)
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page]).per(15)
   end
 
   def show
@@ -53,6 +54,20 @@ class UsersController < ApplicationController
     @favorites = @user.favorites
     @books = Book.where(id: @favorites.pluck(:book_id)).page(params[:page]).per(10)
     render "favorite_books"
+  end
+
+  def following
+    @title = "フォロー中一覧"
+    @user  = User.find(params[:id])
+    @users = @user.following.page(params[:page]).per(15)
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "フォロワー一覧"
+    @user  = User.find(params[:id])
+    @users = @user.followers.page(params[:page]).per(15)
+    render 'show_follow'
   end
 
 private

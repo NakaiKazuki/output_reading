@@ -5,7 +5,7 @@ RSpec.describe "SiteLayouts", type: :system do
   let(:user) { create(:user) }
 
   describe "home layout"do
-    context "ユーザーがログインしていない場合" do
+    describe "ユーザーがログインしていない場合" do
       it "/ へのリンクがある"do
         visit root_path
         expect(page).to have_link "Output Reading", href: root_path , count:1
@@ -27,7 +27,7 @@ RSpec.describe "SiteLayouts", type: :system do
       end
     end
 
-    context "ユーザーがログインしている場合" do
+    describe "ユーザーがログインしている場合" do
       before do
         log_in_by(user)
       end

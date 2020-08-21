@@ -5,7 +5,7 @@ RSpec.describe "FavoritesDestroys", type: :request do
   let(:book) { create(:book, user: user) }
   let!(:favorite) { create(:favorite,user: user,book: book) }
 
-  describe "DELETE /favorite" do
+  describe "DELETE /favorite/:id" do
 
     it "ログインしていない場合は無効" do
       expect{

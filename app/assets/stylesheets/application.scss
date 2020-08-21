@@ -163,7 +163,7 @@
   li{
    padding:1rem;
    margin-bottom:1rem;
-   border: 0.065rem solid green;
+   border: 0.065rem solid palegreen;
    .book-edit-delete-btn{
      padding-right: 0.6rem;
    }
@@ -195,7 +195,6 @@
    border-radius: 4.4rem;
    .title-container{
      text-align: center;
-     padding-bottom: 2rem;
    }
   .user-name{
     color: green;
@@ -329,10 +328,11 @@
  }
 
 // User
+
  // Users profile
  .user-profile-container{
    margin-top:2rem;
-   padding:3.5rem;
+   padding:3.5rem 3.5rem 1rem 3.5rem;
    background-color:white;
    border: 0.63rem double darkorange;
    border-radius: 4.4rem;
@@ -340,7 +340,7 @@
      text-align: center;
      padding-bottom: 2rem;
    }
-   .users_info{
+   .users-info{
      border:0.065rem solid green;
      padding: 1.5rem 0 3rem 1rem;
      margin-bottom: 3.5rem;
@@ -350,12 +350,25 @@
      }
      .profile{
        font-size: 1.7rem;
+       padding-left:1rem;
      }
-     .user-link{
+     .user-item-link{
        margin:1rem 0 0 1rem;
        width:12rem;
      }
    }
+
+   // follow btn
+   .follow-form{
+     text-align: right;
+     padding-right: 1rem;
+   }
+ }
+
+ // follow btn
+ .follow-form{
+   text-align: right;
+   padding-right: 1rem;
  }
 
  // Users edit
@@ -369,7 +382,7 @@
  }
 
  // Users index
- .users-index-container{
+ .users-index-container,.users-follow-container{
    margin-top:1.8rem;
    padding:3.5rem;
    background-color:white;
@@ -421,9 +434,24 @@
   }
  }
 
+ // Search
+ .search{
+   text-align: center;
+   padding: 1.5rem 0;
+   .text-field{
+     width:55%;
+   }
+   .search-submit{
+     background-color: limegreen;
+     color:white;
+     border: 0.14rem solid green;
+     &:hover{
+       background:green;
+     }
+   }
+ }
  // Pagination
  .pagination{
-   padding-top:1.5rem;
    justify-content: center;
    .page-item {
      &.active .page-link{
@@ -434,6 +462,7 @@
       margin:0 0.04rem;
       border-radius: 50%;
       &:hover{
+        color:black;
         background:palegreen;
       }
     }

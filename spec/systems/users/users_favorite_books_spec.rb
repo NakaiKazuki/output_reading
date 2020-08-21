@@ -5,8 +5,26 @@ RSpec.describe "UsersFavoritesBooks", type: :system  do
   let(:other_user) { create(:other_user) }
 
   describe "users/:id/favorite_books layout" do
+    it "ログインしていなくても閲覧可能" do
+      visit favorite_books_user_path(user)
+      expect(current_path).to eq favorite_books_user_path(user)
+    end
 
     describe "User　Profile" do
+      describe "ユーザーがログインしていない場合" do
+        it "編集画面へのリンクは存在しない" do
+          visit favorite_books_user_path(user)
+          expect(current_path).to eq favorite_books_user_path(user)
+          expect(page).not_to have_link "登録内容を編集する", href:edit_user_path(user)
+        end
+
+        it "フォローボタンは存在しない" do
+          visit favorite_books_user_path(user)
+          expect(current_path).to eq favorite_books_user_path(user)
+          expect(page).not_to have_button "フォロー"
+        end
+      end
+
       describe "ログインしているユーザーが一致しない場合" do
         it "編集画面へのリンクは存在しない" do
           log_in_by(other_user)
@@ -21,12 +39,27 @@ RSpec.describe "UsersFavoritesBooks", type: :system  do
           expect(current_path).to eq user_path(user)
           expect(page).to have_link "ユーザー投稿一覧", href:user_path(user)
         end
-        
+
         it "ユーザーのお気に入り投稿リストページへのリンクがある" do
           log_in_by(other_user)
           visit favorite_books_user_path(user)
           expect(current_path).to eq favorite_books_user_path(user)
           expect(page).to have_link "お気に入り投稿一覧", href:favorite_books_user_path(user)
+        end
+
+        it "フォローとフォロー解除ボタンが機能している" do
+          log_in_by(other_user)
+          visit favorite_books_user_path(user)
+          expect{
+            click_button("フォロー")
+            wait_for_ajax
+          }.to change {Relationship.count}.by(1)
+          expect(current_path).to eq favorite_books_user_path(user)
+          expect{
+            click_button("フォロー解除")
+            wait_for_ajax
+          }.to change {Relationship.count}.by(-1)
+          expect(current_path).to eq favorite_books_user_path(user)
         end
       end
 
@@ -43,6 +76,13 @@ RSpec.describe "UsersFavoritesBooks", type: :system  do
           visit favorite_books_user_path(user)
           expect(current_path).to eq favorite_books_user_path(user)
           expect(page).to have_link "お気に入り投稿一覧", href:favorite_books_user_path(user)
+        end
+
+        it "フォローボタンは存在しない" do
+          log_in_by(user)
+          visit favorite_books_user_path(user)
+          expect(current_path).to eq favorite_books_user_path(user)
+          expect(page).not_to have_button "フォロー"
         end
       end
     end

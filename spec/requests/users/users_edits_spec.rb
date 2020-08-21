@@ -51,7 +51,7 @@ RSpec.describe "UsersEdits", type: :request do
 
   describe "GET /users/:id/edit" do
 
-    context "ユーザーがログインしていない場合" do
+    describe "ユーザーがログインしていない場合" do
       it "edit_user_pathの取得は無効" do
         get edit_user_path(user)
         follow_redirect!
@@ -67,7 +67,7 @@ RSpec.describe "UsersEdits", type: :request do
       end
     end
 
-    context "異なるユーザーのアクセスした場合は無効" do
+    describe "異なるユーザーのアクセスした場合は無効" do
       it "自身以外のユーザー情報編集画面へのアクセスは無効" do
         log_in_as(other_user)
         get edit_user_path(user)
@@ -94,8 +94,8 @@ RSpec.describe "UsersEdits", type: :request do
     end
 
 
-    context "ユーザーが一致した場合" do
-      context "無効" do
+    describe "ユーザーが一致した場合" do
+      describe "無効" do
         it "無効な編集情報" do
           log_in_as(user)
           get edit_user_path(user)
@@ -107,7 +107,7 @@ RSpec.describe "UsersEdits", type: :request do
         end
       end
 
-      context "有効" do
+      describe "有効" do
         it "有効な編集情報" do
           log_in_as(user)
           get edit_user_path(user)
@@ -117,7 +117,6 @@ RSpec.describe "UsersEdits", type: :request do
           follow_redirect!
           expect(user.reload.name).to eq "Foo Bar"
           expect(user.reload.email).to eq "foo@bar.com"
-          # expect(user.reload.password).to eq "foobar"           #nameとemailは更新されるがpasswordだけ更新されないため、解決するまで放置。digestになってるからやろ
           expect(request.fullpath).to eq "/users/1"
           expect(flash[:success]).to be_truthy
         end
@@ -131,7 +130,6 @@ RSpec.describe "UsersEdits", type: :request do
           follow_redirect!
           expect(user.reload.name).to eq "Foo Bar"
           expect(user.reload.email).to eq "foo@bar.com"
-          # expect(user.password).to eq user.reload.password
           expect(request.fullpath).to eq "/users/1"
           expect(flash[:success]).to be_truthy
         end
@@ -145,7 +143,6 @@ RSpec.describe "UsersEdits", type: :request do
           follow_redirect!
           expect(user.reload.name).to eq "Foo Bar"
           expect(user.reload.email).to eq "foo@bar.com"
-          # expect(user.password).to eq user.reload.password
           expect(user.reload.image).to be_truthy
           expect(request.fullpath).to eq "/users/1"
           expect(flash[:success]).to be_truthy

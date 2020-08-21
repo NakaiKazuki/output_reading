@@ -22,7 +22,7 @@ RSpec.describe "BooksNews", type: :system do
 
   describe "/books/new layout" do
     describe "無効" do
-      it "ユーザーがログインしていない場合はアクセス不可" do
+      it "ユーザーがログインしていない場合は無効" do
         visit new_book_path
         expect(current_path).to eq login_path
         expect(page).to have_selector ".alert-warning"

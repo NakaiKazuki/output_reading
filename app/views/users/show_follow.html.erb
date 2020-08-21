@@ -1,0 +1,25 @@
+<% provide(:title, @title) %>
+<%= render "profile" %>
+<div class="container users-follow-container">
+  <div class="row">
+    <div class="col">
+      <h1 class="title-container"><%= @title %></h1>
+      <% if @users.any? %>
+        <%= paginate @users %>
+        <ul class="users">
+          <% @users.each do |user| %>
+            <li>
+              <% if user.image? %>
+                <%= image_tag user.image.url ,class: "user-image" %>
+              <% else %>
+                <%= image_tag "default.png" ,:size =>'80x80',class: "user-image-default" %>
+              <% end %>
+              <%= link_to user.name, user ,class: "user-name" %>
+            </li>
+          <% end %>
+        </ul>
+        <%= paginate @users %>
+      <% end %>
+    </div>
+  </div>
+</div>
