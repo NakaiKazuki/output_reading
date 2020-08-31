@@ -8,5 +8,4 @@ class ApplicationRecord < ActiveRecord::Base
       errors.add(:image, "は5MB未満にしてください")
     end
   end
-
 end
