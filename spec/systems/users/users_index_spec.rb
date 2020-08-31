@@ -17,10 +17,10 @@ RSpec.describe "UsersIndices", type: :system  do
       visit users_path
       expect(current_path).to eq users_path
       expect(page).to have_link non_admin.name,href: user_path(non_admin)
-      fill_in "検索ワードを入力",with: "foobar"
+      fill_in "ユーザー名を入力してください",with: "foobar"
       find(".search-submit").click
       expect(page).not_to have_link non_admin.name,href: user_path(non_admin)
-      fill_in "検索ワードを入力",with: non_admin.name
+      fill_in "ユーザー名を入力してください",with: non_admin.name
       find(".search-submit").click
       expect(page).to have_link non_admin.name,href: user_path(non_admin)
     end

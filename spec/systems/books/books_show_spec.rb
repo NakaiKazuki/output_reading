@@ -51,6 +51,14 @@ RSpec.describe "BooksShows", type: :system  do
         expect(current_path).to eq book_path(book)
         expect(page).not_to have_button "お気に入り登録"
       end
+
+      it "楽天市場で検索ページへのリンクは別タブで開かれる" do
+        visit book_path(book)
+        expect(current_path).to eq book_path(book)
+        find_link("楽天市場で検索する",href: search_books_path).click
+        switch_to_window(windows.last)
+        expect(current_path).to eq search_books_path
+      end
     end
 
     describe "一致しないユーザーとしてログイン" do

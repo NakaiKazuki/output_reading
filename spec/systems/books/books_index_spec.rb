@@ -16,10 +16,10 @@ RSpec.describe "BooksIndices", type: :system  do
       visit books_path
       expect(current_path).to eq books_path
       expect(page).to have_link other_book.title,href: book_path(other_book)
-      fill_in "検索ワードを入力",with: "foobar"
+      fill_in "タイトルを入力してください",with: "foobar"
       find(".search-submit").click
       expect(page).not_to have_link other_book.title,href: book_path(other_book)
-      fill_in "検索ワードを入力",with: other_book.title
+      fill_in "タイトルを入力してください",with: other_book.title
       find(".search-submit").click
       expect(page).to have_link other_book.title,href: book_path(other_book)
     end
@@ -57,6 +57,14 @@ RSpec.describe "BooksIndices", type: :system  do
       expect(current_path).to eq books_path
       find_link(other_book.title,href: book_path(other_book)).click
       expect(current_path).to eq book_path(other_book)
+    end
+
+    it "楽天市場で検索ページへのリンクは別タブで開かれる" do
+      visit books_path
+      expect(current_path).to eq books_path
+      find_link("楽天市場で検索する",href: search_books_path).click
+      switch_to_window(windows.last)
+      expect(current_path).to eq search_books_path
     end
   end
 end

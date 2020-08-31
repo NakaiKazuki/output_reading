@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :books do
+    collection do
+      get :search
+    end
     resources :chapters, only:[:new, :create, :edit, :update, :destroy],param: :number
   end
   resources :favorites,  only: [:create, :destroy],param: nil

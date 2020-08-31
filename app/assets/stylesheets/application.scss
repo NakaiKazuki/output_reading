@@ -100,7 +100,6 @@
    margin-top:0.4rem;
  }
 
-
  #error_explanation {
    text-align: center;
    color: red;
@@ -285,6 +284,9 @@
  // Favorite btn
  .favorite-form{
    text-align: right;
+   .btn{
+     width:11rem;
+   }
  }
 
 // Books new
@@ -312,6 +314,47 @@
      padding-bottom: 2rem;
    }
  }
+
+// Books search
+  .books-search-container{
+    margin-top:2rem;
+    padding:3.5rem;
+    background-color:white;
+    border: 0.63rem double darkorange;
+    border-radius: 4.4rem;
+    .title-container{
+      text-align: center;
+      padding-bottom: 2rem;
+    }
+    .result{
+      margin-top:2rem;
+      li{
+        padding:0.6rem 0.6rem 0.6rem 0.6rem;
+        border: 0.063rem solid green;
+        border-bottom: 0.063rem solid green;
+        list-style: none;
+        text-align: center;
+        .result-image{
+          margin:1rem 0;
+        }
+        a{
+          color:black;
+        }
+      }
+    }
+  }
+
+  // 楽天検索リンク
+    .rakuten-search-link{
+      text-align: right;
+      margin-bottom: 1rem;
+      a{
+        width:11rem;
+        color: white;
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+    }
 
 // Chapter
  // Chpter new Chapter edit
@@ -356,12 +399,6 @@
        margin:1rem 0 0 1rem;
        width:12rem;
      }
-   }
-
-   // follow btn
-   .follow-form{
-     text-align: right;
-     padding-right: 1rem;
    }
  }
 
@@ -434,7 +471,7 @@
   }
  }
 
- // Search
+ // Search-Box
  .search{
    text-align: center;
    padding: 1.5rem 0;
@@ -450,6 +487,7 @@
      }
    }
  }
+
  // Pagination
  .pagination{
    justify-content: center;

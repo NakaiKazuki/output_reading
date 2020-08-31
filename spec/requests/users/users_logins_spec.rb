@@ -89,7 +89,7 @@ RSpec.describe "UsersLogins", type: :request do
       expect(is_logged_in?).to be_falsey
       follow_redirect!
       expect(request.fullpath).to eq '/'
-      #別のウインドウで、2度目のログアウト
+      #2度目のログアウト
       delete logout_path
       follow_redirect!
       expect(request.fullpath).to eq '/'

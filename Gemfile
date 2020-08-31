@@ -24,6 +24,7 @@ gem 'faker-japanese'
 gem 'sorcery'
 gem 'font-awesome-sass'
 gem 'ransack'
+gem 'rakuten_web_service'
 
 group :development, :test do
   gem 'sqlite3'

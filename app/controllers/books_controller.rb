@@ -47,6 +47,12 @@ class BooksController < ApplicationController
     redirect_to current_user
   end
 
+  def search
+    if params[:keyword].present?
+      @books = RakutenWebService::Books::Book.search(title: params[:keyword])
+    end
+  end
+
   private
 
   def book_params

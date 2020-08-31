@@ -8,7 +8,7 @@ RSpec.describe "UsersShows", type: :request do
     describe "ユーザーがログインしていない場合" do
       it "/users/:idの取得は有効" do
         get user_path(user)
-        expect(request.fullpath).to eq "/users/1"
+        expect(request.fullpath).to eq user_path(user)
       end
     end
 
@@ -16,7 +16,7 @@ RSpec.describe "UsersShows", type: :request do
       it "/users/:idの取得は有効" do
         log_in_as(user)
         get user_path(user)
-        expect(request.fullpath).to eq "/users/1"
+        expect(request.fullpath).to eq user_path(user)
       end
     end
   end
