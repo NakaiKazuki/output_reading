@@ -12,6 +12,8 @@ Rails.application.config.assets.precompile += %w( application.css )
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+#assetsのコンパイルが並列で行われるため、  herokuにpushできないから追記(セグメンテーションエラー gemアプデされたら削除)
 Rails.application.config.assets.configure do |env|
   env.export_concurrent = false
 end
