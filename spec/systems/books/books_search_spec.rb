@@ -4,6 +4,8 @@ RSpec.describe "BooksSearches", type: :system  do
   it "ログインしていなくてもアクセス可能" do
     visit search_books_path
     expect(current_path).to eq search_books_path
+    expect(page).not_to have_selector ".result-image"
+    expect(page).not_to have_selector ".result-content"
   end
 
   it "楽天検索機能" do
