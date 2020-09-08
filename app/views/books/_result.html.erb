@@ -2,7 +2,7 @@
   <% @books.each do |book| %>
   <li class="result-book">
     <div class="result-image">
-      <%= link_to image_tag(book.medium_image_url,size:"180x240"), book.item_url,　class:"result-image"%>
+      <%= link_to image_tag(book.medium_image_url,size:"200x300"), book.item_url,　class:"result-image"%>
     </div>
     <div class="result-content">
       <p><%= link_to book.title, book.item_url %></p>
