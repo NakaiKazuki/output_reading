@@ -1,8 +1,15 @@
 User.create!(name:  "かずき",
-             email: "example@railstutorial.org",
+             email: "outputreading01@gmail.com",
              password:              "password",
              password_confirmation: "password",
              admin: true,
+             activated: true)
+
+User.create!(name:  "ゲスト",
+             email: "output.guest@gmail.com",
+             password:              "password",
+             password_confirmation: "password",
+             admin: false,
              activated: true)
 
 
