@@ -25,7 +25,7 @@ class ChaptersController < ApplicationController
   def update
     @book = Book.find(params[:book_id])
     @chapter = current_user.chapters.find_by(book_id: @book,number: params[:number])
-    if @chapter.update_attributes(chapter_params)
+    if @chapter.update(chapter_params)
       flash[:success] = "投稿内容を編集しました！"
       redirect_to @book
     else
