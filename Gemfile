@@ -25,9 +25,10 @@ gem 'sorcery'
 gem 'font-awesome-sass'
 gem 'ransack'
 gem 'rakuten_web_service'
+gem 'mysql2'
+gem 'dotenv-rails'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug' , platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -44,7 +45,6 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-rbenv-vars'
-  gem 'capistrano3-puma'
 end
 
 group :test do
@@ -54,7 +54,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'fog'
 end
 
