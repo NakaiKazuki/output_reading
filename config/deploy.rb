@@ -5,17 +5,6 @@ lock "~> 3.14.1"
 set :application, "output_reading"
 set :repo_url, "git@github.com:NakaiKazuki/output_reading.git"
 
-# Pumaに関する設定（後述）
-# ソケットの場所、Nginxとのやり取りに必要
-set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"
-# サーバー状態を表すファイルの場所
-set :puma_state, "#{shared_path}/tmp/pids/puma.state"
-# プロセスを表すファイルの場所
-set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
-# ログの場所
-set :puma_access_log, "#{shared_path}/log/puma.error.log"
-set :puma_error_log, "#{shared_path}/log/puma.access.log"
-
 # タスクでsudoなどを行う際に必要
 set :pty, true
 # シンボリックリンクのファイルを指定、具体的にはsharedに入るファイル
@@ -36,13 +25,6 @@ namespace :deploy do
           execute :bundle, :exec, :rails, 'db:create'
         end
       end
-    end
-  end
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
     end
   end
 end
