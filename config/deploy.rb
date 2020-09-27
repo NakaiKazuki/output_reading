@@ -3,7 +3,7 @@ lock "~> 3.14.1"
 
 # Capistranoでの必須の設定
 set :application, "output_reading"
-set :repo_url, "git@github.com:NakaiKazuki/output_reading.git"
+set :repo_url, "https://github.com/NakaiKazuki/output_reading.git"
 
 # タスクでsudoなどを行う際に必要
 set :pty, true

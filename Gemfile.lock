@@ -577,7 +577,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootsnap
-  bootstrap (~> 4.4.0)
+  bootstrap
   byebug
   capistrano
   capistrano-bundler
@@ -608,7 +608,6 @@ DEPENDENCIES
   rakuten_web_service
   ransack
   rspec-rails
-  sassc (~> 2.3.0)
   sassc-rails
   sorcery
   spring
