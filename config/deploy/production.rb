@@ -1,4 +1,4 @@
-server "54.199.59.49", user: "Kazuki", roles: %w{app db web}
+server "52.193.175.43", user: "Kazuki", roles: %w{app db web}
 
 set :ssh_options, {
   keys: %w(~/.ssh/Output-Reading_key_rsa),
