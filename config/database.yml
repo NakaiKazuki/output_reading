@@ -18,8 +18,8 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['DB_NAME'] %>
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
+  database: output_reading_production
+  username: admin
+  password: Sd3mnju+
   socket: /var/lib/mysql/mysql.sock
-  host: <%= ENV['DB_HOSTNAME'] %>
+  host: output-reading-mysql.cymfu1ihmhjm.ap-northeast-1.rds.amazonaws.com
