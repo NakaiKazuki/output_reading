@@ -2,8 +2,9 @@
 lock "~> 3.14.1"
 
 # Capistranoでの必須の設定
-set :application, "自分のアプリ名"
-set :repo_url, "git@github.com:githubのユーザー名/アプリ名.git"
+set :application, "output_reading"
+set :repo_url, "https://github.com/NakaiKazuki/output_reading.git"
+
 
 # # Pumaに関する設定（後述）
 # # ソケットの場所、Nginxとのやり取りに必要
@@ -38,8 +39,8 @@ namespace :deploy do
       end
     end
   end
-  # 
-  # desc 'Restart application'
+
+  desc 'Restart application'
   # task :restart do
   #   on roles(:app), in: :sequence, wait: 5 do
   #     invoke 'puma:restart'
