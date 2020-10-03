@@ -44,7 +44,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-rbenv-vars'
-  gem 'capistrano3-puma'
+  # gem 'capistrano3-puma'
 end
 
 group :test do
