@@ -9,6 +9,6 @@ require 'capistrano/puma'
 require 'capistrano/console'
 
 install_plugin Capistrano::SCM::Git
-install_plugin Capistrano::Puma
+install_plugin Capistrano::Puma, false
 
 Dir.glob('lib/capistrano/tasks/*.rb').each { |r| import r }
