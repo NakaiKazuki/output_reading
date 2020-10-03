@@ -1,4 +1,4 @@
-class CreateChapters < ActiveRecord::Migration[5.2]
+class CreateChapters < ActiveRecord::Migration[6.0]
   def change
     create_table :chapters do |t|
       t.integer :number,null: false

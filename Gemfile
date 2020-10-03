@@ -25,13 +25,12 @@ gem 'sorcery'
 gem 'font-awesome-sass'
 gem 'ransack'
 gem 'rakuten_web_service'
-gem 'mysql2'
-gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug' , platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -54,6 +53,7 @@ group :test do
 end
 
 group :production do
+  gem 'mysql2'
   gem 'fog-aws'
 end
 
