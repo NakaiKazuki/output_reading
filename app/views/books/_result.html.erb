@@ -6,7 +6,7 @@
     </div>
     <div class="result-content">
       <p><%= link_to book.title, book.item_url %></p>
-      <p><%= link_to "著者:#{book.author}",book.item_url %></p>
+      <p><%="著者:#{book.author}"%></p>
     </div>
   </li>
   <% end %>

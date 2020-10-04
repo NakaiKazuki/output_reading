@@ -39,12 +39,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'mail-iso-2022-jp'
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-rbenv-vars'
-  # gem 'capistrano3-puma'
 end
 
 group :test do
