@@ -1,21 +1,13 @@
 User.create!(name:  "かずき",
-             email: "outputreading01@gmail.com",
+             email: "outputreading@example.com",
              password:              "password",
              password_confirmation: "password",
              admin: true,
              activated: true)
 
-User.create!(name:  "ゲスト",
-             email: "output.guest@gmail.com",
-             password:              "password",
-             password_confirmation: "password",
-             admin: false,
-             activated: true)
-
-
 20.times do |n|
   name  = Faker::Japanese::Name.name
-  email = "example-#{n+1}@railstutorial.org"
+  email = "output-reading-#{n+1}example.com"
   password = "password"
   User.create!(name:  name,
                email: email,
