@@ -28,7 +28,7 @@ RSpec.describe "BooksDestroys", type: :request do
     describe "有効" do
 
       let!(:book) { create(:book, user: user) }
-      
+
       it "投稿者による削除は有効" do
         log_in_as(user)
         expect{delete book_path(book)}.to change {Book.count}.by(-1)

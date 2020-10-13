@@ -1,0 +1,43 @@
+# Docker Composeのバージョン
+version: '3'
+
+# Docker Composeではコンテナをサービスとして扱う
+services:
+  # サービス名をappとして定義
+  app:
+    # 参照するDockerfileを指定（docker-compose.ymlから基準）
+    build: .
+    # 環境変数が設定されているファイルを指定
+    env_file:
+      - ./environments/db.env
+    # ボリュームをマウント（後述）
+    volumes:
+      - .:/output_reading_docker
+    # サービス名dbが作成されたらappを作成
+    depends_on:
+      - db
+    # コンテナを起動させ続ける際に使用
+    tty: true
+    # コマンドを実行
+    command: bundle exec puma -C config/puma.rb
+
+  db:
+    # イメージを指定（後述）
+    image: mysql
+    env_file:
+      - ./environments/db.env
+    # ボリュームをマウント（後述）
+    volumes:
+      - db-data:/var/lib/mysql
+
+  nginx:
+    build: containers/nginx
+    # ホスト:コンテナのポートを指定
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+# ボリュームとして扱うボリューム名
+volumes:
+  db-data:
