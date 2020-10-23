@@ -3,16 +3,20 @@ version: '3'
 
 # Docker Composeではコンテナをサービスとして扱う
 services:
-  # サービス名をappとして定義
-  app:
+  # サービス名をwebsiteとして定義
+  webapp:
     # 参照するDockerfileを指定（docker-compose.ymlから基準）
     build: .
     # 環境変数が設定されているファイルを指定
     env_file:
       - ./environments/db.env
+      - ./environments/rspec.env
     # ボリュームをマウント（後述）
     volumes:
       - .:/output_reading_docker
+      - public-data:/output_reading_docker/public
+      - tmp-data:/output_reading_docker/tmp
+      - log-data:/output_reading_docker/log
     # サービス名dbが作成されたらappを作成
     depends_on:
       - db
@@ -20,6 +24,13 @@ services:
     tty: true
     # コマンドを実行
     command: bundle exec puma -C config/puma.rb
+
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    logging:
+      driver: none
+    ports:
+      - "4444:4444"
 
   db:
     # イメージを指定（後述）
@@ -29,15 +40,21 @@ services:
     # ボリュームをマウント（後述）
     volumes:
       - db-data:/var/lib/mysql
+      - ./mysql-confd:/etc/mysql/conf.d
 
   nginx:
     build: containers/nginx
+    volumes:
+      - public-data:/output_reading_docker/public
+      - tmp-data:/output_reading_docker/tmp
     # ホスト:コンテナのポートを指定
     ports:
       - "80:80"
     depends_on:
-      - app
-
+      - webapp
 # ボリュームとして扱うボリューム名
 volumes:
+  public-data:
+  tmp-data:
+  log-data:
   db-data:
