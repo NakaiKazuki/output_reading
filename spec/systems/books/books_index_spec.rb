@@ -59,10 +59,10 @@ RSpec.describe "BooksIndices", type: :system  do
       expect(current_path).to eq book_path(other_book)
     end
 
-    it "楽天市場で検索ページへのリンクは別タブで開かれる" do
+    it "楽天ブックスで検索へのリンクは別タブで開かれる" do
       visit books_path
       expect(current_path).to eq books_path
-      find_link("楽天市場で検索する",href: search_books_path).click
+      find_link("楽天で検索する",href: search_books_path).click
       switch_to_window(windows.last)
       expect(current_path).to eq search_books_path
     end

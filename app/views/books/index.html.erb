@@ -11,7 +11,7 @@
           <%= f.submit "検索" ,class: "search-submit" %>
         <% end %>
       </div>
-      <div class="rakuten-search-link"><%= link_to "楽天市場で検索する" ,search_books_path,target: :_blank ,class:"btn btn-danger" %></div>
+      <div class="rakuten-search-link"><%= link_to "楽天で検索する" ,search_books_path,target: :_blank ,class:"btn btn-danger" %></div>
       <%= paginate @books %>
       <div class="book-items">
         <ul class="books">

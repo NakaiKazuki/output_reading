@@ -5,6 +5,13 @@ User.create!(name:  "管理者",
              admin: true,
              activated: true)
 
+User.create!(name:  "ゲスト",
+             email: "guestoutputreading@example.com",
+             password: "password",
+             password_confirmation: "password",
+             admin: false,
+             activated: true)
+
 20.times do |n|
   name  = Faker::Japanese::Name.name
   email = "output-reading-#{n+1}@example.com"
@@ -21,10 +28,19 @@ Book.create!(title: "テストタイトル",
              user_id:1,
              )
 
+Book.create!(title: "ゲストBook投稿",
+             user_id:2,
+             )
+
 Chapter.create!(content: "テスト投稿",
-             user_id:1,
-             book_id:1,
-             number:1)
+                user_id:1,
+                book_id:1,
+                number:1)
+
+Chapter.create!(content: "ゲストCahpter投稿",
+                user_id:2,
+                book_id:2,
+                number:1)
 
 # リレーションシップ
 users = User.all

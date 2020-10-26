@@ -10,7 +10,7 @@ services:
     # 環境変数が設定されているファイルを指定
     env_file:
       - ./environments/db.env
-      - ./environments/rspec.env
+      - ./environments/selenium.env
     # ボリュームをマウント（後述）
     volumes:
       - .:/output_reading_docker

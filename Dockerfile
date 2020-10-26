@@ -2,7 +2,7 @@
 FROM ruby:2.6.6
 # コンテナを機能させるまでの準備のコマンドを実行する
 RUN apt-get update -qq && \
-    apt-get install -y build-essential nodejs
+    apt-get install -y build-essential nodejs imagemagick
 
 # 署名を追加(chromeのインストールに必要) -> apt-getでchromeと依存ライブラリをインストール
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add \

@@ -2,7 +2,7 @@
 <div class="container books-show-container">
   <div class="row">
     <div class="col">
-      <div class="rakuten-search-link"><%= link_to "楽天市場で検索する" ,search_books_path,target: :_blank ,class:"btn btn-danger" %></div>
+      <div class="rakuten-search-link"><%= link_to "楽天で検索する" ,search_books_path,target: :_blank ,class:"btn btn-danger" %></div>
       <%= render "/books/favorite_form"%>
       <h2 class="title-container"><%= @book.title %></h2>
       <p class = "col">投稿者: <%= link_to @book.user.name,@book.user,class: "user-name" %></p>

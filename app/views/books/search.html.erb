@@ -1,13 +1,13 @@
-<% provide(:title, "楽天市場で検索") %>
+<% provide(:title, "楽天ブックスで検索") %>
 <div class="container books-search-container">
   <div class="row">
     <div class="col">
-      <h1 class="title-container">楽天市場で検索</h1>
+      <h1 class="title-container">楽天ブックスで検索</h1>
       <div id="search-box">
         <%= form_with(url:search_books_path, method: :get,local: true) do |form|%>
         <div class="form-group">
           <%= form.text_field :keyword, class: "form-control", placeholder: "本のタイトルを入力してください" %>
-          <%= form.submit "楽天市場で検索", class: "btn btn-outline-success btn-md form-submit" %>
+          <%= form.submit "楽天ブックスで検索", class: "btn btn-outline-success btn-md form-submit" %>
         </div>
         <% end %>
      </div>
