@@ -100,7 +100,7 @@ http://localhost:80
 # Author
 
 * 中井一樹
-* E-mail
+* Twitter : https://twitter.com/k_kyube
 
 # License
 
