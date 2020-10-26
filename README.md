@@ -21,8 +21,8 @@ Output Readingでは他者がアウトプットした内容も確認すること
 
 ローカル環境にDockerがインストールされていない場合は、個人の環境に合わせて下記のページからアカウント作成後にインストールしてください。
 
-Mac    :[Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)  
-Windows:[Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+Mac    : [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)  
+Windows: [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
 
 下記のコマンドでインストールされているか確認できます。
 
@@ -80,13 +80,17 @@ $ rails db:migrate RAILS_ENV=test
 $ rspec
 ```
 
-テストが無事に通ったら、[localhost:80](http://localhost:80)へアクセスします。
+テストが無事に通ったら、localhost:80へアクセスします。
+
+```
+http://localhost:80
+```
 
 画面右上の ログイン からログイン画面へ移動後、下記の内容を入力すると管理者権限を持ったユーザーとしてログインできます。
 
 ```
 メールアドレス: outputreading@example.com
-パスワード　　: password
+パスワード: password
 ```
 
 # Note
