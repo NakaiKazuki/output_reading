@@ -8,8 +8,8 @@ Output Readingは読書した内容を投稿することで、気軽に本の内
 
 # Features
 
-Output Readingでは他者がアウトプットした内容も確認することができます。
-その投稿が気に入った場合は投稿のお気に入り登録と投稿者をフォローすることができます。
+Output Readingでは他者がアウトプットした内容も確認することができます。  
+その投稿が気に入った場合は投稿のお気に入り登録と投稿者をフォローすることができます。  
 気になった本を購入する場合には、Output Reading内から楽天ブックスの商品リストを検索することが可能です。
 
 # Requirement
@@ -21,7 +21,7 @@ Output Readingでは他者がアウトプットした内容も確認すること
 
 ローカル環境にDockerがインストールされていない場合は、個人の環境に合わせて下記のページからアカウント作成後にインストールしてください。
 
-Mac    :[Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
+Mac    :[Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)  
 Windows:[Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
 
 下記のコマンドでインストールされているか確認できます。
