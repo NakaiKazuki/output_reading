@@ -4,7 +4,7 @@ Output Readingは読書した内容を投稿することで、気軽に本の内
 
 # DEMO
 
-![demo](https://raw.github.com/NakaiKazuki/wiki/output_reading/images/output_reading_demo.gif)
+![demo](https://raw.githubusercontent.com/wiki/NakaiKazuki/output_reading/images/output_reading_demo.gif)
 
 # Features
 
