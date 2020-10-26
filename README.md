@@ -90,7 +90,7 @@ http://localhost:80
 
 ```
 メールアドレス: outputreading@example.com
-パスワード　　: password
+パスワード: password
 ```
 
 # Note
