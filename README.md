@@ -14,8 +14,8 @@ Output Readingでは他者がアウトプットした内容も確認すること
 
 # Requirement
 
-* Docker version 19.03.13
-* docker-compose version 1.27.4
+* Docker
+* docker-compose
 
 # Installation
 
@@ -74,13 +74,13 @@ $ rails db:create db:migrate db:seed
 $ rails db:migrate RAILS_ENV=test
 ```
 
-最後に、テストを実行してうまく動いているかどうか確認してください。
+テストを実行してうまく動いているかどうか確認してください。
 
 ```
 $ rspec
 ```
 
-テストが無事に通ったら、localhost:80へアクセスします。
+テストが無事に通ったら、ブラウザからlocalhost:80に接続します。
 
 ```
 http://localhost:80
@@ -90,7 +90,7 @@ http://localhost:80
 
 ```
 メールアドレス: outputreading@example.com
-パスワード: password
+パスワード　　: password
 ```
 
 # Note
