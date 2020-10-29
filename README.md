@@ -19,10 +19,9 @@ Output Readingでは他者がアウトプットした内容も確認すること
 
 # Installation
 
-ローカル環境にDockerがインストールされていない場合は、個人の環境に合わせて下記のページからアカウント作成後にインストールしてください。
+ローカル環境にDockerがインストールされていない場合は、下記のページでアカウント作成後にインストールしてください。
 
-Mac    : [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)  
-Windows: [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
+[Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)  
 
 下記のコマンドでインストールされているか確認できます。
 
