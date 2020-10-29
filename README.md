@@ -88,10 +88,8 @@ http://localhost:80
 
 画面右上の ログイン からログイン画面へ移動後、下記の内容を入力すると管理者権限を持ったユーザーとしてログインできます。
 
-```
-メールアドレス: outputreading@example.com
-パスワード: password
-```
+* メールアドレス: outputreading@example.com
+* パスワード: password
 
 # Note
 
