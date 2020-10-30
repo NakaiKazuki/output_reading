@@ -94,7 +94,7 @@ http://localhost:80
 * メールアドレス: outputreading@example.com
 * パスワード: password
 
-#　その他
+# その他
 
 本番環境:[Output Reading](https://www.output-reading.xyz/)  
 
