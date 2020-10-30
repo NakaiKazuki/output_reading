@@ -22,7 +22,7 @@ Output Readingでは読んだ本の内容を章ごとに分けて書き出すこ
 
 #  インストール
 
-ローカル環境にDockerがインストールされていない場合は、下記のページでアカウント作成後にインストールしてください。
+ローカル環境にDockerがインストールされていない場合は、下記のリンクからアカウント作成後にインストールしてください。
 
 [Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)  
 
