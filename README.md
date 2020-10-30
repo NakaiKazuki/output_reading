@@ -1,23 +1,25 @@
 # Output Reading
 
-Output Readingは読書した内容を投稿することで、気軽に本の内容をアウトプットできるアプリケーションです。
+Output Readingでは読んだ本の内容を章ごとに分けてアウトプットし、その内容をいつでも確認することが可能なアプリケーションです。  
 
-# DEMO
+# デモ
 
 ![demo](https://raw.githubusercontent.com/wiki/NakaiKazuki/output_reading/images/output_reading_demo.gif)
 
-# Features
+# 特徴
 
-Output Readingでは他者がアウトプットした内容も確認することができます。  
+Output Readingでは読んだ本の内容を章ごとに分けて書き出すことで、その章の内容をより深く掘り下げることができます。  
+章ごとに分割して投稿することができるため、見返す場合には投稿内容が本のどのあたりに書かれているかがすぐ確認できます。  
+また、Output Readingでは他者が書き出した本の内容も確認することができます。   
 その投稿が気に入った場合は投稿のお気に入り登録と投稿者をフォローすることができます。  
-気になった本を購入する場合には、Output Reading内から楽天ブックスの商品リストを検索することが可能です。
+また、投稿を見て気になった本を購入する場合には、Output Reading内から楽天ブックスの商品リストを検索することが可能です。
 
-# Requirement
+# 必要要件
 
 * Docker
 * docker-compose
 
-# Installation
+#  インストール
 
 ローカル環境にDockerがインストールされていない場合は、下記のページでアカウント作成後にインストールしてください。
 
@@ -29,7 +31,8 @@ Output Readingでは他者がアウトプットした内容も確認すること
 $ docker -v
 $ docker-compose -v
 ```
-# Usage
+
+# 使い方
 
 このアプリケーションを動かす場合は、まずはリポジトリを手元にクローンしてください。
 
@@ -90,15 +93,21 @@ http://localhost:80
 * メールアドレス: outputreading@example.com
 * パスワード: password
 
-# Note
+#　その他
 
-本番環境:[Output Reading](https://www.output-reading.xyz/)
+本番環境:[Output Reading](https://www.output-reading.xyz/)  
 
-# Author
+本番環境のページではユーザー登録無しで下記の機能を利用することが可能です。
+* 投稿タイトル一覧の確認
+* 投稿の詳細の確認
+* 投稿者のプロフィール確認
+* 楽天ブックスで検索
+
+# 作者
 
 * 中井一樹
 * Twitter : https://twitter.com/k_kyube
 
-# License
+# ライセンス
 
 Output Readingは[MITライセンス](https://en.wikipedia.org/wiki/MIT_License)のもとで公開されています。詳細は [LICENSE.md](https://github.com/NakaiKazuki/output_reading/blob/master/LICENSE.md) をご覧ください。

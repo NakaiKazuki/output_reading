@@ -58,5 +58,4 @@ RSpec.describe "UsersSignups", type: :request do
       expect(flash[:info]).to be_truthy
     end
   end
-
 end

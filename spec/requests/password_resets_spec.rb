@@ -6,8 +6,8 @@ RSpec.describe "PasswordResets", type: :request do
     ActionMailer::Base.deliveries.clear
   end
 
-   let(:user) { create(:user) }
-   let(:non_activation_user){ create(:non_activation_user) }
+  let(:user) { create(:user) }
+  let(:non_activation_user){ create(:non_activation_user) }
 
    describe "Post /password_resets" do
      it "無効なメールアドレス" do
@@ -137,10 +137,10 @@ RSpec.describe "PasswordResets", type: :request do
        expect(request.fullpath).to eq "/users/1"
      end
    end
-   #user = controller.instance_variable_get(:@user) とする理由
-   #edit_password_reset_pathの引数に当たるreset_tokenは、
-   #attr_accessorによって生成された仮属性である。
-   #そのためletで生成したuserにはreset_tokenが存在しないためエラーとなる。
-   #エラーを回避するために、reset_tokenが代入されたPasswordResetsコントローラの
-   #@userを使用する必要がある。
 end
+#user = controller.instance_variable_get(:@user) とする理由
+#edit_password_reset_pathの引数に当たるreset_tokenは、
+#attr_accessorによって生成された仮属性である。
+#そのためletで生成したuserにはreset_tokenが存在しないためエラーとなる。
+#エラーを回避するために、reset_tokenが代入されたPasswordResetsコントローラの
+#@userを使用する必要がある。
