@@ -83,7 +83,7 @@ $ rails db:migrate RAILS_ENV=test
 $ rspec
 ```
 
-テストが無事に通ったら、ブラウザからlocalhost:80に接続します。
+テストが無事に通ったら、ブラウザからlocalhost:80に接続できます。
 
 ```
 http://localhost:80
