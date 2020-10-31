@@ -58,6 +58,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+# コンテナ上で動かすのに必要記述
   config.before(:each, type: :system) do
     driven_by :selenium_remote
     host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
@@ -82,7 +83,7 @@ RSpec.configure do |config|
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
-  # arbitrary gems may also be filtered via:
+  arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   # config.before(:each) do |example|
   #   if example.metadata[:type] == :system
