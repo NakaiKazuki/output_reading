@@ -51,6 +51,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
   # DatabaseCleaner設定
   DatabaseCleaner.strategy = :truncation
   DatabaseCleaner.clean_with :truncation
@@ -58,7 +59,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-# コンテナ上で動かすのに必要記述
+# コンテナ上で動かすのに必要
   config.before(:each, type: :system) do
     driven_by :selenium_remote
     host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
@@ -83,7 +84,7 @@ RSpec.configure do |config|
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
-  arbitrary gems may also be filtered via:
+  # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   # config.before(:each) do |example|
   #   if example.metadata[:type] == :system
