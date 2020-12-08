@@ -5,15 +5,24 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-
+require 'capybara/email/rspec'
 
 Capybara.server_host = "webapp"
 Capybara.server_port = 3001
 
-Capybara.register_driver :selenium_remote do |app|
+Capybara.register_driver :remote_chrome do |app|
   url = ENV.fetch('SELENIUM_DRIVER_URL')
-  opts = { desired_capabilities: :chrome, browser: :remote, url: url }
-  Capybara::Selenium::Driver.new(app, opts)
+  caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
+    "goog:chromeOptions" => {
+      "args" => [
+        "no-sandbox",
+        "headless",
+        "disable-gpu",
+        "window-size=1680,1050"
+      ]
+    }
+  )
+  Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
 end
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -53,17 +62,22 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   # DatabaseCleaner設定
-  DatabaseCleaner.strategy = :truncation
-  DatabaseCleaner.clean_with :truncation
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with :truncation
+  end
   config.after(:each) do
     DatabaseCleaner.clean
   end
 
 # コンテナ上で動かすのに必要
-  config.before(:each, type: :system) do
-    driven_by :selenium_remote
-    host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
-  end
+config.before(:each, type: :system) do
+  driven_by :rack_test
+end
+config.before(:each, type: :system, js: true) do
+  driven_by :remote_chrome
+  Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+end
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 

@@ -60,7 +60,7 @@ RSpec.describe "UsersIndices", type: :system  do
     end
 
     describe "管理者としてログイン" do
-      it "管理者としてログインした場合は、非管理者ユーザーの削除リンクが表示される" do
+      it "管理者としてログインした場合は、非管理者ユーザーの削除リンクが表示される",js:true do
         log_in_by(admin)
         visit users_path
         expect(current_path).to eq users_path

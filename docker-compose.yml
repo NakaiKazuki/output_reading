@@ -20,6 +20,7 @@ services:
     # サービス名dbが作成されたらappを作成
     depends_on:
       - db
+      - selenium_chrome
     # コンテナを起動させ続ける際に使用
     tty: true
     # コマンドを実行

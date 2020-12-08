@@ -47,7 +47,7 @@ RSpec.describe "UsersFavoritesBooks", type: :system  do
           expect(page).to have_link "お気に入り投稿一覧", href:favorite_books_user_path(user)
         end
 
-        it "フォローとフォロー解除ボタンが機能している" do
+        it "フォローとフォロー解除ボタンが機能している",js:true do
           log_in_by(other_user)
           visit favorite_books_user_path(user)
           expect{

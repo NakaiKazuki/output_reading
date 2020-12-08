@@ -21,7 +21,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'faker'
 gem 'faker-japanese'
-gem 'sorcery'
 gem 'font-awesome-sass'
 gem 'ransack'
 gem 'rakuten_web_service'
@@ -38,7 +37,6 @@ group :development do
   gem 'listen'
   gem 'spring'
   gem 'spring-watcher-listen'
-  gem 'mail-iso-2022-jp'
 end
 
 group :test do

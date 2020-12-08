@@ -54,7 +54,7 @@ RSpec.describe "UsersFollowings", type: :system  do
           expect(page).to have_button 'フォロー'
         end
 
-        it "フォローとフォロー解除ボタンが機能している" do
+        it "フォローとフォロー解除ボタンが機能している",js:true do
           log_in_by(user)
           visit following_user_path(other_user)
           expect{

@@ -55,7 +55,7 @@ RSpec.describe "UsersShows", type: :system do
           expect(page).to have_button 'フォロー'
         end
 
-        it "フォローとフォロー解除ボタンが機能している" do
+        it "フォローとフォロー解除ボタンが機能している",js:true do
           log_in_by(user)
           visit user_path(other_user)
           expect{
@@ -155,7 +155,7 @@ RSpec.describe "UsersShows", type: :system do
           expect(page).not_to have_link "編集", href:edit_book_path(other_book)
         end
 
-        it "自分の投稿編集ページへのリンクは表示される" do
+        it "自分の投稿編集ページへのリンクは表示される",js:true do
           log_in_by(user)
           visit user_path(user)
           expect(page).to have_link "編集",href:edit_book_path(book)
@@ -171,7 +171,7 @@ RSpec.describe "UsersShows", type: :system do
           expect(page).not_to have_link "削除", href:book_path(other_book)
         end
 
-        it "自分の投稿削除のリンクは表示される" do
+        it "自分の投稿削除のリンクは表示される",js:true do
           log_in_by(user)
           visit user_path(user)
           expect(page).to have_link "削除",href:book_path(book)

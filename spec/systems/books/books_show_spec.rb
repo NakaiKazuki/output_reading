@@ -52,7 +52,7 @@ RSpec.describe "BooksShows", type: :system  do
         expect(page).not_to have_button "お気に入り登録"
       end
 
-      it "楽天ブックスで検索へのリンクは別タブで開かれる" do
+      it "楽天ブックスで検索へのリンクは別タブで開かれる",js:true do
         visit book_path(book)
         expect(current_path).to eq book_path(book)
         find_link("楽天で検索する",href: search_books_path).click
@@ -69,7 +69,7 @@ RSpec.describe "BooksShows", type: :system  do
         expect(page).not_to have_link "削除",href: book_chapter_path(book_id:chapter.book_id,number:chapter.number)
       end
 
-      it "お気に入り登録と削除ボタンが機能している" do
+      it "お気に入り登録と削除ボタンが機能している",js:true do
         log_in_by(other_user)
         visit book_path(book)
         expect{
@@ -93,14 +93,14 @@ RSpec.describe "BooksShows", type: :system  do
         expect(page).to have_link "削除",href: book_chapter_path(book_id: chapter.book_id,number: chapter.number)
       end
 
-      it "編集リンク" do
+      it "編集リンク",js:true do
         log_in_by(user)
         visit book_path(book)
         find_link("編集",href: edit_book_chapter_path(book_id: chapter.book_id,number: chapter.number)).click
         expect(current_path).to eq edit_book_chapter_path(book_id: chapter.book_id,number: chapter.number)
       end
 
-      it "削除リンク" do
+      it "削除リンク" ,js:true do
         log_in_by(user)
         visit book_path(book)
         expect{
@@ -118,7 +118,7 @@ RSpec.describe "BooksShows", type: :system  do
         expect(current_path).to eq new_book_chapter_path(book_id:book)
       end
 
-      it "お気に入り登録と削除ボタンが機能している" do
+      it "お気に入り登録と削除ボタンが機能している",js:true do
         log_in_by(user)
         visit book_path(book)
         expect{
