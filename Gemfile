@@ -46,6 +46,10 @@ group :test do
   gem 'database_cleaner-active_record'
 end
 
+group :production, :staging do
+  gem 'unicorn'
+end
+
 group :production do
   gem 'fog-aws'
 end
