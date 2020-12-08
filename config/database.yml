@@ -24,5 +24,4 @@ production:
   database: <%= Rails.application.credentials.prduction_db[:database_name] %>
   username: <%= Rails.application.credentials.prduction_db[:user_name] %>
   password: <%= Rails.application.credentials.prduction_db[:password] %>
-  socket: <%= Rails.application.credentials.prduction_db[:socket] %>
   host: <%= Rails.application.credentials.prduction_db[:host_name] %>
