@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  before_action :logged_in_user, only: [:new,:create,:edit,:update,:destroy]
-  before_action :correct_user,   only: [:edit, :update,:destroy]
+  before_action :logged_in_user, only: %i[new create edit update destroy]
+  before_action :correct_user,   only: %i[edit update destroy]
 
   def new
     @book = current_user.books.build if logged_in?
@@ -9,10 +9,9 @@ class BooksController < ApplicationController
   def create
     @book = current_user.books.build(book_params)
     if @book.save
-      flash[:success] = "新しく本のタイトルがリストに追加されました！"
-      redirect_to book_path(@book)
+      redirect_to book_path(@book), flash: { success: '新しく本のタイトルがリストに追加されました！' }
     else
-      render "new"
+      render 'new'
     end
   end
 
@@ -33,31 +32,29 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      flash[:success] = "投稿タイトルを編集しました！"
-      redirect_to @book
+      redirect_to @book, flash: { success: '投稿タイトルを編集しました！' }
     else
-      flash.now[:danger] = "投稿タイトルの編集に失敗しました。"
-      render "edit"
+      flash.now[:danger] = '投稿タイトルの編集に失敗しました。'
+      render 'edit'
     end
   end
 
   def destroy
     Book.find(params[:id]).destroy
-    flash[:success] = "投稿を削除しました。"
-    redirect_to current_user
+    redirect_to current_user, flash: { success: '投稿を削除しました。' }
   end
 
   def search
-    if params[:keyword].present?
-      @books = RakutenWebService::Books::Book.search(title: params[:keyword])
-    end
+    return if params[:keyword].blank?
+
+    @books = RakutenWebService::Books::Book.search(title: params[:keyword])
   end
 
   private
 
-  def book_params
-    params.require(:book).permit(:title,:image)
-  end
+    def book_params
+      params.require(:book).permit(:title, :image)
+    end
 
   # beforeアクション
     # 正しいユーザーかどうか確認

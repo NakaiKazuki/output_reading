@@ -1,6 +1,5 @@
 module ApplicationHelpers
-
-  #ユーザーがログインしていればtrue、その他ならfalseを返す(cookiesに依存しない)
+  # ユーザーがログインしていればtrue、その他ならfalseを返す(cookiesに依存しない)
   def is_logged_in?
     !session[:user_id].nil?
   end
@@ -17,12 +16,11 @@ module ApplicationHelpers
     follow_redirect!
   end
 
-  def log_in_by(user,remember_me = 0)
+  def log_in_by(user, remember_me = 0)
     visit login_path
-    fill_in "メールアドレス", with: user.email
-    fill_in "パスワード", with: user.password
-    check "session_remember_me" if remember_me == 1
-    find(".form-submit").click
+    fill_in 'メールアドレス', with: user.email
+    fill_in 'パスワード', with: user.password
+    check 'session_remember_me' if remember_me == 1
+    find('.form-submit').click
   end
-
 end

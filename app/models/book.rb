@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-  belongs_to  :user
+  belongs_to :user
   has_many :chapters, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
@@ -7,9 +7,9 @@ class Book < ApplicationRecord
   mount_uploader :image, BookImageUploader
 
   validates :title,
-    presence: true,
-    length: { maximum: 50 }
+            presence: true,
+            length: { maximum: 50 }
   validates :user_id,
-    presence: true
+            presence: true
   validate  :image_size
 end

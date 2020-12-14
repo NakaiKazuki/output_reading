@@ -9,7 +9,7 @@ class FavoritesController < ApplicationController
       format.js
     end
   end
-  #create.jsで　book_id: @book の追加必要unfavoritedでFavoriteモデル叩く時にbook_idがないため、リダイレクトされない
+  # create.jsで　book_id: @book の追加必要unfavoritedでFavoriteモデル叩く時にbook_idがないため、リダイレクトされない
 
   def destroy
     favorite = Favorite.find(params[:id])

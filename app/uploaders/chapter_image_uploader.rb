@@ -5,7 +5,6 @@ class ChapterImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   process resize_to_limit: [400, 400]
 
-
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
     storage :fog
@@ -47,7 +46,7 @@ class ChapterImageUploader < CarrierWave::Uploader::Base
   # end
 
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.

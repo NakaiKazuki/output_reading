@@ -1,5 +1,4 @@
 module SessionsHelper
-
   # 渡されたユーザーでログインする
   def log_in(user)
     session[:user_id] = user.id
@@ -8,10 +7,10 @@ module SessionsHelper
   # 記憶トークン (cookie) に対応するユーザーを返す
   def current_user
     if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id) #current_userがある場合はcurrent_userを代入するけど、無い場合はUserモデルからsession使って探して代入する。
+      @current_user ||= User.find_by(id: user_id) # current_userがある場合はcurrent_userを代入するけど、無い場合はUserモデルからsession使って探す。
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
-      if user &&user.authenticated?(:remember,cookies[:remember_token])
+      if user && user&.authenticated?(:remember, cookies[:remember_token])
         log_in user
         @current_user = user
       end
@@ -42,7 +41,7 @@ module SessionsHelper
 
   def remember(user)
     user.remember
-    cookies.permanent.signed[:user_id] = user.id #cookies.signed IDの暗号化。クッキーを長期間保存 cookies.permanent
+    cookies.permanent.signed[:user_id] = user.id # cookies.signed IDの暗号化。クッキーを長期間保存 cookies.permanent
     cookies.permanent[:remember_token] = user.remember_token
   end
 
@@ -57,19 +56,19 @@ module SessionsHelper
     session[:forwarding_url] = request.original_url if request.get?
   end
 
-  #記憶したリンクか任意のリンクにリダイレクトする
+  # 記憶したリンクか任意のリンクにリダイレクトする
   def redirect_back_or(default)
     redirect_to(session[:forwarding_url] || default)
     session.delete(:forwarding_url)
   end
 
   private
+
   # ログイン済みユーザーかどうか確認
     def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:warning] = "ログインしてください"
-        redirect_to login_url
-      end
+      return if logged_in?
+
+      store_location
+      redirect_to login_url, flash: { warning: 'ログインしてください。' }
     end
 end
