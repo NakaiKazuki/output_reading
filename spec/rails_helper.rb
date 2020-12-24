@@ -7,11 +7,8 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/email/rspec'
 
-Capybara.server_host = 'webapp'
-Capybara.server_port = 3001
-
 Capybara.register_driver :remote_chrome do |app|
-  url = ENV.fetch('SELENIUM_DRIVER_URL')
+  url = 'http://chrome:4444/wd/hub'
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
     'goog:chromeOptions' => {
       'args' => [
@@ -80,6 +77,8 @@ RSpec.configure do |config|
   end
   config.before(:each, type: :system, js: true) do
     driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 4444
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
   # You can uncomment this line to turn off ActiveRecord support entirely.

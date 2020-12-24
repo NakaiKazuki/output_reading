@@ -47,7 +47,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-email'
   gem 'database_cleaner-active_record'
-  gem 'webdrivers'
+  gem 'selenium-webdriver'
 end
 
 group :production, :staging do
