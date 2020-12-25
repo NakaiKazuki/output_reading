@@ -16,7 +16,6 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'mini_magick'
-gem 'mysql2'
 gem 'puma'
 gem 'rails', '~> 6.0.3'
 gem 'rails-i18n'
@@ -29,6 +28,7 @@ gem 'uglifier'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
+  gem 'mysql2'
   gem 'rspec-rails'
 end
 
@@ -52,6 +52,7 @@ end
 
 group :production do
   gem 'fog-aws'
+  gem 'pg'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
