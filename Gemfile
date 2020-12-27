@@ -28,8 +28,8 @@ gem 'uglifier'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'rspec-rails'
   gem 'mysql2'
+  gem 'rspec-rails'
 end
 
 group :development do
