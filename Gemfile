@@ -24,11 +24,11 @@ gem 'ransack'
 gem 'sassc-rails'
 gem 'turbolinks'
 gem 'uglifier'
+gem 'mysql2'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'mysql2'
   gem 'rspec-rails'
 end
 
@@ -52,7 +52,6 @@ end
 
 group :production do
   gem 'fog-aws'
-  gem 'pg'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
