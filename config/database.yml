@@ -20,9 +20,7 @@ test:
   database: <%= Rails.application.credentials.test_db[:database_name] %>
 
 production:
+  <<: *default
   adapter: postgresql
   encoding: unicode
-  database: db/production.postgresql
   pool: 5
-  username: test_postgre
-  password:
