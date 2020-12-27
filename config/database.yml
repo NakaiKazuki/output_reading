@@ -20,8 +20,9 @@ test:
   database: <%= Rails.application.credentials.test_db[:database_name] %>
 
 production:
-  <<: *default
-  database: <%= Rails.application.credentials.prduction_db[:database_name] %>
-  username: <%= Rails.application.credentials.prduction_db[:user_name] %>
-  password: <%= Rails.application.credentials.prduction_db[:password] %>
-  host: <%= Rails.application.credentials.prduction_db[:host_name] %>
+  adapter: postgresql
+  encoding: unicode
+  database: db/production.postgresql
+  pool: 5
+  username: test_postgre
+  password:
