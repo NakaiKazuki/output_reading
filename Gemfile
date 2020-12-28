@@ -50,6 +50,10 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+group :production, :staging do
+  gem 'unicorn'
+end
+
 group :production do
   gem 'fog-aws'
 end
