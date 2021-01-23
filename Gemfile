@@ -17,7 +17,7 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'mini_magick'
 gem 'mysql2'
-gem 'puma'
+gem 'puma', '< 5'
 gem 'rails', '~> 6.0.3'
 gem 'rails-i18n'
 gem 'rakuten_web_service'
@@ -33,6 +33,14 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bcrypt_pbkdf'
+  gem 'capistrano'
+  gem 'capistrano3-puma', '< 5'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rbenv-vars'
+  gem 'ed25519'
   gem 'listen'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
@@ -40,6 +48,7 @@ group :development do
   gem 'rubocop-rspec'
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'sshkit-sudo'
   gem 'web-console'
 end
 
@@ -48,10 +57,6 @@ group :test do
   gem 'capybara-email'
   gem 'database_cleaner-active_record'
   gem 'selenium-webdriver'
-end
-
-group :production, :staging do
-  gem 'unicorn'
 end
 
 group :production do

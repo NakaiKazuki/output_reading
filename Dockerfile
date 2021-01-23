@@ -2,7 +2,7 @@
 FROM ruby:2.6.6
 # コンテナを機能させるまでの準備のコマンドを実行する
 RUN apt-get update -qq && \
-    apt-get install -y build-essential nodejs imagemagick
+    apt-get install -y build-essential nodejs imagemagick vim
 
 RUN mkdir /output_reading_docker
 # 環境変数を設定する
@@ -16,6 +16,9 @@ COPY Gemfile.lock $APP_ROOT/Gemfile.lock
 RUN gem install bundler
 RUN bundle install
 COPY . $APP_ROOT
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+
 RUN mkdir -p tmp/sockets
-# コンテナ起動時のポートを設定する
-EXPOSE 3000

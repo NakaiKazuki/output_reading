@@ -1,25 +1,28 @@
-version: '3'
+version: '3.1'
 services:
-  webapp:
-    build: .
-    env_file:
-      - ./environments/db.env
-    volumes:
-      - .:/output_reading_docker
-    ports:
-      - 3000:3000
-    depends_on:
-      - chrome
-      - db
-    tty: true
-    command: bundle exec puma -C config/puma.rb
-
   chrome:
     image: selenium/standalone-chrome
     logging:
       driver: none
     ports:
       - 4444:4444
+
+  webapp:
+    build: .
+    env_file:
+      - ./environments/db.env
+    volumes:
+      - .:/output_reading_docker
+      - public-data:/output_reading_docker/public
+      - tmp-data:/output_reading_docker/tmp
+      - log-data:/output_reading_docker/log
+    depends_on:
+      - chrome
+    tty: true
+    command: bundle exec puma -C config/puma.rb
+    secrets:
+      - ec2_rsa
+      - git_rsa
 
   db:
     image: mysql
@@ -28,6 +31,10 @@ services:
     volumes:
       - db-data:/var/lib/mysql
       - ./mysql-confd:/etc/mysql/conf.d
+    depends_on:
+      - webapp
+    ports:
+      - 3306:3306
 
   nginx:
     build: containers/nginx
@@ -39,7 +46,15 @@ services:
     depends_on:
       - webapp
 
+# secretsはデプロイ時のみコメントアウト
+secrets:
+  ec2_rsa:
+    file: ${OUTPUT_READING_KEY}
+  git_rsa:
+    file: ${GIT_KEY}
+
 volumes:
   public-data:
   tmp-data:
+  log-data:
   db-data:
