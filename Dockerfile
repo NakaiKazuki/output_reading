@@ -1,5 +1,5 @@
 # 元にするイメージ
-FROM ruby:2.6.6
+FROM ruby:2.7.2
 # コンテナを機能させるまでの準備のコマンドを実行する
 RUN apt-get update -qq && \
     apt-get install -y build-essential nodejs imagemagick vim

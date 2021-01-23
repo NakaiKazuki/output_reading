@@ -11,7 +11,7 @@ default: &default
 development:
   <<: *default
   database: output_reading_development
-  
+
 test:
   <<: *default
   database: output_reading_test
