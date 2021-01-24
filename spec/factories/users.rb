@@ -34,6 +34,14 @@ FactoryBot.define do
     activated { false }
   end
 
+  factory :guest_user, class: 'User' do
+    name { 'Guest User' }
+    email { 'guest@example.com' }
+    password { 'foobar' }
+    password_confirmation { 'foobar' }
+    admin { false }
+    activated { true }
+  end
 # 複数ユーザーの作成 _spec で let!(:users) { create_list(:users,15) }のように記述。15は作りたい個数
   factory :users, class: 'User' do
     name { 'test' }

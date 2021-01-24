@@ -51,6 +51,12 @@ class User < ApplicationRecord
              end
       BCrypt::Password.create(string, cost: cost)
     end
+
+    def guest
+      find_or_create_by!(email: 'guest@example.com', name: 'ゲスト') do |user|
+        user.password = SecureRandom.urlsafe_base64
+      end
+    end
   end
     # 永続セッションのために、暗号化したトークンをDBに代入する
   def remember

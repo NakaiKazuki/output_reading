@@ -5,13 +5,6 @@ User.create!(name:  "管理者",
              admin: true,
              activated: true)
 
-User.create!(name:  "ゲスト",
-             email: "guestoutputreading@example.com",
-             password: "password",
-             password_confirmation: "password",
-             admin: false,
-             activated: true)
-
 20.times do |n|
   name  = Faker::Japanese::Name.name
   email = "output-reading-#{n+1}@example.com"

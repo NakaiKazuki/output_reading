@@ -87,6 +87,8 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
   CountComments: false
+  Exclude:
+    - 'app/models/user.rb'
 
 Metrics/MethodLength:
   CountComments: false

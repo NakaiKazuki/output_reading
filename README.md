@@ -89,20 +89,9 @@ $ rspec
 http://localhost:80
 ```
 
-画面右上の ログイン からログイン画面へ移動後、下記の内容を入力すると管理者権限を持ったユーザーとしてログインできます。
-
-* メールアドレス: outputreading@example.com
-* パスワード: password
-
 # その他
 
-本番環境:[Output Reading](https://www.output-reading.xyz/)  
-
-本番環境のページではユーザー登録無しで下記の機能を利用することが可能です。
-* 投稿タイトル一覧の確認
-* 投稿の詳細の確認
-* 投稿者のプロフィール確認
-* 楽天ブックスで検索
+本番環境:[Output Reading](https://output-reading.xyz/)  
 
 # 作者
 

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[edit update index destroy]
   before_action :correct_user,   only: %i[edit update]
   before_action :admin_user,     only: :destroy
+  before_action :check_guest, only: %i[update destroy]
 
   def new
     @user = User.new
@@ -83,5 +84,11 @@ class UsersController < ApplicationController
     # 管理者かどうか確認
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+
+    def check_guest
+      return unless current_user.email == 'guest@example.com'
+
+      redirect_to user_path(current_user), flash: { danger: 'ゲストユーザーの変更・削除はできません。' }
     end
 end

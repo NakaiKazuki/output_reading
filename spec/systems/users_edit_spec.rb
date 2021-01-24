@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'UsersEdits', type: :system do
   let(:user) { create(:user) }
   let(:other_user) { create(:other_user) }
+  let(:guest) { create(:guest_user) }
 
   def submit_with_invalid_information
     fill_in '名前', with: ''
@@ -40,6 +41,14 @@ RSpec.describe 'UsersEdits', type: :system do
       visit edit_user_path(user)
       expect(page).to have_current_path login_path, ignore_query: true
       expect(page).to have_selector '.alert-warning'
+    end
+
+    it 'ゲストユーザー編集は無効' do
+      log_in_by(guest)
+      visit edit_user_path(guest)
+      submit_with_valid_information
+      expect(page).to have_current_path user_path(guest), ignore_query: true
+      expect(page).to have_selector '.alert-danger'
     end
 
     describe '異なったユーザーのアクセス' do
