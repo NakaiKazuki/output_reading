@@ -23,9 +23,6 @@ set :keep_releases, 2
 # 出力するログのレベル。
 set :log_level, :debug
 
-# puma
-set :puma_init_active_record, true
-
 # Nginxの設定ファイル名と置き場所を修正
 set :nginx_sites_enabled_path, '/etc/nginx/conf.d'
 set :nginx_config_name, "#{fetch(:application)}.conf"
