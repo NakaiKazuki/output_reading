@@ -25,12 +25,11 @@ services:
       - git_rsa
 
   db:
-    image: mysql
+    image: mysql:5.7
     env_file:
       - ./environments/db.env
     volumes:
       - db-data:/var/lib/mysql
-      - ./mysql-confd:/etc/mysql/conf.d
     depends_on:
       - webapp
     ports:
