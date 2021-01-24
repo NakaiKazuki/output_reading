@@ -22,4 +22,4 @@ production:
   username: <%= Rails.application.credentials.dig(:production_db, :user_name) %>
   password: <%= Rails.application.credentials.dig(:production_db, :password) %>
   host: <%= Rails.application.credentials.dig(:production_db, :host_name) %>
-  socket: /var/lib/mysql/mysql.sock
+  socket: /tmp/mysql.sock 
