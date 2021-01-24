@@ -20,9 +20,9 @@ services:
       - chrome
     tty: true
     command: bundle exec puma -C config/puma.rb
-    secrets:
-      - ec2_rsa
-      - git_rsa
+    # secrets:
+    #   - ec2_rsa
+    #   - git_rsa
 
   db:
     image: mysql:5.7
@@ -46,11 +46,11 @@ services:
       - webapp
 
 # secretsはデプロイ時のみコメントアウト
-secrets:
-  ec2_rsa:
-    file: ${OUTPUT_READING_KEY}
-  git_rsa:
-    file: ${GIT_KEY}
+# secrets:
+#   ec2_rsa:
+#     file: ${OUTPUT_READING_KEY}
+#   git_rsa:
+#     file: ${GIT_KEY}
 
 volumes:
   public-data:
