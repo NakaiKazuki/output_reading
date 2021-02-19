@@ -69,7 +69,5 @@ namespace :deploy do
   end
 end
 
-after 'deploy:finished', 'deploy:db_drop'
-after 'deploy:db_drop', 'deploy:db_create'
-after 'deploy:db_create', 'deploy:db_migrate'
+after 'deploy:finished', 'deploy:db_migrate'
 after 'deploy:db_migrate', 'deploy:db_seed'
