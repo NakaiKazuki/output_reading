@@ -6,12 +6,12 @@ RSpec.describe 'BooksSearches', type: :request do
       get search_books_path
       expect(response).to have_http_status(:success)
       # # 検索ワード有りでのアクセス master.key必須
-      # get search_books_path, params: {
-      #   keyword: '検索'
-      # }
-      # books = controller.instance_variable_get(:@books)
-      # expect(books).to be_truthy
-      # expect(response).to have_http_status(:success)
+      get search_books_path, params: {
+        keyword: '検索'
+      }
+      books = controller.instance_variable_get(:@books)
+      expect(books).to be_truthy
+      expect(response).to have_http_status(:success)
     end
   end
 end
