@@ -3,6 +3,8 @@
  他社の投稿も閲覧することができ、気になった本があれば楽天ブックスから検索できるようにしています。 <br >
  スマホからもご利用いただけます。
 
+<img width="1435" alt="スクリーンショット 2021-02-19 14 37 38" src="https://user-images.githubusercontent.com/62586169/108462648-54fbaf80-72c0-11eb-941b-c1d8aee9e631.png">
+<img width="1440" alt="スクリーンショット 2021-02-19 14 38 35" src="https://user-images.githubusercontent.com/62586169/108462652-562cdc80-72c0-11eb-94ea-c86f46d3f035.png">
 # URL
 https://output-reading.xyz/ <br >
 画面中央の「ゲストログイン」のボタンから、メールアドレスとパスワードを入力せずにログインできます。
