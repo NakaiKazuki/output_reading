@@ -29,11 +29,11 @@ set :nginx_config_name, "#{fetch(:application)}.conf"
 
 namespace :deploy do
   desc 'Create database'
-  task :db_reset do
+  task :db_drop do
     on roles(:db) do |_host|
       with rails_env: fetch(:rails_env) do
         within current_path do
-          execute :bundle, :exec, :rails, 'db:reset'
+          execute :bundle, :exec, :rails, 'db:drop'
         end
       end
     end
@@ -69,7 +69,7 @@ namespace :deploy do
   end
 end
 
-after 'deploy:finished', 'deploy:db_reset'
-after 'deploy:db_reset', 'deploy:db_create'
+after 'deploy:finished', 'deploy:db_drop'
+after 'deploy:db_drop', 'deploy:db_create'
 after 'deploy:db_create', 'deploy:db_migrate'
 after 'deploy:db_migrate', 'deploy:db_seed'

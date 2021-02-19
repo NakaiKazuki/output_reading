@@ -22,6 +22,7 @@ services:
       - db
     tty: true
     command: rails s
+    # secretsはデプロイ時のみコメントアウト
     secrets:
       - ec2_rsa
       - git_rsa
