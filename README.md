@@ -5,6 +5,7 @@
 
 <img width="1435" alt="スクリーンショット 2021-02-19 14 37 38" src="https://user-images.githubusercontent.com/62586169/108462648-54fbaf80-72c0-11eb-941b-c1d8aee9e631.png">
 <img width="1440" alt="スクリーンショット 2021-02-19 14 38 35" src="https://user-images.githubusercontent.com/62586169/108462652-562cdc80-72c0-11eb-94ea-c86f46d3f035.png">
+
 # URL
 https://output-reading.xyz/ <br >
 画面中央の「ゲストログイン」のボタンから、メールアドレスとパスワードを入力せずにログインできます。
@@ -44,7 +45,7 @@ https://output-reading.xyz/ <br >
   - コントローラーテスト(request)
   - ブラウザテスト(system)
 
-# ローカルで使用する場合(開発環境はDockerを利用して構築します)
+# ローカルで使用する場合(書籍検索機能は使用できません。 開発環境はDockerを利用して構築します)
 リポジトリを手元にクローンしてください。
 
 ```
