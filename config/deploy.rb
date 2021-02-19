@@ -26,3 +26,50 @@ set :log_level, :debug
 # Nginxの設定ファイル名と置き場所を修正
 set :nginx_sites_enabled_path, '/etc/nginx/conf.d'
 set :nginx_config_name, "#{fetch(:application)}.conf"
+
+namespace :deploy do
+  desc 'Create database'
+  task :db_reset do
+    on roles(:db) do |_host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rails, 'db:reset'
+        end
+      end
+    end
+  end
+
+  desc 'Create database'
+  task :db_create do
+    on roles(:db) do |_host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rails, 'db:create'
+        end
+      end
+    end
+  end
+  task :db_migrate do
+    on roles(:db) do |_host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rails, 'db:migrate'
+        end
+      end
+    end
+  end
+  task :db_seed do
+    on roles(:db) do |_host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, :rails, 'db:seed'
+        end
+      end
+    end
+  end
+end
+
+after 'deploy:finished', 'deploy:db_reset'
+after 'deploy:db_reset', 'deploy:db_create'
+after 'deploy:db_create', 'deploy:db_migrate'
+after 'deploy:db_migrate', 'deploy:db_seed'
