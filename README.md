@@ -1,48 +1,55 @@
 # Output Reading
+ Railsチュートリアルの復習として、読んだ本をアウトプットするためのアプリを作成しました。<br >
+ 他社の投稿も閲覧することができ、気になった本があれば楽天ブックスから検索できるようにしています。 <br >
+ スマホからもご利用いただけます。
 
-Output Readingでは読んだ本の内容を章ごとに分けてアウトプットし、その内容をいつでも確認することが可能なアプリケーションです。  
+# URL
+https://output-reading.xyz/ <br >
+画面中央の「ゲストログイン」のボタンから、メールアドレスとパスワードを入力せずにログインできます。
+ゲストユーザーは登録情報の編集と削除のみを制限しています。
 
-# デモ
+# 使用技術
+- Ruby 2.7.2
+- Ruby on Rails 6.0.3.4
+- MySQL 5.7
+- Nginx
+- Puma
+- AWS
+  - VPC
+  - EC2
+  - RDS(MySQL)
+  - Route53
+  - S3
+  - Certificate Manager
+- Docker/Docker-compose
+- Capistrano3
+- RSpec
+- 楽天ブックス書籍検索API
 
-![demo](https://raw.githubusercontent.com/wiki/NakaiKazuki/output_reading/images/output_reading_demo.gif)
+# 機能一覧
+- ユーザー登録、ログイン機能
+- 投稿機能
+  - 画像投稿(carrierwave)
+    - 本番環境ではS3に保存
+- お気に入り機能(Ajax)
+- ページネーション機能(kaminari)
+- 検索機能(ransack)
+- 楽天ブックス書籍検索機能(rakuten_web_service)
 
-# 特徴
+# テスト
+- RSpec
+  - モデルテスト(model)
+  - コントローラーテスト(request)
+  - ブラウザテスト(system)
 
-Output Readingでは読んだ本の内容を章ごとに分けて書き出すことで、その章の内容をより深く掘り下げることができます。  
-章ごとに分割して投稿することができるため、見返す場合には投稿内容が本のどのあたりに書かれているかがすぐ確認できます。  
-
-また、Output Readingでは他者が書き出した本の内容も確認することができます。   
-その投稿が気に入った場合は投稿のお気に入り登録と投稿者をフォローすることができます。  
-投稿を見て気になった本を購入する場合には、Output Reading内から楽天ブックスの商品リストを検索することが可能です。
-
-# 必要要件
-
-* Docker
-* docker-compose
-
-#  インストール
-
-ローカル環境にDockerがインストールされていない場合は、下記のリンクからアカウント作成後にインストールしてください。
-
-[Docker Desktop for Mac](https://hub.docker.com/editions/community/docker-ce-desktop-mac)  
-
-下記のコマンドでインストールされているか確認できます。
-
-```
-$ docker -v
-$ docker-compose -v
-```
-
-# 使い方
-
-このアプリケーションを動かす場合は、まずはリポジトリを手元にクローンしてください。
+# ローカルで使用する場合(開発環境はDockerを利用して構築します)
+リポジトリを手元にクローンしてください。
 
 ```
 $ git clone https://github.com/NakaiKazuki/output_reading.git
 ```
 
 次にクローンしたリポジトリのディレクトリへ移動します。
-
 ```
 $ cd output_reading
 ```
@@ -66,34 +73,11 @@ $ docker-compose exec webapp bash
 ```
 
 コンテナに入れたらデータベースへseedデータを作成します。
-
 ```
-$ rails db:create db:migrate db:seed
-```
-
-その後test環境のデータベースへのマイグレーションを実行します。
-
-```
-$ rails db:migrate RAILS_ENV=test
+$ rails db:create db:migrate db:seed && rails db:migrate RAILS_ENV=test
 ```
 
-テストを実行してうまく動いているかどうか確認してください。
-
-```
-$ rspec
-```
-
-テストが無事に通ったら、ブラウザからlocalhost:80に接続できます。
-
-```
-http://localhost:80
-```
-
-# その他
-
-本番環境:[Output Reading](https://output-reading.xyz/)  
-
-# 作者
+# 制作者
 
 * 中井一樹
 * Twitter : https://twitter.com/k_kyube

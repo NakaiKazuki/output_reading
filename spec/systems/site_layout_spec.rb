@@ -27,8 +27,8 @@ RSpec.describe 'SiteLayouts', type: :system do
 
       it 'guest_login へのリンクがある' do
         visit root_path
-        expect(page).to have_link 'ゲストログイン（閲覧用）', href: guest_login_path, count: 1
-        click_link 'ゲストログイン（閲覧用）', href: guest_login_path
+        expect(page).to have_link 'ゲストログイン', href: guest_login_path, count: 1
+        click_link 'ゲストログイン', href: guest_login_path
         expect(page).to have_current_path '/users/1'
         expect(page).to have_selector '.alert-success'
       end

@@ -17,23 +17,13 @@ User.create!(name:  "管理者",
                activated: true)
 end
 
-Book.create!(title: "テストタイトル",
-             user_id:1,
-             )
-
-Book.create!(title: "ゲストBook投稿",
-             user_id:2,
-             )
-
-Chapter.create!(content: "テスト投稿",
-                user_id:1,
-                book_id:1,
-                number:1)
-
-Chapter.create!(content: "ゲストCahpter投稿",
-                user_id:2,
-                book_id:2,
-                number:1)
+30.times do |n|
+  title  = Faker::Book.title
+  random_id = rand(1..20)
+  Book.create!(title: title,
+    user_id: random_id,
+  )
+end
 
 # リレーションシップ
 users = User.all
