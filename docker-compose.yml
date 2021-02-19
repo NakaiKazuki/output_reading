@@ -22,10 +22,10 @@ services:
       - db
     tty: true
     command: rails s
-    # secretsはデプロイ時のみコメントアウト
-    secrets:
-      - ec2_rsa
-      - git_rsa
+    # # secretsはデプロイ時のみコメントアウト
+    # secrets:
+    #   - ec2_rsa
+    #   - git_rsa
 
   nginx:
     build: containers/nginx
@@ -46,12 +46,12 @@ services:
     depends_on:
       - nginx
 
-# secretsはデプロイ時のみコメントアウト
-secrets:
-  ec2_rsa:
-    file: ${OUTPUT_READING_KEY}
-  git_rsa:
-    file: ${GIT_KEY}
+# # secretsはデプロイ時のみコメントアウト
+# secrets:
+#   ec2_rsa:
+#     file: ${OUTPUT_READING_KEY}
+#   git_rsa:
+#     file: ${GIT_KEY}
 
 volumes:
   public-data:
